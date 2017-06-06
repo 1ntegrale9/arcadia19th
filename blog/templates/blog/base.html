@@ -1,0 +1,75 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Werewolf Arcadia</title>
+        <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+        <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Metamorphous'>
+        <link rel='stylesheet' href='https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css'>
+        <link rel='stylesheet' href='{% static 'css/blog.css' %}'>
+    </head>
+    <body>
+        <div class='page-header'>
+            <a href='{% url 'post_new' %}' class='top-menu'>
+                <span class='glyphicon glyphicon-plus'></span>
+            </a>
+            <h1><a href='/blog'><span class='arcadia'>Werewolf Arcadia</span></a></h1>
+        </div>
+        <div class='content container'>
+            <div class='row'>
+                <div class='col-md-8'>
+                {% block content %}
+                {% endblock %}
+                </div>
+            </div>
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>募集中</th>
+                <th>村名</th>
+                <th>開始日時</th>
+                <th>キャラセット</th>
+                <th>村主</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">5村</th>
+                <td><a href='/blog'>終焉の村</a></td>
+                <td>2017年06月10日00時00分</td>
+                <td><a href='/blog'>霧雨降る街</a></td>
+                <td><a href='/blog'>a19th</a></td>
+              </tr>
+              <tr>
+                <th scope="row">4村</th>
+                <td><a href='/blog'>災厄の村</a></td>
+                <td>2017年06月10日00時00分</td>
+                <td><a href='/blog'>霧雨降る街</a></td>
+                <td><a href='/blog'>a19th</a></td>
+              </tr>
+              <tr>
+                <th scope="row">3村</th>
+                <td><a href='/blog'>異変の村</a></td>
+                <td>2017年06月10日00時00分</td>
+                <td><a href='/blog'>霧雨降る街</a></td>
+                <td><a href='/blog'>a19th</a></td>
+              </tr>
+              <tr>
+                <th scope="row">2村</th>
+                <td><a href='/blog'>始まりの村</a></td>
+                <td>2017年06月10日00時00分</td>
+                <td><a href='/blog'>霧雨降る街</a></td>
+                <td><a href='/blog'>a19th</a></td>
+              </tr>
+              <tr>
+                <th scope="row">1村</th>
+                <td><a href='/blog'>平和な村</a></td>
+                <td>2017年06月10日00時00分</td>
+                <td><a href='/blog'>霧雨降る街</a></td>
+                <td><a href='/blog'>a19th</a></td>
+              </tr>
+            </tbody>
+        </table>
+        </div>
+    </body>
+</html>
