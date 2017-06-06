@@ -26,7 +26,6 @@ ipython-genutils==0.1.0
 Jinja2==2.8
 jsonschema==2.5.1
 MarkupSafe==0.23
-matplotlib==1.5.1
 mido==1.1.24
 mpld3==0.2
 mpmath==0.19
@@ -53,7 +52,6 @@ pyzmq==15.2.0
 requests==2.10.0
 requests-oauthlib==0.8.0
 rsa==3.4.2
-scikit-image==0.12.3
 seaborn==0.7.1
 sigtools==1.1a3
 simplegeneric==0.8.1
