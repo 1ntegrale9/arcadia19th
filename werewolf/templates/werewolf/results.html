@@ -1,13 +1,30 @@
 {% load static %}
+<html>
+    <head>
+        <title>Werewolf Arcadia</title>
+        <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+        <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Metamorphous'>
+        <link rel='stylesheet' href='https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css'>
+        <link rel='stylesheet' href='{% static "werewolf/style.css" %}' />
+    </head>
+    <body>
+        <div class='page-header'>
+            <a href='{% url 'post_new' %}' class='top-menu'>
+                <span class='glyphicon glyphicon-plus'></span>
+            </a>
+            <h1><a href='/werewolf'><span class='arcadia'>Werewolf Arcadia</span></a></h1>
+        </div>
+        <link rel="stylesheet" type="text/css" href="{% static 'werewolf/style.css' %}" />
 
-<link rel="stylesheet" type="text/css" href="{% static 'werewolf/style.css' %}" />
+        <h1>{{ question.question_text }}</h1>
 
-<h1>{{ question.question_text }}</h1>
+        <ul>
+        {% for choice in question.choice_set.all %}
+            <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+        {% endfor %}
+        </ul>
 
-<ul>
-{% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-{% endfor %}
-</ul>
-
-<input type="button" onClick="location.href='{% url 'werewolf:detail' question.id %}'" value="Vote again?">
+        <input type="button" onClick="location.href='{% url 'werewolf:detail' question.id %}'" value="Vote again?">
+    </body>
+</html>

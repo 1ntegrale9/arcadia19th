@@ -1,16 +1,31 @@
 {% load static %}
+<html>
+    <head>
+        <title>Werewolf Arcadia</title>
+        <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+        <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Metamorphous'>
+        <link rel='stylesheet' href='https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css'>
+        <link rel='stylesheet' href='{% static "werewolf/style.css" %}' />
+    </head>
+    <body>
+        <div class='page-header'>
+            <a href='{% url 'post_new' %}' class='top-menu'>
+                <span class='glyphicon glyphicon-plus'></span>
+            </a>
+            <h1><a href='/werewolf'><span class='arcadia'>Werewolf Arcadia</span></a></h1>
+        </div>
+        <h1>{{ question.question_text }}</h1>
 
-<link rel="stylesheet" type="text/css" href="{% static 'werewolf/style.css' %}" />
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<h1>{{ question.question_text }}</h1>
-
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
-<form action="{% url 'werewolf:vote' question.id %}" method="post">
-{% csrf_token %}
-{% for choice in question.choice_set.all %}
-    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
-    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
-{% endfor %}
-<input type="submit" value="Vote" />
-</form>
+        <form action="{% url 'werewolf:vote' question.id %}" method="post">
+        {% csrf_token %}
+        {% for choice in question.choice_set.all %}
+            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+        {% endfor %}
+        <input type="submit" value="Vote" />
+        </form>
+    </body>
+</html>
