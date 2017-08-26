@@ -15,8 +15,7 @@
             </a>
             <h1><a href='/werewolf'><span class='arcadia'>Werewolf Arcadia</span></a></h1>
         </div>
-        <link rel="stylesheet" type="text/css" href="{% static 'werewolf/style.css' %}" />
-
+        <div class='content container'>
         <h1>{{ question.question_text }}</h1>
 
         <ul>
@@ -26,5 +25,6 @@
         </ul>
 
         <input type="button" onClick="location.href='{% url 'werewolf:detail' question.id %}'" value="Vote again?">
+        </div>
     </body>
 </html>

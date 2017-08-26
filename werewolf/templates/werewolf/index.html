@@ -15,7 +15,8 @@
             </a>
             <h1><a href='/werewolf'><span class='arcadia'>Werewolf Arcadia</span></a></h1>
         </div>
-        {% if latest_question_list %}
+        <div class='content container'>
+         {% if latest_question_list %}
             <ul>
             {% for question in latest_question_list %}
                 <li><a href="{% url 'werewolf:detail' question.id %}">{{ question.question_text }}</a></li>
@@ -24,13 +25,6 @@
         {% else %}
             <p>No polls are available.</p>
         {% endif %}
-        <div class='content container'>
-            <div class='row'>
-                <div class='col-md-8'>
-                {% block content %}
-                {% endblock %}
-                </div>
-            </div>
         <table class="table table-bordered">
             <thead>
               <tr>

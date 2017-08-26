@@ -15,6 +15,7 @@
             </a>
             <h1><a href='/werewolf'><span class='arcadia'>Werewolf Arcadia</span></a></h1>
         </div>
+        <div class='content container'>
         <h1>{{ question.question_text }}</h1>
 
         {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
@@ -27,5 +28,6 @@
         {% endfor %}
         <input type="submit" value="Vote" />
         </form>
+        </div>
     </body>
 </html>
