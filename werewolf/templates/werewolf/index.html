@@ -16,19 +16,9 @@
             <h1><a href='/werewolf'><span class='arcadia'>Werewolf Arcadia</span></a></h1>
         </div>
         <div class='content container'>
-         {% if latest_question_list %}
-            <ul>
-            {% for question in latest_question_list %}
-                <li><a href="{% url 'werewolf:detail' question.id %}">{{ question.question_text }}</a></li>
-            {% endfor %}
-            </ul>
-        {% else %}
-            <p>No polls are available.</p>
-        {% endif %}
         <table class="table table-bordered">
             <thead>
               <tr>
-                <th>募集中</th>
                 <th>村名</th>
                 <th>開始日時</th>
                 <th>キャラセット</th>
@@ -36,41 +26,18 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">5村</th>
-                <td><a href='/werewolf'>終焉の村</a></td>
-                <td>2017年06月10日00時00分</td>
-                <td><a href='/werewolf'>霧雨降る街</a></td>
-                <td><a href='/werewolf'>a19th</a></td>
-              </tr>
-              <tr>
-                <th scope="row">4村</th>
-                <td><a href='/werewolf'>災厄の村</a></td>
-                <td>2017年06月10日00時00分</td>
-                <td><a href='/werewolf'>霧雨降る街</a></td>
-                <td><a href='/werewolf'>a19th</a></td>
-              </tr>
-              <tr>
-                <th scope="row">3村</th>
-                <td><a href='/werewolf'>異変の村</a></td>
-                <td>2017年06月10日00時00分</td>
-                <td><a href='/werewolf'>霧雨降る街</a></td>
-                <td><a href='/werewolf'>a19th</a></td>
-              </tr>
-              <tr>
-                <th scope="row">2村</th>
-                <td><a href='/werewolf'>始まりの村</a></td>
-                <td>2017年06月10日00時00分</td>
-                <td><a href='/werewolf'>霧雨降る街</a></td>
-                <td><a href='/werewolf'>a19th</a></td>
-              </tr>
-              <tr>
-                <th scope="row">1村</th>
-                <td><a href='/werewolf'>平和な村</a></td>
-                <td>2017年06月10日00時00分</td>
-                <td><a href='/werewolf'>霧雨降る街</a></td>
-                <td><a href='/werewolf'>a19th</a></td>
-              </tr>
+            {% if latest_question_list %}
+                {% for question in latest_question_list %}
+                  <tr>
+                    <td><a href="{% url 'werewolf:detail' question.id %}">{{ question.question_text }}</a></td>
+                    <td>2017年06月10日00時00分</td>
+                    <td><a href='/werewolf'>霧雨降る街</a></td>
+                    <td><a href='/werewolf'>a19th</a></td>
+                  </tr>
+                {% endfor %}
+            {% else %}
+                <tr><p>No polls are available.</p></tr>
+            {% endif %}
             </tbody>
         </table>
         </div>
