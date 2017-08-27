@@ -16,6 +16,7 @@
         <table class="table table-bordered">
             <thead>
               <tr>
+                <th>募集中</th>
                 <th>村名</th>
                 <th>開始日時</th>
                 <th>キャラセット</th>
@@ -26,6 +27,7 @@
             {% if latest_question_list %}
                 {% for question in latest_question_list %}
                   <tr>
+                    <td>{% question.id %}村</td>
                     <td><a href="{% url 'werewolf:detail' question.id %}">{{ question.question_text }}</a></td>
                     <td>2017年06月10日00時00分</td>
                     <td><a href='/werewolf'>霧雨降る街</a></td>
