@@ -3,7 +3,6 @@ li, li a, label {
 }
 
 body, footer {
-    color: white;
     padding-left: 30px;
     padding-right: 30px;
     background-color: black;
@@ -13,6 +12,7 @@ body {
     font-size: 14pt;
 }
 footer {
+    color: white;
     font-size: 12pt;
 }
 p {
