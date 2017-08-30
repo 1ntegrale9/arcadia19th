@@ -1,27 +1,15 @@
-{% load static %}
-<html>
-    <head>
-        <title>Werewolf Arcadia</title>
-        <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
-        <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
-        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Metamorphous'>
-        <link rel='stylesheet' href='https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css'>
-        <link rel='stylesheet' href='{% static "werewolf/style.css" %}' />
-    </head>
-    <body>
-        <div class='page-header'>
-            <h1><a href='/werewolf'><span class='arcadia'>Werewolf Arcadia</span></a></h1>
-        </div>
-        <div class='content container'>
-        <h1>{{ question.question_text }}</h1>
+{% extends 'werewolf/base.html' %}
 
-        <ul>
-        {% for choice in question.choice_set.all %}
-            <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-        {% endfor %}
-        </ul>
+{% block content %}
+<div class='content container'>
+<h1>{{ question.question_text }}</h1>
 
-        <input type="button" onClick="location.href='{% url 'werewolf:detail' question.id %}'" value="Vote again?">
-        </div>
-    </body>
-</html>
+<ul>
+{% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+{% endfor %}
+</ul>
+
+<input type="button" onClick="location.href='{% url 'werewolf:detail' question.id %}'" value="Vote again?">
+</div>
+{% endblock %}
