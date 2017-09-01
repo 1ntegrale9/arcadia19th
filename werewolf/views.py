@@ -26,7 +26,7 @@ def vote(request, question_id):
     except (KeyError, Choice.DoesNotExist):
         return render(request, 'werewolf/detail.html', {
             'question': question,
-            'error_message': "You didn't select a choice.",
+            'error_message': "投票先を選択してください",
         })
     else:
         selected_choice.votes += 1
