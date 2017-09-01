@@ -6,8 +6,16 @@
             <div class="date">
                 {{ post.published_date }}
             </div>
-            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <h1>{{ post.title }}</h1>
             <p>{{ post.text|linebreaks }}</p>
         </div>
     {% endfor %}
 {% endblock content %}
+
+{% block post %}
+    <h1>新規投稿</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">投稿</button>
+    </form>
+{% endblock %}
