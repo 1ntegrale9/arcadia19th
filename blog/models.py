@@ -3,7 +3,7 @@ from django.utils import timezone
 
 class Post(models.Model):
     title = models.CharField('タイトル', max_length=200)
-    text = models.TextField('内容')
+    text = models.TextField('本文')
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
 
