@@ -7,8 +7,8 @@
     {% for post in posts %}
         <tr>
             <td rowspan="2"><img src="{% static "rain/01.png"%}"/></td>
-            <td>{{ post.title }}</td>
-            <td>{{ post.published_date }}</td>
+            <td><h4>{{ post.title }}</h4></td>
+            <td><div class="date">{{ post.published_date }}</div></td>
         </tr>
         <tr>
             <td colspan="2">{{ post.text|linebreaks }}</td>
