@@ -1,8 +1,19 @@
-body {
+li, li a, label {
+    color: white;
+}
+
+body, footer {
     padding-left: 30px;
     padding-right: 30px;
     background-color: black;
     font-family: 'Rounded Mplus 1c';
+}
+body {
+    font-size: 14pt;
+}
+footer {
+    color: white;
+    font-size: 12pt;
 }
 p {
     color: white;
@@ -19,6 +30,9 @@ h2 {
 }
 h3 {
     font-size: 24pt;
+}
+h4 {
+    font-size: 22pt;
 }
 table {
     color: white;
@@ -58,5 +72,10 @@ table {
     margin-right: 20px;
 }
 .post {
-    margin-bottom: 30px;
+    margin-bottom: 70px;
+    font-size: 12pt;
+}
+.post h1 a, .post h1 a:visited {
+    color: red;
+    font-size: 20pt;
 }

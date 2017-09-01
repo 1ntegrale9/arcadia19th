@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
     'werewolf.apps.WerewolfConfig',
+    'index.apps.IndexConfig',
 ]
 
 MIDDLEWARE = [
