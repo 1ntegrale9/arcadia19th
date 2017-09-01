@@ -2,20 +2,20 @@
 {% load static %}
 
 {% block content %}
+    <table class="table table-bordered">
+    <tbody>
     {% for post in posts %}
-        <table class="table table-bordered">
-        <tbody>
-            <tr>
-                <td rowspan="2"><img src="{% static "rain/01.png"%}"/></td>
-                <td>{{ post.title }}</td>
-                <td>{{ post.published_date }}</td>
-            </tr>
-             <tr>
-                <td colspan="2">{{ post.text|linebreaks }}</td>
-            </tr>
-            </tbody>
-        </table>
+        <tr>
+            <td rowspan="2"><img src="{% static "rain/01.png"%}"/></td>
+            <td>{{ post.title }}</td>
+            <td>{{ post.published_date }}</td>
+        </tr>
+        <tr>
+            <td colspan="2">{{ post.text|linebreaks }}</td>
+        </tr>
     {% endfor %}
+    </tbody>
+    </table>
 {% endblock content %}
 
 {% block post %}
