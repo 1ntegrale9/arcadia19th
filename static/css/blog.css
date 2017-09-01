@@ -58,10 +58,5 @@ table {
     margin-right: 20px;
 }
 .post {
-    margin-bottom: 70px;
-    font-size: 12pt;
-}
-.post h1 a, .post h1 a:visited {
-    color: red;
-    font-size: 20pt;
+    margin-bottom: 30px;
 }
