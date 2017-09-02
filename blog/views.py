@@ -10,6 +10,7 @@ def post_list(request):
             post = form.save(commit=False)
             post.published_date = timezone.now()
             post.save()
+            return redirect('post_list')
     else:
         form = PostForm()
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
