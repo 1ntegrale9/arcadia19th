@@ -39,6 +39,7 @@ class Remark(models.Model):
     days = models.IntegerField(default=1)
     types = models.IntegerField(default=1)
     user = models.CharField('ユーザ名', max_length=200)
+    character = models.IntegerField(default=1)
     date = models.DateTimeField(default=timezone.now)
     text = models.TextField('本文')
 
