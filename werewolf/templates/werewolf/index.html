@@ -5,27 +5,23 @@
 <table class="table table-bordered">
     <thead>
       <tr>
-        <th>募集中</th>
+        <th>No</th>
         <th>村名</th>
-        <th>開始日時</th>
+        <th>作成日時</th>
         <th>キャラセット</th>
         <th>村主</th>
       </tr>
     </thead>
     <tbody>
-    {% if latest_question_list %}
-        {% for question in latest_question_list %}
+        {% for village in latest_village_list %}
           <tr>
-            <td>{{ question.id }}村</td>
-            <td><a href="{% url 'werewolf:detail' question.id %}">{{ question.question_text }}</a></td>
-            <td>2017年06月10日00時00分</td>
-            <td><a href='http://misty-rain.sakura.ne.jp/fall0rain/'>霧雨降る街</a></td>
-            <td><a href='https://twitter.com/a19th'>a19th</a></td>
+            <td>{{ village.id }}</td>
+            <td><a href="{% url 'werewolf:village' village.id %}">{{ village.name }}</a></td>
+            <td>{{ village.created_date }}</td>
+            <td><a href='http://misty-rain.sakura.ne.jp/fall0rain/'>{{ village.character }}</a></td>
+            <td>{{ village.auther }}</td>
           </tr>
         {% endfor %}
-    {% else %}
-        <tr><p>No polls are available.</p></tr>
-    {% endif %}
     </tbody>
 </table>
 <p>
