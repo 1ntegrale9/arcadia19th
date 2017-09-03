@@ -35,11 +35,12 @@ class Village(models.Model):
 
 class Remark(models.Model):
     village = models.ForeignKey(Village, on_delete=models.CASCADE)
-    serial_no = models.IntegerField()
+    serial_no = models.IntegerField(defalult=0)
     days = models.IntegerField(default=1)
     types = models.IntegerField(default=1)
-    user = models.CharField('発言者', max_length=200, default='unknown')
-    text = models.TextField('発言')
+    user = models.CharField('ユーザ名', max_length=200)
+    date = models.DateTimeField(default=timezone.now)
+    text = models.TextField('本文')
 
     def __str__(self):
         return self.text
