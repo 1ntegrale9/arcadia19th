@@ -23,3 +23,23 @@ class Choice(models.Model):
 
     def __str__(self):
         return self.choice_text
+
+class Village(models.Model):
+    name = models.CharField('村名', max_length=200)
+    auther = models.CharField('作成者', max_length=200)
+    character = models.CharField('キャラセット', max_length=200)
+    created_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.name
+
+class Remark(models.Model):
+    village = models.ForeignKey(Village, on_delete=models.CASCADE)
+    serial_no = models.IntegerField()
+    days = models.IntegerField(default=1)
+    types = models.IntegerField(default=1)
+    user = models.CharField('発言者', max_length=200, default='unknown')
+    text = models.TextField('発言')
+
+    def __str__(self):
+        return self.text
