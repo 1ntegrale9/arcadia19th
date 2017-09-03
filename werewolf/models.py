@@ -26,7 +26,7 @@ class Choice(models.Model):
 
 class Village(models.Model):
     name = models.CharField('村名', max_length=200)
-    auther = models.CharField('作成者', max_length=200)
+    auther = models.CharField('村主', max_length=200)
     character = models.CharField('キャラセット', max_length=200)
     created_date = models.DateTimeField(default=timezone.now)
 
