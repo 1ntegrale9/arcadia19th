@@ -22,7 +22,7 @@ def village(request, village_id):
             return HttpResponseRedirect(reverse('werewolf:village', args=(village_id,)))
     else:
         form = RemarkForm()
-    remark_list = Remark.objects.order_by('-date')
+    remark_list = Remark.objects.filter(village=village_id).order_by('-date')
     return render(request, 'werewolf/village.html', {'remark_list':remark_list, 'form':form})
 
 class DetailView(generic.DetailView):
