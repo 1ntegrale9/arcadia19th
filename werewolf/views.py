@@ -13,7 +13,6 @@ class IndexView(generic.ListView):
         return Village.objects.order_by('created_date')
 
 def village(request, village_id):
-    remark = get_object_or_404(Remark, pk=village_id)
     if request.method == "POST":
         form = RemarkForm(request.POST)
         if form.is_valid():
