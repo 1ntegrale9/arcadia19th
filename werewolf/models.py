@@ -35,7 +35,7 @@ class Village(models.Model):
 
 class Remark(models.Model):
     village = models.ForeignKey(Village, on_delete=models.CASCADE)
-    serial_no = models.IntegerField(defalult=0)
+    serial_no = models.IntegerField(default=0)
     days = models.IntegerField(default=1)
     types = models.IntegerField(default=1)
     user = models.CharField('ユーザ名', max_length=200)
