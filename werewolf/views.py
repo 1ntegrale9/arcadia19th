@@ -18,13 +18,12 @@ def village(request, village_id):
         if form.is_valid():
             remark = form.save(commit=False)
             remark.village_id = village_id
-            remark.serial_no = 0
             remark.save()
             return HttpResponseRedirect(reverse('werewolf:village', args=(village_id,)))
     else:
         form = RemarkForm()
-    latest_remark_list = Remark.objects.all()
-    return render(request, 'werewolf/village.html', {'latest_remark_list':latest_remark_list, 'form':form})
+    remark_list = Remark.objects.order_by('date')
+    return render(request, 'werewolf/village.html', {'remark_list':remark_list, 'form':form})
 
 class DetailView(generic.DetailView):
     model = Question

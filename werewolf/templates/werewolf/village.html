@@ -14,14 +14,14 @@
       </div>
       <table class="table table-bordered">
         <tbody>
-          {% for remark in latest_remark_list %}
+          {% for remark in remark_list %}
             <tr>
               <td rowspan="2" width="81"><img src="{% static "rain/01.png"%}"/></td>
               <td><h4>{{ remark.user }}</h4></td>
-              <!-- <td><div class="date">{{ post.published_date }}</div></td> -->
+              <td width="180"><div class="date">{{ remark.date }}</div></td>
             </tr>
             <tr>
-              <td>{{ remark.text|linebreaks }}</td>
+              <td colspan="2">{{ remark.text|linebreaks }}</td>
             </tr>
           {% endfor %}
         </tbody>
