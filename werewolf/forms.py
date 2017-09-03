@@ -1,8 +1,12 @@
 from django import forms
-from .models import Remark
+from .models import Village, Remark
+
+class VillageForm(forms.ModelForm):
+	class Meta:
+		model = Village
+		fields = ('name', 'auther')
 
 class RemarkForm(forms.ModelForm):
-
     class Meta:
         model = Remark
         fields = ('user', 'text')
