@@ -26,6 +26,7 @@ def village(request, village_id):
             remark = form.save(commit=False)
             remark.village_id = village_id
             remark.character = randint(1,80)
+            remark.character_img_url = "rain/" + str(remark.character).zfill(2) + ".png"
             remark.save()
             return HttpResponseRedirect(reverse('werewolf:village', args=(village_id,)))
     else:

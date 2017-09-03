@@ -40,6 +40,7 @@ class Remark(models.Model):
     types = models.IntegerField(default=1)
     user = models.CharField('ユーザ名', max_length=200)
     character = models.IntegerField(default=1)
+    character_img_url = models.CharField(max_length=100, default="rain/01.png")
     date = models.DateTimeField(default=timezone.now)
     text = models.TextField('本文')
 

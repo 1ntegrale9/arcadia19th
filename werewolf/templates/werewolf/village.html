@@ -16,7 +16,7 @@
         <tbody>
           {% for remark in remark_list %}
             <tr>
-              <td rowspan="2" width="81"><img src="{% static "rain/01.png"%}"/></td>
+              <td rowspan="2" width="81"><img src="{% static remark.character_img_url %}"/></td>
               <td><h4>{{ remark.user }}</h4></td>
               <td width="180"><div class="date">{{ remark.date }}</div></td>
             </tr>
