@@ -12,6 +12,17 @@ class QuestionAdmin(admin.ModelAdmin):
     list_filter = ['pub_date']
     search_fields = ['question_text']
 
+class RemarkInline(admin.TabularInline):
+    model = Remark
+    extra = 1
+
+class VillageAdmin(admin.ModelAdmin):
+    fieldsets = [(None, {'fields':['name']}),('Date information', {'fields':['created_date']}),]
+    inlines = [RemarkInline]
+    list_display = ('name','created_date')
+    list_filter = ['created_date']
+    search_fields = ['name']
+
 admin.site.register(Question, QuestionAdmin)
-admin.site.register(Village)
+admin.site.register(Village, VillageAdmin)
 admin.site.register(Remark)
