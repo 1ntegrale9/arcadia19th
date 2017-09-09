@@ -76,3 +76,12 @@ table {
     color: red;
     font-size: 20pt;
 }
+
+/*スクロール用*/
+thead.scrollHead,tbody.scrollBody{
+  display:block;
+}
+tbody.scrollBody{
+  overflow-y:scroll;
+  height:100px;
+}
