@@ -1,7 +1,5 @@
 body, footer {
     color: white;
-    padding-left: 30px;
-    padding-right: 30px;
     background-color: black;
     font-family: 'Rounded Mplus 1c';
 }
@@ -14,7 +12,6 @@ footer {
 }
 h1, h2, h3, h4 {
     color: red;
-    font-family: 'Rounded Mplus 1c';
 }
 h1 {
     font-size: 28pt;
@@ -37,7 +34,7 @@ h3 {
 /* タイトル */
 .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
     color: red;
-    font-size: 36pt;
+    font-size: 32pt;
     text-decoration: none;
 }
 .date {
@@ -51,10 +48,6 @@ h3 {
     color: black;
     width: 100%;
 }
-.post {
-    margin-bottom: 70px;
-    font-size: 12pt;
-}
 
 /*スクロール用*/
 thead.scrollHead,tbody.scrollBody{
@@ -62,5 +55,5 @@ thead.scrollHead,tbody.scrollBody{
 }
 tbody.scrollBody{
   overflow-y:scroll;
-  height: 50%;
+  height: 300px;
 }
