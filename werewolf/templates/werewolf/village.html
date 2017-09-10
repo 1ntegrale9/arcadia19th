@@ -2,11 +2,11 @@
 {% load static %}
 
 {% block content %}
-<form method="POST" class="post-form">{% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit" class="save btn btn-default">投稿</button>
-</form>
 <div class='content container'>
+  <form method="POST" class="post-form">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="save btn btn-default">投稿</button>
+  </form>
   <table class="table table-bordered">
     <tbody class="scrollBody">
       {% for remark in remark_list %}
