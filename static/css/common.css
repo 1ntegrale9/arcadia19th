@@ -59,7 +59,7 @@ table.table, table.table-bordered {
 thead.scrollHead,tbody.scrollBody{
   display:block;
   width: 100%;
-  height: 50vw;
+  height: 100vw;
 }
 tbody.scrollBody{
   overflow-y:scroll;
