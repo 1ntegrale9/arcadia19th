@@ -50,11 +50,18 @@ h3 {
     width: 100%;
 }
 
+table.table, table.table-bordered {
+  width: auto;
+  height: auto;
+}
+
 /*スクロール用*/
 thead.scrollHead,tbody.scrollBody{
   display:block;
+  width: 100%;
+  height: 50vw;
 }
 tbody.scrollBody{
   overflow-y:scroll;
-  height: 300px;
+  width: auto;
 }
