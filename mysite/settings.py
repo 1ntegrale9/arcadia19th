@@ -7,13 +7,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-from os import environ
-SECRET_KEY = environ['SECRET_KEY']
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 ALLOWED_HOSTS = []
 
 
@@ -118,9 +111,11 @@ ALLOWED_HOSTS = ['*']
 
 STATIC_ROOT = 'staticfiles'
 
-DEBUG = False
-
 try:
     from .local_settings import *
 except ImportError:
-    pass
+    # SECURITY WARNING: keep the secret key used in production secret!
+    from os import environ
+    SECRET_KEY = environ['SECRET_KEY']
+    # SECURITY WARNING: don't run with debug turned on in production!
+    DEBUG = False
