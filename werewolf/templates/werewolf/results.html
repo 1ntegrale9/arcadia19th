@@ -2,13 +2,12 @@
 
 {% block content %}
 <div class='content container'>
-
-<ul>
-{% for choice in question.choice_set.all %}
+  <ul>
+    {% for choice in question.choice_set.all %}
     <li>{{ choice.choice_text }}  {{ choice.votes }}票</li>
-{% endfor %}
-</ul>
+    {% endfor %}
+  </ul>
 
-<input type="button" onClick="location.href='{% url 'werewolf:detail' question.id %}'" value="再投票">
+  <input type="button" onClick="location.href='{% url 'werewolf:detail' question.id %}'" value="再投票">
 </div>
 {% endblock %}

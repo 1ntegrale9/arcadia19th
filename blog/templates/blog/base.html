@@ -2,33 +2,33 @@
 
 {% load static %}
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Werewolf Arcadia</title>
-        <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
-        <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
-        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Metamorphous'>
-        <link rel='stylesheet' href='https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css'>
-        <link rel='stylesheet' href='{% static 'css/common.css' %}'>
-    </head>
-    <body>
-        <div class='page-header'>
-            <h1><a href='/'><span class='arcadia'>Werewolf Arcadia</span></a></h1>
-            <a href='/blog'>掲示板</a>　
-            <a href='/werewolf'>村一覧</a>　
-            <a href='/admin'>管理画面</a>
-        </div>
-        <div class='content container'>
-            <div class='row'>
-                <div class='col-md-8'>
-                {% block post %}
-                {% endblock %}
-                </div>
-                <div class='col-md-8'>
-                {% block content %}
-                {% endblock %}
-                </div>
-            </div>
-        </div>
-    </body>
+<head>
+  <meta charset="UTF-8">
+  <title>Werewolf Arcadia</title>
+  <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Metamorphous'>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css'>
+  <link rel='stylesheet' href='{% static 'css/common.css' %}'>
+</head>
+<body>
+  <div class='page-header'>
+    <h1><a href='/'><span class='arcadia'>Werewolf Arcadia</span></a></h1>
+    <a href='/blog'>掲示板</a>　
+    <a href='/werewolf'>村一覧</a>　
+    <a href='/admin'>管理画面</a>
+  </div>
+  <div class='content container'>
+    <div class='row'>
+      <div class='col-md-8'>
+        {% block post %}
+        {% endblock %}
+      </div>
+      <div class='col-md-8'>
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</body>
 </html>
