@@ -39,7 +39,7 @@ class Remark(models.Model):
     serial_no = models.IntegerField(default=0)
     days = models.IntegerField(default=1)
     types = models.IntegerField(default=1)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.CharField('ユーザ名', max_length=200)
     character = models.IntegerField(default=1)
     character_img_url = models.CharField(max_length=100, default="rain/01.png")
     date = models.DateTimeField(default=timezone.now)
