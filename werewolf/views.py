@@ -11,6 +11,7 @@ def index(request):
         form = VillageForm(request.POST)
         if form.is_valid():
             village = form.save(commit=False)
+            village.auther = request.user.username
             village.character = "霧雨降る街"
             village.save()
             return redirect('werewolf:index')
@@ -24,6 +25,7 @@ def village(request, village_id):
         form = RemarkForm(request.POST)
         if form.is_valid():
             remark = form.save(commit=False)
+            remark.user = request.user.username
             remark.village_id = village_id
             remark.character = randint(1,80)
             remark.character_img_url = "rain/" + str(remark.character).zfill(2) + ".png"

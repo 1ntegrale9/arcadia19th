@@ -3,10 +3,12 @@
 
 {% block content %}
 <div class='content container'>
+  {% if user.is_authenticated %}
   <form method="POST" class="post-form">{% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="save btn btn-default">投稿</button>
   </form>
+  {% endif %}
   <table class="table table-bordered">
     <tbody class="scrollBody">
       {% for remark in remark_list %}

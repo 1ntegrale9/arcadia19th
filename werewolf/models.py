@@ -1,7 +1,6 @@
 import datetime
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User
 
 class Question(models.Model):
     question_text = models.CharField('質問', max_length=200)
@@ -43,7 +42,7 @@ class Remark(models.Model):
     character = models.IntegerField(default=1)
     character_img_url = models.CharField(max_length=100, default="rain/01.png")
     date = models.DateTimeField(default=timezone.now)
-    text = models.TextField('本文')
+    text = models.TextField('発言')
 
     def __str__(self):
         return self.text

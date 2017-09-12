@@ -4,12 +4,12 @@ from .models import Village, Remark
 class VillageForm(forms.ModelForm):
 	class Meta:
 		model = Village
-		fields = ('name', 'auther')
+		fields = ('name',)
 
 class RemarkForm(forms.ModelForm):
     class Meta:
         model = Remark
-        fields = ('user', 'text')
+        fields = ('text',)
         widgets = {
             'text': forms.Textarea(attrs={'rows': 3}),
         }
