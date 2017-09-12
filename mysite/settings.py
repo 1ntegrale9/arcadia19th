@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'werewolf.apps.WerewolfConfig',
     'index.apps.IndexConfig',
+    'account.apps.AccountConfig',
 ]
 
 MIDDLEWARE = [
@@ -110,6 +111,9 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 
 STATIC_ROOT = 'staticfiles'
+
+LOGIN_URL = "/login/"
+LOGIN_REDIRECT_URL = '/'
 
 try:
     from .local_settings import *

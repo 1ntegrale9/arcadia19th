@@ -1,0 +1,60 @@
+{% extends "account/base.html" %}
+{% block content %}
+<div class="container">
+  <div class="center">
+    <h1>ユーザ情報</h1>
+    <p class="lead">ログイン中のユーザデータを表示します</p>
+  </div>
+ 
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>名前・説明</th>
+        <th>templateでの呼び出し方</th>
+        <th>ログインユーザのデータ</th>
+        <th>備考</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>ユーザ名</td>
+        <td>{% verbatim %} {{ user.username }} {% endverbatim %} </td>
+        <td>{{ user.username }}</td>
+        <td>必須</td>
+      </tr>
+      <tr>
+        <td>メール</td>
+        <td>{% verbatim %} {{ user.email }} {% endverbatim %} </td>
+        <td>{{ user.email }}</td>
+        <td>デフォルトは空欄でもOK</td>
+      </tr>
+      <tr>
+        <td>姓</td>
+        <td>{% verbatim %} {{ user.first_name }} {% endverbatim %} </td>
+        <td>{{ user.first_name }}</td>
+        <td>デフォルトは空欄でもOK</td>
+      </tr>
+      <tr>
+        <td>名</td>
+        <td>{% verbatim %} {{ user.last_name }} {% endverbatim %} </td>
+        <td>{{ user.last_name }}</td>
+        <td>デフォルトは空欄でもOK</td>
+      </tr>
+      <tr>
+        <td>adminサイトにアクセスできるか</td>
+        <td>{% verbatim %} {{ user.is_staff }} {% endverbatim %} </td>
+        <td>{{ user.is_staff }}</td>
+        <td>デフォルトはFalse</td>
+      </tr>
+      <tr>
+        <td>アカウントが有効か（ログインできるか）</td>
+        <td>{% verbatim %} {{ user.is_active }} {% endverbatim %} </td>
+        <td>{{ user.is_active }}</td>
+        <td>デフォルトはTrue</td>
+      </tr>
+    </tbody>
+  </table>
+ 
+</div><!-- /.container -->
+{% endblock %}
+ 
