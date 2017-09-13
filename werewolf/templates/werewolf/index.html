@@ -24,12 +24,10 @@
       {% endfor %}
     </tbody>
   </table>
-  <div class="post row col-md-8">
     {% if user.is_authenticated %}
-    <h4>村の作成</h4>
     <form method="POST" class="post-form">{% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit" class="save btn btn-default">投稿</button>
+      {{ form.as_table }}
+      <button type="submit" class="save btn btn-block btn-outline-primary">村を作成</button>
     </form>
     {% endif %}
   </div>
