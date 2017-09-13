@@ -1,7 +1,8 @@
-{% extends 'blog/base.html' %}
+{% extends 'werewolf/base.html' %}
+
 {% load static %}
 
-{% block post %}
+{% block content %}
 <div class="post">
   <h4>新規投稿</h4>
   <form method="POST" class="post-form">{% csrf_token %}
@@ -9,9 +10,7 @@
     <button type="submit" class="save btn btn-default">投稿</button>
   </form>
 </div>
-{% endblock %}
 
-{% block content %}
 <table class="table table-bordered">
   <tbody>
     {% for post in posts %}

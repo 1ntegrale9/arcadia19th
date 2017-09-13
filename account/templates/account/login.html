@@ -1,12 +1,9 @@
-{% extends "account/base.html" %}
+{% extends "werewolf/base.html" %}
+
 {% block content %}
 <div class="container">
-  <div class="center">
-    <h1>ログインページ</h1>
-  </div>
- 
   <div class="card-group">
-    <div class="card card-outline-primary">
+    <div class="card">
       <div class="card-block">
         <form action="{% url 'account:login' %}" method="POST">
           <p>{{ form.non_field_errors }}</p>
@@ -19,17 +16,8 @@
           </button>
         </form>
       </div>
-    </div>
-    <div class="card card-outline-primary">
-      <div class="card-block">
-        <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'account:create' %}">
-          会員登録
-        </a>
-      </div>
-    </div>
- 
+    </div> 
   </div><!-- /.card-group -->
-　　
 </div><!-- /.container -->
 {% endblock %}
  
