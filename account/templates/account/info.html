@@ -23,24 +23,6 @@
         <td>必須</td>
       </tr>
       <tr>
-        <td>メール</td>
-        <td>{% verbatim %} {{ user.email }} {% endverbatim %} </td>
-        <td>{{ user.email }}</td>
-        <td>デフォルトは空欄でもOK</td>
-      </tr>
-      <tr>
-        <td>姓</td>
-        <td>{% verbatim %} {{ user.first_name }} {% endverbatim %} </td>
-        <td>{{ user.first_name }}</td>
-        <td>デフォルトは空欄でもOK</td>
-      </tr>
-      <tr>
-        <td>名</td>
-        <td>{% verbatim %} {{ user.last_name }} {% endverbatim %} </td>
-        <td>{{ user.last_name }}</td>
-        <td>デフォルトは空欄でもOK</td>
-      </tr>
-      <tr>
         <td>adminサイトにアクセスできるか</td>
         <td>{% verbatim %} {{ user.is_staff }} {% endverbatim %} </td>
         <td>{{ user.is_staff }}</td>

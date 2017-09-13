@@ -7,23 +7,13 @@ class RegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = (
-            "username", "email", "password1", "password2",
-            "first_name", "last_name",
+            "username", "password1", "password2",
         )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['class'] = 'form-control'
         self.fields['username'].widget.attrs['placeholder'] = 'ユーザ名'
-
-        self.fields['email'].widget.attrs['class'] = 'form-control'
-        self.fields['email'].widget.attrs['placeholder'] = 'メールアドレス'
-
-        self.fields['first_name'].widget.attrs['class'] = 'form-control'
-        self.fields['first_name'].widget.attrs['placeholder'] = '姓'
-
-        self.fields['last_name'].widget.attrs['class'] = 'form-control'
-        self.fields['last_name'].widget.attrs['placeholder'] = '名'
 
         self.fields['password1'].widget.attrs['class'] = 'form-control'
         self.fields['password1'].widget.attrs['placeholder'] = 'パスワード'
