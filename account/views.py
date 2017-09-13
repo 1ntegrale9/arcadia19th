@@ -14,7 +14,7 @@ class MyPageView(LoginRequiredMixin, generic.TemplateView):
 class CreateUserView(generic.CreateView):
     template_name = 'account/create.html'
     form_class = RegisterForm
-    success_url = reverse_lazy('account:index')
+    success_url = reverse_lazy('index:index')
 
 def login(request):
     context = {
@@ -25,6 +25,6 @@ def login(request):
 
 def logout(request):
     context = {
-        'template_name': 'account/index.html',
+        'template_name': 'index/index.html',
     }
     return auth_views.logout(request, **context)
