@@ -3,37 +3,49 @@
 
 {% block content %}
 <div class='content container'>
-    <div class="card-block">
+  <nav class="nav navbar">
+    <div class="container-fluid">
+      <a class="nav-item nav-link" href="/blog">匿名掲示板</a>
       {% if user.is_authenticated %}
-      <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_table }}
-        <button type="submit" class="save btn btn-block btn-outline-primary">村を作成</button>
-      </form>
+        <a class="nav-item nav-link" href="/admin">管理画面</a>
+        <a class="nav-item nav-link" href="{% url 'account:logout' %}">ログアウト</a>
+      {% else %}
+        <a class="nav-item nav-link" href="{% url 'account:create' %}">ユーザ登録</a>
+        <a class="nav-item nav-link" href="{% url 'account:login' %}">ログイン</a>
       {% endif %}
-      <table class="table table-bordered table-responsive">
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>村名</th>
-            <th>村主</th>
-            <th>編成</th>
-            <th>キャラセット</th>
-            <th>作成日時</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for village in latest_village_list %}
-          <tr>
-            <td>{{ village.id }}</td>
-            <td><a href="{% url 'werewolf:village' village.id %}">{{ village.name }}</a></td>
-            <td>{{ village.auther }}</td>
-            <td>雑談</td>
-            <td><a href='http://misty-rain.sakura.ne.jp/fall0rain/'>{{ village.character }}</a></td>
-            <td>{{ village.created_date }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
     </div>
+  </nav>
+  <div class="card-block">
+    {% if user.is_authenticated %}
+    <form method="POST" class="post-form">{% csrf_token %}
+      {{ form.as_table }}
+      <button type="submit" class="save btn btn-block btn-outline-primary">村を作成</button>
+    </form>
+    {% endif %}
+    <table class="table table-bordered table-responsive">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>村名</th>
+          <th>村主</th>
+          <th>編成</th>
+          <th>キャラセット</th>
+          <th>作成日時</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for village in latest_village_list %}
+        <tr>
+          <td>{{ village.id }}</td>
+          <td><a href="{% url 'werewolf:village' village.id %}">{{ village.name }}</a></td>
+          <td>{{ village.auther }}</td>
+          <td>雑談</td>
+          <td><a href='http://misty-rain.sakura.ne.jp/fall0rain/'>{{ village.character }}</a></td>
+          <td>{{ village.created_date }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 {% endblock %}
