@@ -17,7 +17,7 @@ def index(request):
             return redirect('werewolf:index')
     else:
         form = VillageForm()
-    latest_village_list = Village.objects.order_by('created_date')
+    latest_village_list = Village.objects.order_by('-created_date')
     return render(request, 'werewolf/index.html', {'latest_village_list':latest_village_list, 'form':form})
 
 def village(request, village_id):

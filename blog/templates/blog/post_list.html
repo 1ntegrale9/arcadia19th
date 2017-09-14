@@ -1,30 +1,27 @@
 {% extends 'werewolf/base.html' %}
-
 {% load static %}
 
 {% block content %}
 <div class='content container'>
-  <div class="card-block">
-    <form method="POST" class="post-form">{% csrf_token %}
-      {{ form.as_table }}
-      <button type="submit" class="save btn btn-block btn-outline-primary">新規投稿</button>
-    </form>
-  </div>
-  <div class="card-block">
-    <table class="table table-bordered">
-      <tbody>
-        {% for post in posts %}
+    <div class="card-block">
+      <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_table }}
+        <button type="submit" class="save btn btn-block btn-outline-primary">新規投稿</button>
+      </form>
+      <table class="table table-bordered table-responsive">
+        <tbody>
+          {% for post in posts %}
           <tr>
-            <td rowspan="2"><img src="{% static "rain/01.png"%}"/></td>
-            <td><h4>{{ post.title }}</h4></td>
+            <td rowspan="2" width="81"><img src="{% static "rain/01.png"%}"/></td>
+            <td>{{ post.title }}</td>
             <td><div class="date">{{ post.published_date }}</div></td>
           </tr>
           <tr>
             <td colspan="2">{{ post.text|linebreaks }}</td>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
 </div>
 {% endblock content %}

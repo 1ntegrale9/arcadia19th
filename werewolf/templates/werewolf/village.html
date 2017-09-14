@@ -3,25 +3,27 @@
 
 {% block content %}
 <div class='content container'>
-  {% if user.is_authenticated %}
-    <form method="POST" class="post-form">{% csrf_token %}
-      {{ form.as_table }}
-      <button type="submit" class="save btn btn-block btn-outline-primary">発言</button>
-    </form>
-  {% endif %}
-  <table class="table table-bordered table-responsive">
-    <tbody class="scrollBody">
-      {% for remark in remark_list %}
-        <tr>
-          <td rowspan="2" width="81"><img src="{% static remark.character_img_url %}"/></td>
-          <td><h4>{{ remark.user }}</h4></td>
-          <td><div class="date">{{ remark.date }}</div></td>
-        </tr>
-        <tr>
-          <td colspan="2">{{ remark.text|linebreaks }}</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+    <div class="card-block">
+      {% if user.is_authenticated %}
+      <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_table }}
+        <button type="submit" class="save btn btn-block btn-outline-primary">発言</button>
+      </form>
+      {% endif %}
+      <table class="table table-bordered table-responsive">
+        <tbody class="scrollBody">
+          {% for remark in remark_list %}
+          <tr>
+            <td rowspan="2" width="81"><img src="{% static remark.character_img_url %}"/></td>
+            <td>{{ remark.user }}</td>
+            <td><div class="date">{{ remark.date }}</div></td>
+          </tr>
+          <tr>
+            <td colspan="2">{{ remark.text|linebreaks }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
 </div>
 {% endblock %}

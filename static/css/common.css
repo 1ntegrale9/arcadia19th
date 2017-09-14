@@ -33,3 +33,11 @@ footer {
   color: black;
   width: 100%;
 }
+
+.table {
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  -webkit-overflow-scrolling: touch;
+}
