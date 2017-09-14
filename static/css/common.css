@@ -41,3 +41,6 @@ footer {
   -ms-overflow-style: -ms-autohiding-scrollbar;
   -webkit-overflow-scrolling: touch;
 }
+.c-name {
+  color: red;
+}

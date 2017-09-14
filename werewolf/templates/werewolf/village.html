@@ -15,7 +15,7 @@
           {% for remark in remark_list %}
           <tr>
             <td rowspan="2" width="81"><img src="{% static remark.character_img_url %}"/></td>
-            <td>{{ remark.user }}</td>
+            <td class="c-name">{{ remark.user }}</td>
             <td><div class="date">{{ remark.date }}</div></td>
           </tr>
           <tr>
