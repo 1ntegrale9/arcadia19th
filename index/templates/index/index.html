@@ -2,13 +2,19 @@
 
 {% block content %}
 <div class='content container'>
-<p><a href="http://nejiten.halfmoon.jp/">ねじれ天国</a>から派生した人狼サイトプロジェクトです。</p>
-<p>
-・スマホでも使える<br>
-・リロードなしで動作する<br>
-・過疎でもAIを追加して遊べる
-</p>
-<p>を目標としています。</p>
+  <nav class="nav navbar">
+    <div class="container-fluid">
+      <a class="nav-item nav-link" href="/werewolf">村一覧</a>
+      <a class="nav-item nav-link" href="/blog">掲示板</a>
+      {% if user.is_authenticated %}
+        <a class="nav-item nav-link" href="/admin">管理画面</a>
+        <a class="nav-item nav-link" href="{% url 'account:logout' %}">ログアウト</a>
+      {% else %}
+        <a class="nav-item nav-link" href="{% url 'account:create' %}">ユーザ登録</a>
+        <a class="nav-item nav-link" href="{% url 'account:login' %}">ログイン</a>
+      {% endif %}
+    </div>
+  </nav>
 </div>
 {% endblock %}
 

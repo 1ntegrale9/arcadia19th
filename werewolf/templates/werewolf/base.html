@@ -11,21 +11,14 @@
     <link rel='stylesheet' href='{% static 'css/common.css' %}'>
   </head>
   <body>
-    <div class='page-header'>
-      <a href="{% url 'index:index' %}" class='arcadia'><h1>Werewolf Arcadia</h1></a>
-      <nav class="nav navbar">
-        <div class="container-fluid">
-          <a class="nav-item nav-link" href="/werewolf">村一覧</a>
-          <a class="nav-item nav-link" href="/blog">掲示板</a>
-          {% if user.is_authenticated %}
-            <a class="nav-item nav-link" href="/admin">管理画面</a>
-            <a class="nav-item nav-link" href="{% url 'account:logout' %}">ログアウト</a>
-          {% else %}
-            <a class="nav-item nav-link" href="{% url 'account:create' %}">ユーザ登録</a>
-            <a class="nav-item nav-link" href="{% url 'account:login' %}">ログイン</a>
-          {% endif %}
+    <div class='container'>
+      <div class='page-header'>
+        <div class='center'>
+          <a href="{% url 'index:index' %}" class='arcadia'>
+            <h1>Werewolf Arcadia</h1>
+          </a>
         </div>
-      </nav>
+      </div><!-- /.container -->
     </div>
     {% block content %}
     {% endblock %}

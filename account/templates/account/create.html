@@ -2,37 +2,25 @@
 
 {% block content %}
 <div class="container">
-　<form action="{% url 'account:create' %}" method="POST">
-    <div class="row">
-      <div class="col-sm-10 offset-sm-1">
-        <div class="card">
-          <div class="card-block">
-            <div class="row">
-              <div class="col-xs-12 col-sm-6">
-                <div class="form-group">
-                  {{ form.username }}
-                  {{ form.username.errors }}
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-6">
-                <div class="form-group">
-                  {{ form.password1 }}
-                  {{ form.password1.errors }}
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-6">
-                <div class="form-group">
-                  {{ form.password2 }}
-                  {{ form.password2.errors }}
-                </div>
-              </div>
-            </div>
-            {% csrf_token %}
-            <button type="submit" class="btn btn-lg btn-block btn-outline-primary">会員登録</button>
-          </div>
-        </div>
+  <form action="{% url 'account:create' %}" method="POST">
+  <div class="card-group">
+    <div class="card-block">
+      <div class="form-group">
+        {{ form.username }}
+        {{ form.username.errors }}
       </div>
+      <div class="form-group">
+        {{ form.password1 }}
+        {{ form.password1.errors }}
+      </div>
+      <div class="form-group">
+        {{ form.password2 }}
+        {{ form.password2.errors }}
+      </div>
+      {% csrf_token %}
+      <button type="submit" class="btn btn-lg btn-block btn-outline-primary">会員登録</button>
     </div>
-　</form> 
+    </div>
+  </form> 
 </div>
 {% endblock %}
