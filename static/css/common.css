@@ -45,3 +45,6 @@ footer {
 .c-title {
   color: red;
 }
+th,td {
+  word-break: break-all;
+}
