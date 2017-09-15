@@ -1,5 +1,4 @@
 {% extends 'werewolf/base.html' %}
-{% load static %}
 
 {% block content %}
     <div class='container'>
@@ -23,11 +22,7 @@
                             <form method="POST">
                                 <p class="card-title text-center">村名{{ form.name }}{% csrf_token %}</p>
                                 <button type="submit" class="save btn btn-block btn-outline-primary">作成</button>
-                                </form>
-                                </div>
-                                </div>
-                                </div>
-                                {% endif %}
+                                </form></div></div></div>{% endif %}
             {% for village in latest_village_list %}
                 <div class="col-sm-6">
                     <div class="card text-white border-dark mb-4">
