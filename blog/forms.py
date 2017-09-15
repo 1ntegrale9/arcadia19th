@@ -13,7 +13,7 @@ class PostForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['text'].widget.attrs['class'] = 'form-control'
-        self.fields['text'].widget.attrs['placeholder'] = 'タイトル'
+        self.fields['text'].widget.attrs['placeholder'] = '本文'
 
         self.fields['title'].widget.attrs['class'] = 'form-control'
-        self.fields['title'].widget.attrs['placeholder'] = '本文'
+        self.fields['title'].widget.attrs['placeholder'] = 'タイトル'
