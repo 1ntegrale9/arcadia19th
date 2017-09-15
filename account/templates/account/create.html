@@ -2,9 +2,9 @@
 
 {% block content %}
 <div class="container">
-  <form action="{% url 'account:create' %}" method="POST">
   <div class="card-group">
     <div class="card-block">
+    <form action="{% url 'account:create' %}" method="POST">
       <div class="form-group">
         {{ form.username }}
         {{ form.username.errors }}

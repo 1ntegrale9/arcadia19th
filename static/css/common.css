@@ -9,7 +9,6 @@ html
 body,
 footer,
 .list-group-item,
-.form-control,
 .card {
   background-color: black;
 }
