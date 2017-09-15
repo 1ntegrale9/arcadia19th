@@ -2,9 +2,18 @@ html
 body,
 footer {
   color: white;
-  background-color: black;
   font-family: 'Rounded Mplus 1c';
 }
+
+html
+body,
+footer,
+.list-group-item,
+.form-control,
+.card {
+  background-color: black;
+}
+
 .arcadia {
   color: red;
   font-family: 'Metamorphous', cursive;
@@ -21,9 +30,13 @@ footer {
   color: red;
   text-decoration: none;
 }
+.id {
+  float: left;
+  color: gray;
+}
 .date {
   float: right;
-  color: #828282;
+  color: gray;
 }
 .save {
   float: right;
@@ -34,13 +47,6 @@ footer {
   width: 100%;
 }
 
-.table {
-  width: 100%;
-  overflow-y: hidden;
-  overflow-x: auto;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-  -webkit-overflow-scrolling: touch;
-}
 .c-name,
 .c-title {
   color: red;
@@ -48,4 +54,14 @@ footer {
 th,td {
   word-break: break-all;
   word-wrap: break-word;
+}
+a {
+  color: red;
+}
+a:hover {
+  text-decoration: none;
+}
+.card,
+.card-header {
+  border-color: gray;
 }

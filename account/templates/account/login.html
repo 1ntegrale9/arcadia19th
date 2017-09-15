@@ -10,9 +10,7 @@
         　　{{ form.password }}
         　　  {% csrf_token %}
         <input type="hidden" name="next" value={{ next }} />
-        　　  <button type="submit" class="btn btn-lg btn-block btn-outline-primary">
-          ログイン
-        </button>
+        <button type="submit" class="btn btn-lg btn-block btn-outline-primary">ログイン</button>
       </form>
     </div>
   </div><!-- /.card-group -->
