@@ -14,13 +14,13 @@
             {% for remark in remark_list %}
                 <div class="col-sm-12">
                     <div class="card text-white border-dark mb-3">
-                        <div class="card-header border-dark">
-                            <p class="card-text">
-                                <span class="c-title text-left">{{ remark.user }}</span>
-                                <span class="text-dark text-right" style="float:right;">{{ remark.date }}</span>
-                                </p></div>
                         <div class="card-body border-dark">
                             <div class="media">
                                 <img class="img-fluid d-flex align-self-center mr-4" src="{% static remark.character_img_url %}"/>
-                                <div class="media-body text-word-break-all">{{ remark.text|linebreaks }}</div>
-                                </div></div></div></div>{% endfor %}</div></div>{% endblock %}
+                                <div class="media-body">
+                                    <p class="card-text">
+                                        <span class="c-title text-left">{{ remark.user }}</span>
+                                        <span class="text-dark text-right" style="float:right;">{{ remark.date }}</span>
+                                        </p>
+                                    <p class="card-text text-word-break-all">{{ remark.text|linebreaks }}</p>
+                                    </div></div></div></div></div>{% endfor %}</div></div>{% endblock %}
