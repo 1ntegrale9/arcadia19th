@@ -15,26 +15,17 @@ footer,
 }
 
 .page-header {
-  padding: 2em 2em 2em 0em;
+  padding: 2em 2em 0em 2em;
 }
 
-/* タイトル */
-.title,
 .page-header h1,
 .page-header h1 a,
+.page-header h1 a:hover,
 .page-header h1 a:visited,
 .page-header h1 a:active {
   color: red;
   text-decoration: none;
   font-family: 'Metamorphous', cursive;
-}
-.id {
-  float: left;
-  color: gray;
-}
-.date {
-  float: right;
-  color: gray;
 }
 .save {
   float: right;
@@ -55,8 +46,4 @@ th,td {
 }
 a:hover {
   text-decoration: none;
-}
-.card,
-.card-header {
-  border-color: gray;
 }

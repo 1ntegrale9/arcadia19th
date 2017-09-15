@@ -15,11 +15,11 @@
         <div class="card-group">
             {% if user.is_authenticated %}
                 <div class="col-sm-6">
-                    <div class="card card-inverse">
-                        <div class="card-header"">
+                    <div class="card text-white border-dark mb-4">
+                        <div class="card-header border-dark">
                             <p class="c-title card-text">新規村</p>
                             </div>
-                        <div class="card-body">
+                        <div class="card-body border-dark">
                             <form method="POST">
                                 <p class="card-title text-center">村名{{ form.name }}{% csrf_token %}</p>
                                 <button type="submit" class="save btn btn-block btn-outline-primary">作成</button>
@@ -30,12 +30,15 @@
                                 {% endif %}
             {% for village in latest_village_list %}
                 <div class="col-sm-6">
-                    <div class="card card-inverse">
-                        <div class="card-header"">
-                        <p class="c-title card-text">{{ village.name }}</p>
-                        <p class="card-text"><span class="id">{{ village.id }}</span><span class="date">{{ village.created_date }}</span></p>
+                    <div class="card text-white border-dark mb-4">
+                        <div class="card-header border-dark">
+                        <p class="card-text id text-dark">
+                            <span class="text-left"">{{ village.id }}</span>
+                            <span class="text-right" style="float:right;">{{ village.created_date }}</span>
+                            <p>
+                        <p class="card-text c-title">{{ village.name }}</p>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body border-dark">
                             <div class="media">
                                 <img class="img-fluid d-flex align-self-center mr-3" src="{% static 'rain/01.png' %}"/>
                                 <div class="media-body">
