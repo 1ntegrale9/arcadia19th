@@ -1,8 +1,8 @@
-{% extends 'werewolf/base.html' %}
+{% extends 'index/base.html' %}
 {% load static %}
 
 {% block content %}
-<div class='content container'>
+<div class='container'>
   <div class="card-block">
     {% if user.is_authenticated %}
       <form method="POST" class="post-form">{% csrf_token %}

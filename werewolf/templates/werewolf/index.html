@@ -1,17 +1,8 @@
-{% extends 'werewolf/base.html' %}
+{% extends 'index/base.html' %}
 {% load static %}
 
 {% block content %}
     <div class='container'>
-        <nav class="nav navbar">
-            <a class="nav-item nav-link" href="/blog">匿名掲示板</a>
-            {% if user.is_authenticated %}
-                <a class="nav-item nav-link" href="/admin">管理画面</a>
-                <a class="nav-item nav-link" href="{% url 'account:logout' %}">ログアウト</a>
-            {% else %}
-                <a class="nav-item nav-link" href="{% url 'account:create' %}">ユーザ登録</a>
-                <a class="nav-item nav-link" href="{% url 'account:login' %}">ログイン</a>
-                {% endif %}</nav>
         <div class="card-group">
             {% if user.is_authenticated %}
                 <div class="col-sm-6">
