@@ -1,47 +1,93 @@
-html
-body,
-footer {
-  color: white;
-  font-family: 'Rounded Mplus 1c';
-}
-
-html
-body,
-footer,
-.list-group-item,
-.card {
-  background-color: black;
-}
-
-.page-header {
-  padding: 2em 2em 0em 2em;
-}
+/* UTILITY */
 
 .page-header h1,
 .page-header h1 a,
 .page-header h1 a:hover,
 .page-header h1 a:visited,
-.page-header h1 a:active {
-  color: red;
+.page-header h1 a:active,
+a:hover {
   text-decoration: none;
-  font-family: 'Metamorphous', cursive;
+}
+.text-word-break-all {
+  word-break: break-all;
+}
+
+/* LAYOUT */
+
+.page-header {
+  padding: 2em 2em 0em 2em;
 }
 .save {
   float: right;
 }
 .post-form textarea,
 .post-form input {
-  color: black;
   width: 100%;
 }
 
+/* FONT */
+
+html
+body,
+footer {
+  font-family: 'Rounded Mplus 1c';
+}
+.page-header h1,
+.page-header h1 a,
+.page-header h1 a:hover,
+.page-header h1 a:visited,
+.page-header h1 a:active {
+  font-family: 'Metamorphous', cursive;
+}
+
+/* COLOR */
+
+html
+body,
+footer,
+.border-top,
+.card-text {
+  /* white */
+  color: #D2D2D3;
+}
+.table th,
+.table td {
+  border-top: 1px solid #D2D2D3;
+}
+.page-header h1,
+.page-header h1 a,
+.page-header h1 a:hover,
+.page-header h1 a:visited,
+.page-header h1 a:active,
 .c-name,
 .c-title {
-  color: red;
+  /* red */
+  color: #A81E1E;
 }
-.text-word-break-all {
-  word-break: break-all;
+html
+body,
+footer,
+.post-form textarea,
+.post-form input {
+  /* black */
+  background-color: #0C1019;
 }
-a:hover {
-  text-decoration: none;
+.card {
+  /* gray */
+  background-color: #141111;
+}
+a
+a:hover,
+a:visited,
+a:active,
+.btn,
+.nav-link {
+  /* blue */
+  color: #006C63;
+}
+.btn,
+.btn-block.
+.btn-outline-info {
+  outline: solid 1px #006C63;
+  border-radius: .25rem
 }
