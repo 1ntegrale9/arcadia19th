@@ -14,21 +14,19 @@ footer,
   background-color: black;
 }
 
-.arcadia {
-  color: red;
-  font-family: 'Metamorphous', cursive;
-}
 .page-header {
   padding: 2em 2em 2em 0em;
 }
 
 /* タイトル */
+.title,
 .page-header h1,
 .page-header h1 a,
 .page-header h1 a:visited,
 .page-header h1 a:active {
   color: red;
   text-decoration: none;
+  font-family: 'Metamorphous', cursive;
 }
 .id {
   float: left;
