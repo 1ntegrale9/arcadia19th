@@ -2,20 +2,25 @@
 {% load static %}
 
 {% block content %}
-<div class='content container'>
-  <div class="card-block">
-    <form method="POST" class="post-form">{% csrf_token %}
-      {{ form.as_table }}
-      <button type="submit" class="save btn btn-block btn-outline-primary">新規投稿</button>
-      </form>
-    <table class="table table-bordered table-responsive">
-      <tbody>
-        {% for post in posts %}
-          <tr>
-            <td rowspan="2" width="81"><img src="{% static "rain/01.png"%}"/></td>
-            <td class="c-title">{{ post.title }}</td>
-            <td><div class="date">{{ post.published_date }}</div></td>
-            </tr>
-          <tr>
-            <td colspan="2">{{ post.text|linebreaks }}</td>
-            </tr>{% endfor %}</tbody></table></div></div>{% endblock content %}
+    <div class='container'>
+        <div class="card-block">
+            <div class="col-sm-12">
+                <div class="card text-white border-dark mb-3">
+                <form method="POST">{% csrf_token %}
+                    {{ form.title }}
+                    {{ form.text }}
+                    <button type="submit" class="save btn btn-block btn-outline-primary">投稿</button>
+                    </form></div></div>
+            {% for post in posts %}
+                <div class="col-sm-12">
+                    <div class="card text-white border-dark mb-3">
+                        <div class="card-header border-dark">
+                            <p class="card-text">
+                                <span class="c-title text-left">{{ post.title }}</span>
+                                <span class="text-dark text-right" style="float:right;">{{ post.published_date }}</span>
+                                </p></div>
+                        <div class="card-body border-dark">
+                            <div class="media">
+                                <img class="img-fluid d-flex align-self-center mr-4" src="{% static 'rain/01.png'%}"/>
+                                <div class="media-body text-word-break-all">{{ post.text|linebreaks }}</div>
+                                </div></div></div></div>{% endfor %}</div></div>{% endblock %}

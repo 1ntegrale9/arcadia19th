@@ -7,8 +7,8 @@
             {% if user.is_authenticated %}
                 <div class="col-sm-12">
                     <div class="card text-white border-dark mb-3">
-                        <form method="POST">
-                            {{ form.text }}{% csrf_token %}
+                        <form method="POST">{% csrf_token %}
+                            {{ form.text }}
                             <button type="submit" class="save btn btn-block btn-outline-primary">発言</button>
                             </form></div></div>{% endif %}
             {% for remark in remark_list %}

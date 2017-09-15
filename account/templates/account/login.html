@@ -4,11 +4,10 @@
 <div class="container">
   <div class="card-group">
     <div class="card-block">
-      <form action="{% url 'account:login' %}" method="POST">
+      <form action="{% url 'account:login' %}" method="POST">{% csrf_token %}
         <p>{{ form.non_field_errors }}</p>
         　　{{ form.username }}
-        　　{{ form.password }}
-        　　  {% csrf_token %}
+        　　{{ form.password }}        　　  
         <input type="hidden" name="next" value={{ next }} />
         <button type="submit" class="btn btn-lg btn-block btn-outline-primary">ログイン</button>
       </form>

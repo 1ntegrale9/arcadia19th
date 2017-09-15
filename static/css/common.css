@@ -39,9 +39,10 @@ footer,
 .c-title {
   color: red;
 }
-th,td {
+th,
+td,
+.text-word-break-all {
   word-break: break-all;
-  word-wrap: break-word;
 }
 a:hover {
   text-decoration: none;
