@@ -1,10 +1,10 @@
 /* UTILITY */
 
-.page-header h1,
-.page-header h1 a,
-.page-header h1 a:hover,
-.page-header h1 a:visited,
-.page-header h1 a:active,
+h1,
+h1 a,
+h1 a:hover,
+h1 a:visited,
+h1 a:active,
 a:hover {
   text-decoration: none;
 }
@@ -14,17 +14,6 @@ a:hover {
 
 /* LAYOUT */
 
-.page-header {
-  padding: 2em 2em 0em 2em;
-}
-.save {
-  float: right;
-}
-.post-form textarea,
-.post-form input {
-  width: 100%;
-}
-
 /* FONT */
 
 html
@@ -32,11 +21,11 @@ body,
 footer {
   font-family: 'Rounded Mplus 1c';
 }
-.page-header h1,
-.page-header h1 a,
-.page-header h1 a:hover,
-.page-header h1 a:visited,
-.page-header h1 a:active {
+h1,
+h1 a,
+h1 a:hover,
+h1 a:visited,
+h1 a:active {
   font-family: 'Metamorphous', cursive;
 }
 
@@ -54,11 +43,11 @@ footer,
 .table td {
   border-top: 1px solid #D2D2D3;
 }
-.page-header h1,
-.page-header h1 a,
-.page-header h1 a:hover,
-.page-header h1 a:visited,
-.page-header h1 a:active,
+
+a,
+a:hover,
+a:visited,
+a:active,
 .c-name,
 .c-title {
   /* red */
@@ -74,20 +63,16 @@ footer,
 }
 .card {
   /* gray */
-  background-color: #141111;
+  background-color: #111112;
 }
 a
 a:hover,
 a:visited,
 a:active,
 .btn,
+.btn-block,
+.btn-outline-info,
 .nav-link {
   /* blue */
-  color: #006C63;
-}
-.btn,
-.btn-block.
-.btn-outline-info {
-  outline: solid 1px #006C63;
-  border-radius: .25rem
+  color: #006C92;
 }
