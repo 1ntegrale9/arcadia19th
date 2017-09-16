@@ -17,7 +17,7 @@ def index(request):
             return redirect('werewolf:index')
     else:
         form = VillageForm()
-    latest_village_list = Village.objects.order_by('-created_date')
+    latest_village_list = Village.objects.filter(endflag=0).filter(delflag=0).order_by('-created_date')
     return render(request, 'werewolf/index.html', {'latest_village_list':latest_village_list, 'form':form})
 
 def village(request, village_id):
@@ -35,6 +35,10 @@ def village(request, village_id):
         form = RemarkForm()
     remark_list = Remark.objects.filter(village=village_id).order_by('-date')
     return render(request, 'werewolf/village.html', {'remark_list':remark_list, 'form':form})
+
+def log(request):
+    end_village_list = Village.objects.filter(endflag=1).filter(delflag=0).order_by('-created_date')
+    return render(request, 'werewolf/log.html', {'end_village_list':end_village_list})
 
 class DetailView(generic.DetailView):
     model = Question

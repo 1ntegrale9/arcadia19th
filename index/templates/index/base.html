@@ -16,6 +16,7 @@
             <a href="{% url 'werewolf:index' %}" class='arcadia text-center'><h1>Werewolf Arcadia</h1></a>
             <nav class="nav navbar">
                     <a class="nav-item nav-link" href="{% url 'werewolf:index' %}">村一覧</a>
+                    <a class="nav-item nav-link" href="{% url 'werewolf:log' %}">過去村</a>
                     <a class="nav-item nav-link" href="{% url 'bbs:post_list' %}">掲示板</a>
                     {% if user.is_authenticated %}
                             <a class="nav-item nav-link" href="/admin" style="color: black;">管理画面</a>
