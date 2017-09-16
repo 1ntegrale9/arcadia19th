@@ -29,6 +29,8 @@ class Village(models.Model):
     auther = models.CharField('村主', max_length=200)
     character = models.CharField('キャラセット', max_length=200)
     created_date = models.DateTimeField(default=timezone.now)
+    endflag = models.IntegerField(default=0)
+    delflag = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
