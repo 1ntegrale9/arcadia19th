@@ -6,18 +6,18 @@
         <div class="card-group">
             {% if user.is_authenticated %}
                 <div class="col-sm-6">
-                    <div class="card text-white border-dark mb-4">
+                    <div class="card border-dark rounded mb-4">
                         <div class="card-header border-dark">
                             <p class="c-title card-text">新規村</p>
                             </div>
                         <div class="card-body border-dark">
                             <form method="POST">{% csrf_token %}
                                 <p class="card-title text-center">{{ form.name }}</p>
-                                <button type="submit" class="save btn btn-block btn-outline-primary">作成</button>
+                                <button type="submit" class="save btn btn-block btn-outline-info">作成</button>
                                 </form></div></div></div>{% endif %}
             {% for village in latest_village_list %}
                 <div class="col-sm-6">
-                    <div class="card text-white border-dark mb-4">
+                    <div class="card border-dark rounded mb-4">
                         <div class="card-header border-dark">
                         <p class="card-text text-dark">
                             <span class="text-left"">{{ village.id }}</span>

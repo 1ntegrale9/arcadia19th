@@ -5,15 +5,15 @@
     <div class='container'>
         <div class="card-block">
             <div class="col-sm-12">
-                <div class="card text-white border-dark mb-3">
+                <div class="card border-dark roundedmb-3">
                 <form method="POST">{% csrf_token %}
                     {{ form.title }}
                     {{ form.text }}
-                    <button type="submit" class="save btn btn-block btn-outline-primary">投稿</button>
+                    <button type="submit" class="save btn btn-block btn-outline-info">投稿</button>
                     </form></div></div>
             {% for post in posts %}
                 <div class="col-sm-12">
-                    <div class="card text-white border-dark mb-3">
+                    <div class="card border-dark roundedmb-3">
                         <div class="card-header border-dark">
                             <p class="card-text">
                                 <span class="c-title text-left">{{ post.title }}</span>
