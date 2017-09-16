@@ -7,10 +7,20 @@
             {% if user.is_authenticated %}
                 <div class="col-sm-12">
                     <div class="card border-dark rounded mb-3">
-                        <form method="POST">{% csrf_token %}
-                            {{ form.text }}
-                            <button type="submit" class="save btn btn-block btn-outline-info">発言</button>
-                            </form></div></div>{% endif %}
+                        <div class="card-body border-dark">
+                            <div class="media">
+                                <img class="img-fluid d-flex align-self-center mr-4" src="{% static icon_url %}"/>
+                                <div class="media-body">
+                                    {% if isResident == True %}
+                                        <form method="POST">{% csrf_token %}
+                                            {{ remark_form.text }}
+                                            <button type="submit" name="remark" class="save btn btn-block btn-outline-info">発言</button>
+                                            </form>
+                                    {% else %}
+                                        <form method="POST">{% csrf_token %}
+                                            {{ resident_form.character }}
+                                            <button type="submit" name="resident" class="save btn btn-block btn-outline-info">居住</button>
+                                            </form>{% endif %}</div></div></div></div></div>{% endif %}
             {% for remark in remark_list %}
                 <div class="col-sm-12">
                     <div class="card border-dark rounded mb-3">

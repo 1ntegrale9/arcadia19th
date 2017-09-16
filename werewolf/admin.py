@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Choice, Question, Village, Remark
+from .models import Choice, Question, Village, Remark, Resident
 
 class ChoiceInline(admin.TabularInline):
     model = Choice
@@ -16,20 +16,6 @@ class RemarkInline(admin.TabularInline):
     model = Remark
     extra = 1
 
-class VillageAdmin(admin.ModelAdmin):
-    fieldsets = [
-        (None, {'fields':['name']}),
-        (None, {'fields':['auther']}),
-        (None, {'fields':['character']}),
-        (None, {'fields':['created_date']}),
-        (None, {'fields':['endflag']}),
-        (None, {'fields':['delflag']}),
-    ]
-    inlines = [RemarkInline]
-    list_display = ('name','auther','character','created_date','endflag','delflag',)
-    list_filter = ['created_date','auther','endflag','delflag',]
-    search_fields = ['name','auther',]
-
 class RemarkAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields':['village']}),
@@ -42,10 +28,36 @@ class RemarkAdmin(admin.ModelAdmin):
         (None, {'fields':['date']}),
         (None, {'fields':['text']}),
     ]
-    list_display = ('village', 'serial_no', 'days', 'types', 'user', 'character', 'character_img_url', 'date', 'text',)
-    list_filter = ['village', 'days', 'types', 'user', 'character', 'date',]
+    list_display = ('text', 'id', 'village', 'user_id', 'serial_no', 'days', 'types', 'user', 'character', 'character_img_url', 'date',)
+    list_filter = ['village', 'user_id', 'days', 'types', 'user', 'character', 'date',]
     search_fields = ['text',]
+
+class VillageAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None, {'fields':['name']}),
+        (None, {'fields':['auther']}),
+        (None, {'fields':['character']}),
+        (None, {'fields':['created_date']}),
+        (None, {'fields':['endflag']}),
+        (None, {'fields':['delflag']}),
+    ]
+    inlines = [RemarkInline]
+    list_display = ('name','id','auther','character','created_date','endflag','delflag',)
+    list_filter = ['created_date','auther','endflag','delflag',]
+    search_fields = ['name','auther',]
+
+class ResidentAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None, {'fields':['village']}),
+        (None, {'fields':['resident']}),
+        (None, {'fields':['character']}),
+        (None, {'fields':['character_img_url']}),
+        (None, {'fields':['position']}),
+        (None, {'fields':['death_flag']}),
+    ]
+    list_display = ('resident','village','character','character_img_url','position','death_flag','id',)
 
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Village, VillageAdmin)
 admin.site.register(Remark, RemarkAdmin)
+admin.site.register(Resident, ResidentAdmin)
