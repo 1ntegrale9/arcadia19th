@@ -57,6 +57,7 @@ class Resident(models.Model):
     character = models.IntegerField(default=1)
     character_img_url = models.CharField(max_length=100, default="rain/01.png")
     position = models.CharField('役職', max_length=100, default='村人')
+    types = models.IntegerField(default=1)
     death_flag = models.IntegerField(default=0)
 
     def __str__(self):
