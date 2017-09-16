@@ -1,4 +1,4 @@
-{% extends "werewolf/base.html" %}
+{% extends "index/base.html" %}
 
 {% block content %}
 <div class="container">
@@ -6,10 +6,10 @@
     <div class="card-block">
       <form action="{% url 'account:login' %}" method="POST">{% csrf_token %}
         <p>{{ form.non_field_errors }}</p>
-        　　{{ form.username }}
-        　　{{ form.password }}        　　  
+            {{ form.username }}
+            {{ form.password }}
         <input type="hidden" name="next" value={{ next }} />
-        <button type="submit" class="btn btn-lg btn-block btn-outline-primary">ログイン</button>
+        <button type="submit" class="btn btn-lg btn-block btn-outline-info">ログイン</button>
       </form>
     </div>
   </div><!-- /.card-group -->

@@ -1,4 +1,4 @@
-{% extends "werewolf/base.html" %}
+{% extends "index/base.html" %}
 
 {% block content %}
 <div class="container">
@@ -18,9 +18,9 @@
         {{ form.password2.errors }}
       </div>
       {% csrf_token %}
-      <button type="submit" class="btn btn-lg btn-block btn-outline-primary">会員登録</button>
+      <button type="submit" class="btn btn-lg btn-block btn-outline-info">会員登録</button>
     </div>
     </div>
-  </form> 
+  </form>
 </div>
 {% endblock %}

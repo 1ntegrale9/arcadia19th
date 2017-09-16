@@ -5,9 +5,6 @@ from django.core.urlresolvers import reverse_lazy
 from django.views import generic
 from .forms import RegisterForm, LoginForm
 
-class TopPageView(generic.TemplateView):
-    template_name = "account/index.html"
-
 class MyPageView(LoginRequiredMixin, generic.TemplateView):
     template_name = "account/info.html"
 
