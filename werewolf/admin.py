@@ -56,14 +56,14 @@ class VillageAdmin(admin.ModelAdmin):
         (None, {'fields':['auther']}),
         (None, {'fields':['character']}),
         (None, {'fields':['created_date']}),
+        (None, {'fields':['palflag']}),
         (None, {'fields':['endflag']}),
         (None, {'fields':['delflag']}),
     ]
     inlines = [ResidentInline, RemarkInline]
-    list_display = ('name','id','auther','character','created_date','endflag','delflag',)
-    list_filter = ['created_date','auther','endflag','delflag',]
+    list_display = ('name','id','auther','character','created_date','palflag','endflag','delflag',)
+    list_filter = ['created_date','auther','palflag','endflag','delflag',]
     search_fields = ['name','auther',]
-
 
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Village, VillageAdmin)

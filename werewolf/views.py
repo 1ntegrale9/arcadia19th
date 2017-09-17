@@ -24,7 +24,23 @@ class VillageIndex(CreateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['object_list'] = Village.objects.filter(endflag=0, delflag=0).order_by('-created_date')
+        context['object_list'] = Village.objects.filter(palflag=0,endflag=0, delflag=0).order_by('-created_date')
+        return context
+
+class VillagePalIndex(CreateView):
+    model = Village, Resident
+    form_class = VillageForm
+    template_name = 'werewolf/pal.html'
+    success_url = reverse_lazy('werewolf:pal')
+
+    def form_valid(self, form):
+        form.instance.auther = self.request.user.username
+        form.instance.character = '霧雨降る街'
+        return super(VillageIndex, self).form_valid(form)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['object_list'] = Village.objects.filter(palflag=1,endflag=0, delflag=0).order_by('-created_date')
         return context
 
 def VillageRemarks(request):
