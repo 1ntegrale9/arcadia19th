@@ -14,10 +14,10 @@ from random import randint
 def getCharacterImgURL(ID):
     if ID == 'rain':
         url = 'rain/' + str(randint(1,80)).zfill(2) + '.png'
-    elif name == 'jewel':
-        ID = 'jewel/' + str(randint(1,62)).zfill(2) + '_n.png'
+    elif ID == 'jewel':
+        url = 'jewel/' + str(randint(1,62)).zfill(2) + '_n.png'
     else:
-        ID = 'rain/01.png'
+        url = 'rain/01.png'
     return url
 
 def getCharacterName(ID):
