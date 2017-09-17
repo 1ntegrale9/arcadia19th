@@ -24,7 +24,7 @@ class VillageIndex(CreateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['object_list'] = Village.objects.filter(endflag=0).filter(delflag=0).order_by('-created_date')
+        context['object_list'] = Village.objects.filter(endflag=0, delflag=0).order_by('-created_date')
         return context
 
 def VillageRemarks(request):
@@ -60,7 +60,7 @@ class VillageResidentForm(CreateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['remark_list'] = Remark.objects.filter(village=self.kwargs['village_id']).order_by('-date')
+        context['remark_list'] = Remark.objects.filter(delflag=0,village=self.kwargs['village_id']).order_by('-date')
         return context
 
 class VillageRemarkForm(CreateView):
@@ -81,13 +81,13 @@ class VillageRemarkForm(CreateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['remark_list'] = Remark.objects.filter(village=self.kwargs['village_id']).order_by('-date')
+        context['remark_list'] = Remark.objects.filter(delflag=0,village=self.kwargs['village_id']).order_by('-date')
         return context
 
 class VillageLog(ListView):
     model = Village
     template_name = 'werewolf/log.html'
-    queryset = Village.objects.filter(endflag=1).filter(delflag=0).order_by('-created_date')
+    queryset = Village.objects.filter(endflag=1, delflag=0).order_by('-created_date')
 
 def VillageView(request, village_id):
     if request.method == 'POST':
@@ -115,7 +115,7 @@ def VillageView(request, village_id):
         context = {
             'remark_form': RemarkForm(),
             'resident_form': ResidentForm(),
-            'remark_list': Remark.objects.filter(village=village_id).order_by('-date')[:100],
+            'remark_list': Remark.objects.filter(delflag=0,village=village_id).order_by('-date')[:100],
             'resident_list': Resident.objects.filter(village=village_id),
         }
         try:

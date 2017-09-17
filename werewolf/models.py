@@ -47,6 +47,7 @@ class Remark(models.Model):
     character_img_url = models.CharField(max_length=100, default="rain/01.png")
     date = models.DateTimeField(default=timezone.now)
     text = models.TextField('発言')
+    delflag = models.IntegerField(default=0)
 
     def __str__(self):
         return self.text
