@@ -115,7 +115,7 @@ def VillageView(request, village_id):
         context = {
             'remark_form': RemarkForm(),
             'resident_form': ResidentForm(),
-            'remark_list': Remark.objects.filter(village=village_id).order_by('-date'),
+            'remark_list': Remark.objects.filter(village=village_id).order_by('-date')[:100],
             'resident_list': Resident.objects.filter(village=village_id),
         }
         try:
