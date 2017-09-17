@@ -12,8 +12,10 @@
                             </div>
                         <div class="card-body border-dark">
                             <form method="POST">{% csrf_token %}
-                                <p class="card-title text-center">{{ form.name }}</p>
-                                <button type="submit" class="save btn btn-block btn-outline-info">作成</button>
+                                {{ form.name }}
+                                {{ form.character }}
+                                {{ form.palflag }}
+                                <button type="submit" class="save btn btn-block btn-outline-info">村を建てる</button>
                                 </form></div></div></div>{% endif %}
             {% for village in object_list %}
                 <div class="col-sm-6">

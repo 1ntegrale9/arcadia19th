@@ -19,7 +19,6 @@ class VillageIndex(CreateView):
 
     def form_valid(self, form):
         form.instance.auther = self.request.user.username
-        form.instance.character = '霧雨降る街'
         return super(VillageIndex, self).form_valid(form)
 
     def get_context_data(self, *args, **kwargs):
@@ -35,7 +34,6 @@ class VillagePalIndex(CreateView):
 
     def form_valid(self, form):
         form.instance.auther = self.request.user.username
-        form.instance.character = '霧雨降る街'
         return super(VillageIndex, self).form_valid(form)
 
     def get_context_data(self, *args, **kwargs):
