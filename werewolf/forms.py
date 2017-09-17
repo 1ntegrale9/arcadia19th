@@ -15,7 +15,7 @@ class VillageForm(forms.ModelForm):
 
     charaset = (
         ('rain','霧雨降る街'),
-        ('jewel','宝石箱'),        
+        ('jewel','宝石箱《Jewel Box》'),
     )
     character = forms.ChoiceField(widget=forms.Select, choices=charaset)
     palflag = forms.ChoiceField(widget=forms.Select, choices=((0,'誰でも歓迎'),(1,'身内限定'),))

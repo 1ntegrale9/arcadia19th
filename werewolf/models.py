@@ -28,7 +28,9 @@ class Choice(models.Model):
 class Village(models.Model):
     name = models.CharField('村名', max_length=200)
     auther = models.CharField('村主', max_length=200)
-    character = models.CharField('キャラセット', max_length=200)
+    character = models.CharField('キャラセット', default='rain', max_length=200)
+    character_name = models.CharField(default='霧雨降る街', max_length=200)
+    character_img_url = models.CharField(default='rain/01.png',max_length=200)
     created_date = models.DateTimeField(default=timezone.now)
     palflag = models.IntegerField(default=0)
     endflag = models.IntegerField(default=0)

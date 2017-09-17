@@ -11,6 +11,24 @@ from .models import Choice, Question, Village, Remark, Resident
 from .forms import VillageForm, RemarkForm, ResidentForm
 from random import randint
 
+def getCharacterImgURL(ID):
+    if ID == 'rain':
+        url = 'rain/' + str(randint(1,80)).zfill(2) + '.png'
+    elif name == 'jewel':
+        ID = 'jewel/' + str(randint(1,62)).zfill(2) + '_n.png'
+    else:
+        ID = 'rain/01.png'
+    return url
+
+def getCharacterName(ID):
+    if ID == 'rain':
+        name = '霧雨降る街'
+    elif ID == 'jewel':
+        name = '宝石箱《Jewel Box》'
+    else:
+        name = 'undefined'
+    return name
+
 class VillageIndex(CreateView):
     model = Village, Resident
     form_class = VillageForm
@@ -19,6 +37,9 @@ class VillageIndex(CreateView):
 
     def form_valid(self, form):
         form.instance.auther = self.request.user.username
+        form.instance.character_name = getCharacterName(form.cleaned_data['character'])
+        form.instance.character_img_url = getCharacterImgURL(form.cleaned_data['character'])
+        print(form.instance.character_img_url)
         return super(VillageIndex, self).form_valid(form)
 
     def get_context_data(self, *args, **kwargs):
@@ -34,7 +55,10 @@ class VillagePalIndex(CreateView):
 
     def form_valid(self, form):
         form.instance.auther = self.request.user.username
-        return super(VillageIndex, self).form_valid(form)
+        form.instance.character_name = getCharacterName(form.cleaned_data['character'])
+        form.instance.character_img_url = getCharacterImgURL(form.cleaned_data['character'])
+        print(form.instance.character_img_url)
+        return super(VillagePalIndex, self).form_valid(form)
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
