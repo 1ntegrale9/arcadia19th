@@ -14,7 +14,9 @@ class QuestionAdmin(admin.ModelAdmin):
 
 class RemarkInline(admin.TabularInline):
     model = Remark
-    extra = 1
+    extra = 0
+    max_num = 100
+    show_change_link = True
 
 class RemarkAdmin(admin.ModelAdmin):
     fieldsets = [
@@ -32,19 +34,10 @@ class RemarkAdmin(admin.ModelAdmin):
     list_filter = ['village', 'user_id', 'days', 'types', 'user', 'character', 'date',]
     search_fields = ['text',]
 
-class VillageAdmin(admin.ModelAdmin):
-    fieldsets = [
-        (None, {'fields':['name']}),
-        (None, {'fields':['auther']}),
-        (None, {'fields':['character']}),
-        (None, {'fields':['created_date']}),
-        (None, {'fields':['endflag']}),
-        (None, {'fields':['delflag']}),
-    ]
-    inlines = [RemarkInline]
-    list_display = ('name','id','auther','character','created_date','endflag','delflag',)
-    list_filter = ['created_date','auther','endflag','delflag',]
-    search_fields = ['name','auther',]
+class ResidentInline(admin.TabularInline):
+    model = Resident
+    extra = 0
+    show_change_link = True
 
 class ResidentAdmin(admin.ModelAdmin):
     fieldsets = [
@@ -56,6 +49,21 @@ class ResidentAdmin(admin.ModelAdmin):
         (None, {'fields':['death_flag']}),
     ]
     list_display = ('resident','village','character','character_img_url','position','death_flag','id',)
+
+class VillageAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None, {'fields':['name']}),
+        (None, {'fields':['auther']}),
+        (None, {'fields':['character']}),
+        (None, {'fields':['created_date']}),
+        (None, {'fields':['endflag']}),
+        (None, {'fields':['delflag']}),
+    ]
+    inlines = [ResidentInline, RemarkInline]
+    list_display = ('name','id','auther','character','created_date','endflag','delflag',)
+    list_filter = ['created_date','auther','endflag','delflag',]
+    search_fields = ['name','auther',]
+
 
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Village, VillageAdmin)
