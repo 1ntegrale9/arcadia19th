@@ -38,7 +38,7 @@ class Village(models.Model):
 
 class Remark(models.Model):
     village = models.ForeignKey(Village, on_delete=models.CASCADE)
-    # user_id = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
     serial_no = models.IntegerField(default=0)
     days = models.IntegerField(default=1)
     types = models.IntegerField(default=1)
@@ -51,14 +51,14 @@ class Remark(models.Model):
     def __str__(self):
         return self.text
 
-# class Resident(models.Model):
-#     village = models.ForeignKey(Village, on_delete=models.CASCADE)
-#     resident = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
-#     character = models.IntegerField(default=1)
-#     character_img_url = models.CharField(max_length=100, default="rain/01.png")
-#     position = models.CharField('役職', max_length=100, default='村人')
-#     types = models.IntegerField(default=1)
-#     death_flag = models.IntegerField(default=0)
+class Resident(models.Model):
+    village = models.ForeignKey(Village, on_delete=models.CASCADE)
+    resident = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
+    character = models.IntegerField(default=1)
+    character_img_url = models.CharField(max_length=100, default="rain/01.png")
+    position = models.CharField('役職', max_length=100, default='村人')
+    types = models.IntegerField(default=1)
+    death_flag = models.IntegerField(default=0)
 
-#     def __str__(self):
-#         return self.resident.username
+    def __str__(self):
+        return self.resident.username
