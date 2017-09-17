@@ -13,16 +13,17 @@
                                 <div class="media-body">
                                     <p class="card-text">
                                         <span class="c-title text-left">{{ user.username }}</span>
-                                        {% if isResident == True %}
-                                            <form method="POST">{% csrf_token %}
-                                                {{ remark_form.text }}
-                                                <button type="submit" name="remark" class="save btn btn-block btn-outline-info">発言</button>
-                                                </form>
-                                        {% else %}
-                                            <form method="POST">{% csrf_token %}
-                                                {{ resident_form.character }}
-                                                <button type="submit" name="resident" class="save btn btn-block btn-outline-info">居住</button>
-                                                </form>{% endif %}</div></div></div></div></div>{% endif %}
+                                        </p></div></div>
+                            {% if isResident == True %}
+                                <form method="POST">{% csrf_token %}
+                                    {{ remark_form.text }}
+                                    <button type="submit" name="remark" class="save btn btn-block btn-outline-info">発言</button>
+                                    </form>
+                            {% else %}
+                                <form method="POST">{% csrf_token %}
+                                    {{ resident_form.character }}
+                                    <button type="submit" name="resident" class="save btn btn-block btn-outline-info">居住</button>
+                                    </form>{% endif %}</div></div></div></div>{% endif %}
             {% for remark in remark_list %}
                 <div class="col-sm-12">
                     <div class="card border-dark rounded mb-3">
