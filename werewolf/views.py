@@ -11,11 +11,168 @@ from .models import Choice, Question, Village, Remark, Resident
 from .forms import VillageForm, RemarkForm, ResidentForm
 from random import randint
 
-def getCharacterImgURL(ID):
+rainTable = (
+    (1 ,'恋多き娘　メイ'),
+    (2 ,'双子の赤　レディア'),
+    (3 ,'双子の青　ヴィノール'),
+    (4 ,'見習い　ミレイユ'),
+    (5 ,'訓練生　ルファ'),
+    (6 ,'教官　アミル'),
+    (7 ,'落第生　クラット'),
+    (8 ,'飛び級　シュカ'),
+    (9 ,'看板娘　サリィ'),
+    (10,'若店主　エト'),
+    (11,'領主の娘　ロッテ'),
+    (12,'領主の末娘　エリィゼ'),
+    (13,'町娘　コレット'),
+    (14,'異国の旅人　イル'),
+    (15,'女装癖　ノクロ'),
+    (16,'隠密修行　ミナオ'),
+    (17,'受信中　ギュル'),
+    (18,'自己愛者　チサ'),
+    (19,'用心棒　アルビーネ'),
+    (20,'悪ガキ　ジュスト'),
+    (21,'鍛冶屋　ジャン'),
+    (22,'仮面紳士　マスケラ'),
+    (23,'童話読み　モカ'),
+    (24,'中毒　カイン　'),
+    (25,'自称王子　アールグレイ'),
+    (26,'図書館長　ジョセフ'),
+    (27,'女中　リーリ'),
+    (28,'怪談好き　アーニャ'),
+    (29,'修道女　イリア'),
+    (30,'踊り子　メリッサ'),
+    (31,'詠み手　ポラリス'),
+    (32,'冒険家　ウィル'),
+    (33,'射手　キリク'),
+    (34,'技師　レネ'),
+    (35,'染物師　サムファ'),
+    (36,'商人　アルカ'),
+    (37,'建築家　フェン'),
+    (38,'噂好き　トルテ'),
+    (39,'小説家　エラリー'),
+    (40,'観測者　マリーベル'),
+    (41,'詐欺師　ネッド'),
+    (42,'彫師　ランス'),
+    (43,'探究者　エドワーズ'),
+    (44,'泣き虫　ティナ'),
+    (45,'盲目　テレーズ'),
+    (46,'転寝　オデット'),
+    (47,'作曲家　ケーリー'),
+    (48,'接客業　スイートピー'),
+    (49,'毒舌家　セルマ'),
+    (50,'家令　ユーリ　'),
+    (51,'雪国の作家　エレオノーラ'),
+    (52,'雪国の少女　リディヤ'),
+    (53,'本屋　クレイグ'),
+    (54,'郵便屋　パーシー'),
+    (55,'装飾工　メリル'),
+    (56,'植物学者　シニード'),
+    (57,'酒飲み　ハイヴィ'),
+    (58,'調香師　チュレット'),
+    (59,'薬草摘み　ソーヤ'),
+    (60,'治療中　スー'),
+    (61,'昆虫博士　ニコル'),
+    (62,'綾取り　ツリガネ'),
+    (63,'蒐集家　ダァリヤ'),
+    (64,'研究者　トロイ'),
+    (65,'歌い手　ナデージュ'),
+    (66,'占星術師　ヘロイーズ'),
+    (67,'学術士　ヒューゴ　'),
+    (68,'演者　ヤーニカ'),
+    (69,'煙草売り　ヌァヴェル'),
+    (70,'火薬師　ヨアン'),
+    (71,'花屋　マイダ'),
+    (72,'パン屋　デボラ'),
+    (73,'庭師　アーリック'),
+    (74,'写真家　ヴィンセント'),
+    (75,'司祭　ドワイト'),
+    (76,'好奇心　エメット'),
+    (77,'泣き女　シーナ'),
+    (78,'代書人　クレム'),
+    (79,'掏摸　セス'),
+    (80,'煙突掃除　ミケル'),
+)
+
+jewelTable = (
+    (1, '水晶　クリスタ'),
+    (2, '黒曜石　オブシウス'),
+    (3, '柘榴石　グラニエ'),
+    (4, '紫水晶　アメジスタ'),
+    (5, '水宝玉　ミレーネ'),
+    (6, '金剛石　リアント'),
+    (7, '翠玉　エメリア'),
+    (8, '真珠　パーヴィス'),
+    (9, '紅玉　ルービナ'),
+    (10,'橄欖石　ガラーシャ'),
+    (11,'青玉　フィーラ'),
+    (12,'蛋白石　オルコット'),
+    (13,'黄玉　パズィ'),
+    (14,'土耳古石　ギュルセル'),
+    (15,'藍銅鉱　アズ'),
+    (16,'縞瑪瑙　イクシオン'),
+    (17,'月長石　ルナ'),
+    (18,'日長石　ソル'),
+    (19,'ユークレース　ファシリア'),
+    (20,'炎瑪瑙　フィエゴ'),
+    (21,'金緑石　アレクシア'),
+    (22,'黄水晶　トール'),
+    (23,'瑠璃　ルリ'),
+    (24,'曹珪灰石　エルマール'),
+    (25,'紅柱石　アンダルシア'),
+    (26,'藍玉　ハルム'),
+    (27,'深海珊瑚　コーラリア'),
+    (28,'蒼鉛　ヴィスマルト'),
+    (29,'黒玉　クロヒメ'),
+    (30,'菊石　アントニオ'),
+    (31,'黒蛋白石　オペラ'),
+    (32,'黄鉄鉱　リット'),
+    (33,'天青石　セレスティア'),
+    (34,'閃亜鉛鉱　ファル'),
+    (35,'モルガン石　ミーナ'),
+    (36,'金緑石　クロード'),
+    (37,'猫目石　キャシー'),
+    (38,'孔雀石　マラク'),
+    (39,'空色縞瑪瑙　シエロ'),
+    (40,'紅玉髄　カルナス'),
+    (41,'菫青石　アイラ'),
+    (42,'針水晶　ルチル'),
+    (43,'菱苦土石　ハウエラ'),
+    (44,'翡翠　フェイ'),
+    (45,'燐葉石　フィオレ'),
+    (46,'緑柱石　ヘリオス'),
+    (47,'ユーディアル石　ディアナ'),
+    (48,'白蝶貝　ハク'),
+    (49,'透輝石　ステラ'),
+    (50,'チャロ石　シェニ　'),
+    (51,'珪孔雀石　クラリス'),
+    (52,'黝輝石　エリシオ'),
+    (53,'曹灰硼石　ウェディ'),
+    (54,'曹灰長石　ヴラド'),
+    (55,'雷鳥卵石　エッカ'),
+    (56,'蛍石　シャオ'),
+    (57,'虹瑪瑙　イリス'),
+    (58,'輝安鉱　ツルギ'),
+    (59,'血玉石　メアリー'),
+    (60,'煙水晶　キーツ'),
+    (61,'葡萄石　リプリィ'),
+    (62,'風信子石　ジル'),
+)
+
+def getRandomCharacterImgURL(ID):
     if ID == 'rain':
         url = 'rain/' + str(randint(1,80)).zfill(2) + '.png'
     elif ID == 'jewel':
         url = 'jewel/' + str(randint(1,62)).zfill(2) + '_n.png'
+    else:
+        url = 'rain/01.png'
+    return url
+
+def getCharacterImgURL(ID,no):
+    if ID == 'rain':
+        url = 'rain/' + str(no).zfill(2) + '.png'
+    elif ID == 'jewel':
+        url = 'jewel/' + str(no).zfill(2) + '_n.png'
     else:
         url = 'rain/01.png'
     return url
@@ -29,6 +186,15 @@ def getCharacterName(ID):
         name = 'undefined'
     return name
 
+def getCharacterTable(ID):
+    if ID == 'rain':
+        table = rainTable
+    if ID == 'jewel':
+        table = jewelTable
+    else:
+        table = rainTable
+    return table
+
 class VillageIndex(CreateView):
     model = Village, Resident
     form_class = VillageForm
@@ -38,7 +204,7 @@ class VillageIndex(CreateView):
     def form_valid(self, form):
         form.instance.auther = self.request.user.username
         form.instance.character_name = getCharacterName(form.cleaned_data['character'])
-        form.instance.character_img_url = getCharacterImgURL(form.cleaned_data['character'])
+        form.instance.character_img_url = getRandomCharacterImgURL(form.cleaned_data['character'])
         print(form.instance.character_img_url)
         return super(VillageIndex, self).form_valid(form)
 
@@ -56,7 +222,7 @@ class VillagePalIndex(CreateView):
     def form_valid(self, form):
         form.instance.auther = self.request.user.username
         form.instance.character_name = getCharacterName(form.cleaned_data['character'])
-        form.instance.character_img_url = getCharacterImgURL(form.cleaned_data['character'])
+        form.instance.character_img_url = getRandomCharacterImgURL(form.cleaned_data['character'])
         print(form.instance.character_img_url)
         return super(VillagePalIndex, self).form_valid(form)
 
@@ -128,6 +294,7 @@ class VillageLog(ListView):
     queryset = Village.objects.filter(endflag=1, delflag=0).order_by('-created_date')
 
 def VillageView(request, village_id):
+    this_village = Village.objects.get(id=village_id)
     if request.method == 'POST':
         if 'remark' in request.POST:
             remark_form = RemarkForm(request.POST)
@@ -136,33 +303,40 @@ def VillageView(request, village_id):
                 post.user_id = request.user
                 post.user = request.user.username
                 post.village_id = village_id
-                post.character = Resident.objects.get(village=village_id, resident=request.user).character
-                post.character_img_url = "rain/" + str(post.character).zfill(2) + ".png"
+                resident_self = Resident.objects.get(village=village_id, resident=request.user)
+                post.character = resident_self.character
+                post.charaset = resident_self.charaset
+                post.character_img_url = getCharacterImgURL(post.charaset, post.character)
                 post.save()
                 return HttpResponseRedirect(reverse('werewolf:village', args=(village_id,)))
         elif 'resident' in request.POST:
             resident_form = ResidentForm(request.POST)
+            resident_form.fields['character'].choices = getCharacterTable(this_village.character)
             if resident_form.is_valid():
                 post = resident_form.save(commit=False)
                 post.resident = request.user
                 post.village_id = village_id
-                post.character_img_url = "rain/" + str(post.character).zfill(2) + ".png"
+                post.charaset = this_village.character
+                post.character_img_url = getCharacterImgURL(post.charaset, post.character)
                 post.save()
-                return HttpResponseRedirect(reverse('werewolf:village', args=(village_id,)))           
+                return HttpResponseRedirect(reverse('werewolf:village', args=(village_id,)))
     else:
+        resident_form = ResidentForm()
+        resident_form.fields['character'].choices = getCharacterTable(this_village.character)
+        resident_list = Resident.objects.filter(village=village_id)
         context = {
             'remark_form': RemarkForm(),
-            'resident_form': ResidentForm(),
+            'resident_form': resident_form,
             'remark_list': Remark.objects.filter(delflag=0,village=village_id).order_by('-date')[:100],
-            'resident_list': Resident.objects.filter(village=village_id),
+            'resident_list': resident_list,
         }
         try:
-            context['myselfinfo'] = context['resident_list'].get(resident=request.user)
+            context['myselfinfo'] = resident_list.get(resident=request.user)
             context['isResident'] = True
             context['icon_url'] = context['myselfinfo'].character_img_url
         except:
             context['isResident'] = False
-            context['icon_url'] =  'rain/01.png'
+            context['icon_url'] = this_village.character_img_url
     return render(request, 'werewolf/village.html', context)
 
 class DetailView(generic.DetailView):
