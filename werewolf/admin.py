@@ -25,13 +25,14 @@ class RemarkAdmin(admin.ModelAdmin):
         (None, {'fields':['days']}),
         (None, {'fields':['types']}),
         (None, {'fields':['user']}),
+        (None, {'fields':['charaset']}),
         (None, {'fields':['character']}),
         (None, {'fields':['character_img_url']}),
         (None, {'fields':['date']}),
         (None, {'fields':['text']}),
     ]
-    list_display = ('text', 'id', 'village', 'user_id', 'serial_no', 'days', 'types', 'user', 'character', 'character_img_url', 'date',)
-    list_filter = ['village', 'user_id', 'days', 'types', 'user', 'character', 'date',]
+    list_display = ('text', 'id', 'village', 'user_id', 'serial_no', 'days', 'types', 'user', 'character', 'charaset', 'character_img_url', 'date',)
+    list_filter = ['village', 'user_id', 'days', 'types', 'user','charaset', 'character', 'date',]
     search_fields = ['text',]
 
 class ResidentInline(admin.TabularInline):
@@ -55,14 +56,16 @@ class VillageAdmin(admin.ModelAdmin):
         (None, {'fields':['name']}),
         (None, {'fields':['auther']}),
         (None, {'fields':['character']}),
+        (None, {'fields':['character_name']}),
+        (None, {'fields':['character_img_url']}),
         (None, {'fields':['created_date']}),
         (None, {'fields':['palflag']}),
         (None, {'fields':['endflag']}),
         (None, {'fields':['delflag']}),
     ]
     inlines = [ResidentInline, RemarkInline]
-    list_display = ('name','id','auther','character','created_date','palflag','endflag','delflag',)
-    list_filter = ['created_date','auther','palflag','endflag','delflag',]
+    list_display = ('name','id','auther','character','character_name','created_date','palflag','endflag','delflag',)
+    list_filter = ['created_date','auther','character','character_name','created_date','palflag','endflag','delflag',]
     search_fields = ['name','auther',]
 
 admin.site.register(Question, QuestionAdmin)
