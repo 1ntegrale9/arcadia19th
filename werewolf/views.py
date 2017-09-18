@@ -190,6 +190,8 @@ def getCharacterName(ID):
         return '宝石箱《Jewel Box》'
     elif ID == 'ensou':
         return '演奏会'
+    elif ID == 'free':
+        return 'フリーアイコン'
     else:
         return 'undefined'
 
@@ -202,6 +204,8 @@ def getCharacterTable(ID):
         return getJewelTable()
     elif ID == 'ensou':
         return getEnsouTable()
+    elif ID == 'free':
+        return getFreeTable()
     else:
         return ((1,'エラーが発生しました'),)
 
@@ -214,6 +218,8 @@ def getRandomCharacterImgURL(ID):
         return 'jewel/{}_n.png'.format(str(randint(1,62)).zfill(2))
     elif ID == 'ensou':
         return 'ensou/{}.png'.format(str(randint(1,40)).zfill(3))
+    elif ID == 'free':
+        return 'free/{}.jpg'.format(str(randint(1,27)).zfill(2))
     else:
         return 'rain/01.png'
 
@@ -226,6 +232,8 @@ def getCharacterImgURL(ID,no):
         return 'jewel/{}_n.png'.format(str(no).zfill(2))
     elif ID == 'ensou':
         return 'ensou/{}.png'.format(str(no).zfill(3))
+    elif ID == 'free':
+        return 'free/{}.jpg'.format(str(no).zfill(2))
     else:
         return 'rain/01.png'
 
@@ -504,4 +512,35 @@ def getEnsouTable():
         (38,'アコーディオン　ドロテア'),
         (39,'音叉　エミリオ'),
         (40,'バードコール　ヴァレリー'),
+    )
+
+def getFreeTable():
+    return (
+        (1 ,'フリーアイコン1'),
+        (2 ,'フリーアイコン2'),
+        (3 ,'フリーアイコン3'),
+        (4 ,'フリーアイコン4'),
+        (5 ,'フリーアイコン5'),
+        (6 ,'フリーアイコン6'),
+        (7 ,'フリーアイコン7'),
+        (8 ,'フリーアイコン8'),
+        (9 ,'フリーアイコン9'),
+        (10,'フリーアイコン10'),
+        (11,'フリーアイコン11'),
+        (12,'フリーアイコン12'),
+        (13,'フリーアイコン13'),
+        (14,'フリーアイコン14'),
+        (15,'フリーアイコン15'),
+        (16,'フリーアイコン16'),
+        (17,'フリーアイコン17'),
+        (18,'フリーアイコン18'),
+        (19,'フリーアイコン19'),
+        (20,'フリーアイコン20'),
+        (21,'フリーアイコン21'),
+        (22,'フリーアイコン22'),
+        (23,'フリーアイコン23'),
+        (24,'フリーアイコン24'),
+        (25,'フリーアイコン25'),
+        (26,'フリーアイコン26'),
+        (27,'フリーアイコン27'),
     )
