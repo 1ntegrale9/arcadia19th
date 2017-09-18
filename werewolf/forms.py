@@ -15,6 +15,7 @@ class VillageForm(forms.ModelForm):
 
     charaset = (
         ('rain','霧雨降る街'),
+        ('rain_big','霧雨降る街(BIG)'),
         ('jewel','宝石箱《Jewel Box》'),
     )
     character = forms.ChoiceField(widget=forms.Select, choices=charaset)
