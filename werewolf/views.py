@@ -159,7 +159,7 @@ jewelTable = (
     (62,'風信子石　ジル'),
 )
 
-rain_bigTable = (
+rainBigTable = (
     (1, '恋多き娘　メイ'),
     (2, '双子の赤　レディア'),
     (3, '双子の青　ヴィノール'),
@@ -244,8 +244,8 @@ rain_bigTable = (
 def getRandomCharacterImgURL(ID):
     if ID == 'rain':
         url = 'rain/' + str(randint(1,80)).zfill(2) + '.png'
-    elif ID == 'rain_big':
-        url = 'rain_big/' + str(randint(1,80)).zfill(2) + '.png'
+    elif ID == 'rainBig':
+        url = 'rainBig/' + str(randint(1,80)).zfill(2) + '.png'
     elif ID == 'jewel':
         url = 'jewel/' + str(randint(1,62)).zfill(2) + '_n.png'
     else:
@@ -255,8 +255,8 @@ def getRandomCharacterImgURL(ID):
 def getCharacterImgURL(ID,no):
     if ID == 'rain':
         url = 'rain/' + str(no).zfill(2) + '.png'
-    elif ID == 'rain_big':
-        url = 'rain_big/' + str(no).zfill(2) + '.png'
+    elif ID == 'rainBig':
+        url = 'rainBig/' + str(no).zfill(2) + '.png'
     elif ID == 'jewel':
         url = 'jewel/' + str(no).zfill(2) + '_n.png'
     else:
@@ -266,7 +266,7 @@ def getCharacterImgURL(ID,no):
 def getCharacterName(ID):
     if ID == 'rain':
         name = '霧雨降る街'
-    if ID == 'rain_big':
+    elif ID == 'rainBig':
         name = '霧雨降る街(BIG)'
     elif ID == 'jewel':
         name = '宝石箱《Jewel Box》'
@@ -277,12 +277,12 @@ def getCharacterName(ID):
 def getCharacterTable(ID):
     if ID == 'rain':
         table = rainTable
-    if ID == 'rain_big':
-        table = rain_bigTable
-    if ID == 'jewel':
+    elif ID == 'rainBig':
+        table = rainBigTable
+    elif ID == 'jewel':
         table = jewelTable
     else:
-        table = rainTable
+        table = ((1,'エラーが発生しました'),)
     return table
 
 class VillageIndex(CreateView):
