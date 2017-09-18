@@ -121,7 +121,7 @@ def VillageView(request, village_id):
             context['residentinfo'] = resident_list.get(resident=request.user)
             context['isResident'] = True
             context['isAuther'] = this_village.auther == request.user.username
-            context['notStarted'] = this_village.startflag
+            context['notStarted'] = this_village.startflag == 0
             context['icon_url'] = context['residentinfo'].character_img_url
         except:
             context['isResident'] = False
