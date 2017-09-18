@@ -121,10 +121,11 @@ def VillageView(request, village_id):
             context['residentinfo'] = resident_list.get(resident=request.user)
             context['isResident'] = True
             context['isAuther'] = this_village.auther == request.user.username
-            context['notStarted'] = not this_village.startflag
+            context['notStarted'] = this_village.startflag
             context['icon_url'] = context['residentinfo'].character_img_url
         except:
             context['isResident'] = False
+            context['notStarted'] = True
             context['icon_url'] = this_village.character_img_url
     return render(request, 'werewolf/village.html', context)
 
