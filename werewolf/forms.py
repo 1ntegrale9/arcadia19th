@@ -5,7 +5,7 @@ from .charasetTable import getCharasetChoices
 class VillageForm(forms.ModelForm):
     class Meta:
         model = Village
-        fields = ('name','daytime_length','nighttime_length','character',)
+        fields = ('name','daytime_length','nighttime_length','character','palflag',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
