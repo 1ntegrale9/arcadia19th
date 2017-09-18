@@ -304,7 +304,7 @@ def getCharacterImgURL(ID,no):
     if ID == 'rain':
         return 'rain/{}.png'.format(str(no).zfill(2))
     elif ID == 'rainBig':
-        return 'rainBig/.png'.format(str(no).zfill(2))
+        return 'rainBig/{}.png'.format(str(no).zfill(2))
     elif ID == 'jewel':
         return 'jewel/{}_n.png'.format(str(no).zfill(2))
     elif ID == 'ensou':
