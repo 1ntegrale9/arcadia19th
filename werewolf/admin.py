@@ -46,10 +46,10 @@ class ResidentAdmin(admin.ModelAdmin):
         (None, {'fields':['resident']}),
         (None, {'fields':['character']}),
         (None, {'fields':['character_img_url']}),
-        (None, {'fields':['position']}),
-        (None, {'fields':['death_flag']}),
+        (None, {'fields':['job']}),
+        (None, {'fields':['deathflag']}),
     ]
-    list_display = ('resident','village','character','character_img_url','position','death_flag','id',)
+    list_display = ('resident','village','character','character_img_url','job','deathflag','id',)
 
 class VillageAdmin(admin.ModelAdmin):
     fieldsets = [
@@ -59,13 +59,20 @@ class VillageAdmin(admin.ModelAdmin):
         (None, {'fields':['character_name']}),
         (None, {'fields':['character_img_url']}),
         (None, {'fields':['created_date']}),
+        (None, {'fields':['started_date']}),
+        (None, {'fields':['updated_date']}),
+        (None, {'fields':['daytime_length']}),
+        (None, {'fields':['nighttime_length']}),
+        (None, {'fields':['days']}),
+        (None, {'fields':['nightflag']}),
         (None, {'fields':['palflag']}),
+        (None, {'fields':['startflag']}),
         (None, {'fields':['endflag']}),
         (None, {'fields':['delflag']}),
     ]
     inlines = [ResidentInline, RemarkInline]
-    list_display = ('name','id','auther','character','character_name','created_date','palflag','endflag','delflag',)
-    list_filter = ['created_date','auther','character','character_name','created_date','palflag','endflag','delflag',]
+    list_display = ('name','id','auther','character','character_name','daytime_length','nighttime_length','days','nightflag','palflag','startflag','endflag','delflag','started_date','created_date','updated_date',)
+    list_filter = ['created_date','started_date','updated_date','auther','character','character_name','created_date','palflag','endflag','delflag',]
     search_fields = ['name','auther',]
 
 admin.site.register(Question, QuestionAdmin)

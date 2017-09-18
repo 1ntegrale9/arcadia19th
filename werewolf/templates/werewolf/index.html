@@ -14,6 +14,8 @@
                             <form method="POST">{% csrf_token %}
                                 {{ form.name }}
                                 {{ form.character }}
+                                {{ form.daytime_length }}
+                                {{ form.nighttime_length }}
                                 {{ form.palflag }}
                                 <button type="submit" class="save btn btn-block btn-outline-info">村を建てる</button>
                                 </form></div></div></div>{% endif %}
