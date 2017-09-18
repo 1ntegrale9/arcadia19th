@@ -244,6 +244,50 @@ def getRainBigTable():
         (80,'夜光性　シェーラ'),
     )
 
+def getEnsouTable():
+    return (
+        (1 ,'ピアノ　アリシア'),
+        (2 ,'ギター　ルース'),
+        (3 ,'草笛　エフェル'),
+        (4 ,'ハープ　コウィスカ'),
+        (5 ,'板胡　シア'),
+        (6 ,'ツィター　シルビア'),
+        (7 ,'レインスティック　ベルスーズ'),
+        (8 ,'角笛　オルファン'),
+        (9 ,'アルプホルン　カルーア'),
+        (10,'宮太鼓　マコト'),
+        (11,'チェロ　ミリッツァ'),
+        (12,'口笛　ケルイズ'),
+        (13,'フルート　リベラ'),
+        (14,'カスタネット　ムティリュ'),
+        (15,'カスタネット　ネスカ'),
+        (16,'ハーモニカ　テイト'),
+        (17,'三味線　クオン'),
+        (18,'トロンボーン　ノール'),
+        (19,'セルパン　カサドル'),
+        (20,'スティールパン　シャンティ'),
+        (21,'クラリネット　コトワ'),
+        (22,'タンバリン　シェシャ'),
+        (23,'シタール　モハーナ'),
+        (24,'手拍子　ブリジット'),
+        (25,'手拍子　エディ'),
+        (26,'ヴィオラ　ルネッタ'),
+        (27,'汽笛　シズキ'),
+        (28,'オーボエ　アニタ'),
+        (29,'平太鼓　コズエ'),
+        (30,'シンバル　ソルム'),
+        (31,'ブズーキ　エイレーネ'),
+        (32,'シュリンクス　クリロフ'),
+        (33,'ハンドベル　ヤシロ'),
+        (34,'トライアングル　クロエ'),
+        (35,'エレキギター　ジョゼ'),
+        (36,'キーボード　リル'),
+        (37,'ベース　ヴェルナー'),
+        (38,'アコーディオン　ドロテア'),
+        (39,'音叉　エミリオ'),
+        (40,'バードコール　ヴァレリー'),
+    )
+
 def getRandomCharacterImgURL(ID):
     if ID == 'rain':
         return 'rain/{}.png'.format(str(randint(1,80)).zfill(2))
@@ -251,6 +295,8 @@ def getRandomCharacterImgURL(ID):
         return 'rainBig/{}.png'.format(str(randint(1,80)).zfill(2))
     elif ID == 'jewel':
         return 'jewel/{}_n.png'.format(str(randint(1,62)).zfill(2))
+    elif ID == 'ensou':
+        return 'ensou/{}.png'.format(str(randint(1,40)).zfill(3))
     else:
         return 'rain/01.png'
 
@@ -261,6 +307,8 @@ def getCharacterImgURL(ID,no):
         return 'rainBig/.png'.format(str(no).zfill(2))
     elif ID == 'jewel':
         return 'jewel/{}_n.png'.format(str(no).zfill(2))
+    elif ID == 'ensou':
+        return 'ensou/{}.png'.format(str(no).zfill(3))
     else:
         return 'rain/01.png'
 
@@ -271,6 +319,8 @@ def getCharacterName(ID):
         return '霧雨降る街(BIG)'
     elif ID == 'jewel':
         return '宝石箱《Jewel Box》'
+    elif ID == 'ensou':
+        return '演奏会'
     else:
         return 'undefined'
 
@@ -281,6 +331,8 @@ def getCharacterTable(ID):
         return getRainBigTable()
     elif ID == 'jewel':
         return getJewelTable()
+    elif ID == 'ensou':
+        return getEnsouTable()
     else:
         return ((1,'エラーが発生しました'),)
 
