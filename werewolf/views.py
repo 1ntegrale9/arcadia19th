@@ -27,19 +27,9 @@ class VillageIndex(CreateView):
         context['object_list'] = Village.objects.filter(palflag=0,endflag=0, delflag=0).order_by('-created_date')
         return context
 
-class VillagePalIndex(CreateView):
-    model = Village, Resident
-    form_class = VillageForm
+class VillagePalIndex(VillageIndex):
     template_name = 'werewolf/pal.html'
     success_url = reverse_lazy('werewolf:pal')
-
-    def form_valid(self, form):
-        form.instance.auther = self.request.user.username
-        form.instance.character_name = getCharacterName(form.cleaned_data['character'])
-        form.instance.character_img_url = getRandomCharacterImgURL(form.cleaned_data['character'])
-        print(form.instance.character_img_url)
-        return super(VillagePalIndex, self).form_valid(form)
-
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['object_list'] = Village.objects.filter(palflag=1,endflag=0, delflag=0).order_by('-created_date')
@@ -100,20 +90,20 @@ def VillageView(request, village_id):
         resident_form = ResidentForm()
         resident_form.fields['character'].choices = getCharacterTable(this_village.character)
         resident_list = Resident.objects.filter(village=village_id)
-        remark_list = Remark.objects.filter(
+        remark_list   = Remark.objects.filter(
             delflag   = 0,
             village   = village_id,
             days      = this_village.days,
             nightflag = this_village.nightflag
             ).order_by('-date')[:100]
         context = {
-            'start_form': StartForm(),
-            'remark_form': RemarkForm(),
+            'start_form'   : StartForm(),
+            'remark_form'  : RemarkForm(),
             'resident_form': resident_form,
-            'remark_list': remark_list,
+            'remark_list'  : remark_list,
             'resident_list': resident_list,
-            'village_info': this_village,
-            'update_time': update_time,
+            'village_info' : this_village,
+            'update_time'  : update_time,
         }
         try:
             context['residentinfo'] = resident_list.get(resident=request.user)

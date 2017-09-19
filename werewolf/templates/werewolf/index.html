@@ -2,42 +2,57 @@
 {% load static %}
 
 {% block content %}
-    <div class='container'>
-        <div class="card-group">
-            {% if user.is_authenticated %}
-                <div class="col-sm-6">
-                    <div class="card border-dark rounded mb-4">
-                        <div class="card-header border-dark">
-                            <p class="c-title card-text">新規村</p>
-                            </div>
-                        <div class="card-body border-dark">
-                            <form method="POST">{% csrf_token %}
-                                {{ form.name }}
-                                {{ form.character }}
-                                {{ form.daytime_length }}
-                                {{ form.nighttime_length }}
-                                {{ form.palflag }}
-                                <button type="submit" class="save btn btn-block btn-outline-info">村を建てる</button>
-                                </form></div></div></div>{% endif %}
-            {% for village in object_list %}
-                <div class="col-sm-6">
-                    <div class="card border-dark rounded mb-4">
-                        <div class="card-header border-dark">
-                        <p class="card-text text-dark">
-                            <span class="text-left"">{{ village.id }}</span>
-                            <span class="text-right" style="float:right;">{{ village.created_date }}</span>
-                            <p>
-                        <p class="card-text c-title text-word-break-all">{{ village.name }}</p>
-                        </div>
-                        <div class="card-body border-dark">
-                            <div class="media">
-                                <img class="img-fluid d-flex align-self-center mr-3" src="{% static village.character_img_url %}" width='70'/>
-                                <div class="media-body">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr><td class="border-0 card-text">{{ village.auther }}</td></tr>
-                                            <tr><td class="card-text">牛村</td></tr>
-                                            <tr><td class="card-text">{{ village.character_name }}</td></tr>
-                                            </tbody></table></div></div>
-                            <a href="{% url 'werewolf:village' village.id %}" class="btn btn-block btn-outline-info">入村</a>
-                            </div></div></div>{% endfor %}</div></div>{% endblock %}
+  <div class='container'>
+    <div class="card-group">
+
+      {% if user.is_authenticated %}
+        <div class="col-sm-6">
+          <div class="card border-dark rounded mb-4">
+            <div class="card-header border-dark">
+              <p class="c-title card-text">新規村</p>
+            </div>
+            <div class="card-body border-dark">
+              <form method="POST">{% csrf_token %}
+                {{ form.name }}
+                {{ form.character }}
+                {{ form.daytime_length }}
+                {{ form.nighttime_length }}
+                {{ form.palflag }}
+                <button type="submit" class="save btn btn-block btn-outline-info">村を建てる</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      {% for village in object_list %}
+        <div class="col-sm-6">
+          <div class="card border-dark rounded mb-4">
+            <div class="card-header border-dark">
+              <p class="card-text text-dark">
+                <span class="text-left"">{{ village.id }}</span>
+                <span class="text-right" style="float:right;">{{ village.created_date }}</span>
+              </p>
+              <p class="card-text c-title text-word-break-all">{{ village.name }}</p>
+            </div>
+            <div class="card-body border-dark">
+              <div class="media">
+                <img class="img-fluid d-flex align-self-center mr-3" src="{% static village.character_img_url %}" width='70'/>
+                <div class="media-body">
+                  <table class="table">
+                    <tbody>
+                      <tr><td class="border-0 card-text">{{ village.auther }}</td></tr>
+                      <tr><td class="card-text">牛村</td></tr>
+                      <tr><td class="card-text">{{ village.character_name }}</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <a href="{% url 'werewolf:village' village.id %}" class="btn btn-block btn-outline-info">入村</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
