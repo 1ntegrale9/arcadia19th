@@ -1,16 +1,5 @@
 from django.contrib import admin
-from .models import Choice, Question, Village, Remark, Resident
-
-class ChoiceInline(admin.TabularInline):
-    model = Choice
-    extra = 3
-
-class QuestionAdmin(admin.ModelAdmin):
-    fieldsets = [(None, {'fields':['question_text']}),('Date information', {'fields':['pub_date']}),]
-    inlines = [ChoiceInline]
-    list_display = ('question_text', 'pub_date', 'was_published_recently')
-    list_filter = ['pub_date']
-    search_fields = ['question_text']
+from .models import Village, Remark, Resident
 
 class RemarkInline(admin.TabularInline):
     model = Remark
@@ -18,64 +7,34 @@ class RemarkInline(admin.TabularInline):
     max_num = 100
     show_change_link = True
 
-class RemarkAdmin(admin.ModelAdmin):
-    fieldsets = [
-        (None, {'fields':['village']}),
-        (None, {'fields':['serial_no']}),
-        (None, {'fields':['days']}),
-        (None, {'fields':['types']}),
-        (None, {'fields':['user']}),
-        (None, {'fields':['charaset']}),
-        (None, {'fields':['character']}),
-        (None, {'fields':['character_img_url']}),
-        (None, {'fields':['date']}),
-        (None, {'fields':['text']}),
-    ]
-    list_display = ('text', 'id', 'village', 'user_id', 'serial_no', 'days', 'types', 'user', 'character', 'charaset', 'character_img_url', 'date',)
-    list_filter = ['village', 'user_id', 'days', 'types', 'user','charaset', 'character', 'date',]
-    search_fields = ['text',]
-
 class ResidentInline(admin.TabularInline):
     model = Resident
     extra = 0
     show_change_link = True
 
+class RemarkAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None, {'fields':['village','serial_no','days','types','user','charaset','character','character_img_url','date','text']})
+    ]
+    list_display = ('text', 'id', 'village', 'user_id', 'serial_no', 'days', 'types', 'user', 'character', 'charaset', 'character_img_url', 'date',)
+    list_filter = ['village', 'user_id', 'days', 'types', 'user','charaset', 'character', 'date',]
+    search_fields = ['text',]
+
 class ResidentAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields':['village']}),
-        (None, {'fields':['resident']}),
-        (None, {'fields':['character']}),
-        (None, {'fields':['character_img_url']}),
-        (None, {'fields':['job']}),
-        (None, {'fields':['deathflag']}),
+        (None, {'fields':['village','resident','character','character_img_url','job','deathflag']})
     ]
     list_display = ('resident','village','character','character_img_url','job','deathflag','id',)
 
 class VillageAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields':['name']}),
-        (None, {'fields':['auther']}),
-        (None, {'fields':['character']}),
-        (None, {'fields':['character_name']}),
-        (None, {'fields':['character_img_url']}),
-        (None, {'fields':['created_date']}),
-        (None, {'fields':['started_date']}),
-        (None, {'fields':['updated_date']}),
-        (None, {'fields':['daytime_length']}),
-        (None, {'fields':['nighttime_length']}),
-        (None, {'fields':['days']}),
-        (None, {'fields':['nightflag']}),
-        (None, {'fields':['palflag']}),
-        (None, {'fields':['startflag']}),
-        (None, {'fields':['endflag']}),
-        (None, {'fields':['delflag']}),
+        (None, {'fields':['name','auther','character','character_name','character_img_url','created_date','started_date','updated_date','daytime_length','nighttime_length','days','nightflag','palflag','startflag','endflag','delflag']})
     ]
     inlines = [ResidentInline, RemarkInline]
     list_display = ('name','id','auther','character','character_name','daytime_length','nighttime_length','days','nightflag','palflag','startflag','endflag','delflag','started_date','created_date','updated_date',)
     list_filter = ['created_date','started_date','updated_date','auther','character','character_name','created_date','palflag','endflag','delflag',]
     search_fields = ['name','auther',]
 
-admin.site.register(Question, QuestionAdmin)
 admin.site.register(Village, VillageAdmin)
 admin.site.register(Remark, RemarkAdmin)
 admin.site.register(Resident, ResidentAdmin)
