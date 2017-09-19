@@ -1,11 +1,9 @@
-from django.views.generic import FormView, ListView, CreateView
+from django.views.generic import ListView, CreateView
 from django.core.urlresolvers import reverse_lazy
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.views import generic, View
-from django import forms
-from .models import Choice, Question, Village, Remark, Resident
+from .models import Village, Remark, Resident
 from .forms import VillageForm, RemarkForm, ResidentForm, StartForm
 from random import randint
 from .charasetTable import *
@@ -128,69 +126,3 @@ def VillageView(request, village_id):
             context['notStarted'] = True
             context['icon_url'] = this_village.character_img_url
     return render(request, 'werewolf/village.html', context)
-
-# class DetailView(generic.DetailView):
-#     model = Question
-#     template_name = 'werewolf/detail.html'
-
-# class ResultsView(generic.DetailView):
-#     model = Question
-#     template_name = 'werewolf/results.html'
-
-# class VillageResidentForm(CreateView):
-#     model = Resident
-#     form_class = ResidentForm
-#     template_name = 'werewolf/village.html'
-
-#     def get_success_url(self):
-#         return reverse_lazy('werewolf:village', args=(self.kwargs['village_id'],))
-
-#     def form_valid(self, form):
-#         form.instance.resident = self.request.user
-#         form.instance.village_id = self.kwargs['village_id']
-#         form.instance.character = randint(1,80)
-#         return super(VillageRemarks, self).form_valid(form)
-
-#     def get_context_data(self, *args, **kwargs):
-#         context = super().get_context_data(*args, **kwargs)
-#         context['remark_list'] = Remark.objects.filter(delflag=0,village=self.kwargs['village_id']).order_by('-date')
-#         return context
-
-# class VillageRemarkForm(CreateView):
-#     model = Remark
-#     form_class = RemarkForm
-#     template_name = 'werewolf/village.html'
-
-#     def get_success_url(self):
-#         return reverse_lazy('werewolf:village', args=(self.kwargs['village_id'],))
-
-#     def form_valid(self, form):
-#         form.instance.user = self.request.user.username
-#         form.instance.user_id = self.request.user
-#         form.instance.village_id = self.kwargs['village_id']
-#         form.instance.character = randint(1,80)
-#         form.instance.character_img_url = "rain/" + str(form.instance.character).zfill(2) + ".png"
-#         return super(VillageRemarks, self).form_valid(form)
-
-#     def get_context_data(self, *args, **kwargs):
-#         context = super().get_context_data(*args, **kwargs)
-#         context['remark_list'] = Remark.objects.filter(delflag=0,village=self.kwargs['village_id']).order_by('-date')
-#         return context
-
-# def vote(request, question_id):
-#     question = get_object_or_404(Question, pk=question_id)
-#     try:
-#         selected_choice = question.choice_set.get(pk=request.POST['choice'])
-#     except (KeyError, Choice.DoesNotExist):
-#         return render(request, 'werewolf/detail.html', {
-#             'question': question,
-#             'error_message': "投票先を選択してください",
-#         })
-#     else:
-#         selected_choice.votes += 1
-#         selected_choice.save()
-#         return HttpResponseRedirect(reverse('werewolf:results', args=(question.id,)))
-
-# def results(request, question_id):
-#     question = get_object_or_404(Question, pk=question_id)
-#     return render(request, 'werewolf/results.html', {'question': question})
