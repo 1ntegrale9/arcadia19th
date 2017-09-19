@@ -309,66 +309,58 @@ def getFreeTable():
     )
 
 def getCharasetChoices():
-    return (
+    return [
         ('rain','霧雨降る街'),
         ('rainBig','霧雨降る街(BIG)'),
         ('jewel','宝石箱《Jewel Box》'),
         ('ensou','演奏会'),
         ('free','フリーアイコン'),
-    )
+    ]
 
 def getCharacterName(ID):
-    if ID == 'rain':
-        return '霧雨降る街'
-    elif ID == 'rainBig':
-        return '霧雨降る街(BIG)'
-    elif ID == 'jewel':
-        return '宝石箱《Jewel Box》'
-    elif ID == 'ensou':
-        return '演奏会'
-    elif ID == 'free':
-        return 'フリーアイコン'
-    else:
+    try:
+        return {
+            'rain':'霧雨降る街',
+            'rainBig':'霧雨降る街(BIG)',
+            'jewel':'宝石箱《Jewel Box》',
+            'ensou':'演奏会',
+            'free':'フリーアイコン',    
+        }[ID]
+    except:
         return 'undefined'
 
 def getCharacterTable(ID):
-    if ID == 'rain':
-        return getRainTable()
-    elif ID == 'rainBig':
-        return getRainBigTable()
-    elif ID == 'jewel':
-        return getJewelTable()
-    elif ID == 'ensou':
-        return getEnsouTable()
-    elif ID == 'free':
-        return getFreeTable()
-    else:
+    try:
+        return {
+            'rain':getRainTable(),
+            'rainBig':getRainBigTable(),
+            'jewel':getJewelTable(),
+            'ensou':getEnsouTable(),
+            'free':getFreeTable(),
+        }[ID]
+    except:
         return ((1,'エラーが発生しました'),)
 
 def getRandomCharacterImgURL(ID):
-    if ID == 'rain':
-        return 'rain/{}.png'.format(str(randint(1,80)).zfill(2))
-    elif ID == 'rainBig':
-        return 'rainBig/{}.png'.format(str(randint(1,80)).zfill(2))
-    elif ID == 'jewel':
-        return 'jewel/{}_n.png'.format(str(randint(1,62)).zfill(2))
-    elif ID == 'ensou':
-        return 'ensou/{}.png'.format(str(randint(1,40)).zfill(3))
-    elif ID == 'free':
-        return 'free/{}.jpg'.format(str(randint(1,27)).zfill(2))
-    else:
+    try:
+        return {
+            'rain':'rain/{}.png'.format(str(randint(1,80)).zfill(2)),
+            'rainBig':'rainBig/{}.png'.format(str(randint(1,80)).zfill(2)),
+            'jewel':'jewel/{}_n.png'.format(str(randint(1,62)).zfill(2)),
+            'ensou':'ensou/{}.png'.format(str(randint(1,40)).zfill(3)),
+            'free':'free/{}.jpg'.format(str(randint(1,27)).zfill(2)),
+        }[ID]
+    except:
         return 'rain/01.png'
 
 def getCharacterImgURL(ID,no):
-    if ID == 'rain':
-        return 'rain/{}.png'.format(str(no).zfill(2))
-    elif ID == 'rainBig':
-        return 'rainBig/{}.png'.format(str(no).zfill(2))
-    elif ID == 'jewel':
-        return 'jewel/{}_n.png'.format(str(no).zfill(2))
-    elif ID == 'ensou':
-        return 'ensou/{}.png'.format(str(no).zfill(3))
-    elif ID == 'free':
-        return 'free/{}.jpg'.format(str(no).zfill(2))
-    else:
-        return 'rain/01.png'
+    try:
+        return {
+            'rain':'rain/{}.png'.format(str(no).zfill(2)),
+            'rainBig':'rainBig/{}.png'.format(str(no).zfill(2)),
+            'jewel':'jewel/{}_n.png'.format(str(no).zfill(2)),
+            'ensou':'ensou/{}.png'.format(str(no).zfill(3)),
+            'free':'free/{}.jpg'.format(str(no).zfill(2)),
+        }[ID]
+    except:
+        'rain/01.png'
