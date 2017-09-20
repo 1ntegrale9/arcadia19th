@@ -1,13 +1,12 @@
-from django.views.generic import ListView, CreateView
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.http import HttpResponseRedirect
+from django.utils import timezone
+from django.views.generic import ListView, CreateView
 from .models import Village, Remark, Resident
 from .forms import VillageForm, RemarkForm, ResidentForm, StartForm
-from random import randint
 from .charasetTable import *
-from django.utils import timezone
 
 class VillageIndex(CreateView):
     model = Village, Resident
@@ -42,7 +41,7 @@ class VillageLog(ListView):
 
 def VillageView(request, village_id):
     this_village = Village.objects.get(id=village_id)
-    limittime = this_village.daytime_length if this_village.nightflag == 0 else this_village.nighttime_length   
+    limittime = this_village.daytime_length if this_village.nightflag == 0 else this_village.nighttime_length
     update_time = timezone.timedelta(seconds=limittime) + this_village.updated_date
     if request.method == 'POST':
         if 'remark' in request.POST:
