@@ -324,7 +324,7 @@ def getCharacterName(ID):
             'rainBig':'霧雨降る街(BIG)',
             'jewel':'宝石箱《Jewel Box》',
             'ensou':'演奏会',
-            'free':'フリーアイコン',    
+            'free':'フリーアイコン',
         }[ID]
     except:
         return 'undefined'

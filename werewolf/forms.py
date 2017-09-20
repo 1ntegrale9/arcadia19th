@@ -2,7 +2,7 @@ from django import forms
 from .models import Village, Remark, Resident
 from .charasetTable import getCharasetChoices
 
-def generateChoiceField(choices):
+def generateSelectForm(choices):
     return forms.ChoiceField(widget=forms.Select, choices=choices)
 def applyFormControl(target, fields):
     for f in fields:
@@ -35,8 +35,8 @@ class VillageForm(forms.ModelForm):
         applyFormControl(self, getVillageFormfields())
         applyPlaceholder(self, getVillageFormPlaceholderTable())
 
-    character = generateChoiceField(getCharasetChoices())
-    palflag = generateChoiceField(getPalflagChoices())
+    character = generateSelectForm(getCharasetChoices())
+    palflag = generateSelectForm(getPalflagChoices())
 
 def getRemarkFormfields():
     return ('text',)

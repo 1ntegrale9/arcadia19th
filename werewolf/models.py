@@ -11,6 +11,7 @@ class Village(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     started_date = models.DateTimeField(default=timezone.now)
     updated_date = models.DateTimeField(default=timezone.now)
+    # daytime_seconds, nighttime_seconds
     daytime_length = models.IntegerField()
     nighttime_length = models.IntegerField()
     days = models.IntegerField('何日目', default=0)
@@ -54,3 +55,27 @@ class Resident(models.Model):
 
     def __str__(self):
         return self.resident.username
+
+def getOpenVillageObjects():
+    return Village.objects.filter(palflag=0,endflag=0,delflag=0).order_by('-created_date')
+def getPalVillageObjects():
+    return Village.objects.filter(palflag=1,endflag=0,delflag=0).order_by('-created_date')
+def getEndVillageObjects():
+    return Village.objects.filter(endflag=1, delflag=0).order_by('-created_date')
+def getResidentObjects(village_id):
+    return Resident.objects.filter(village=village_id)
+def getRemarkObjects(village_object):
+    return Remark.objects.filter(
+        village   = village_object.id,
+        days      = village_object.days,
+        nightflag = village_object.nightflag,
+        delflag   = 0,
+    ).order_by('-date')
+
+def getVillageObject(village_id):
+    return Village.objects.get(id=village_id)
+
+def getThisTurnLength(village_object):
+    return village_object.nighttime_length if bool(village_object.nightflag) else village_object.daytime_length
+def calculateUpdateTime(village_object):
+    return timezone.timedelta(seconds=getThisTurnLength(village_object)) + village_object.updated_date
