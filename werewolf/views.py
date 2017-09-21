@@ -9,11 +9,8 @@ class OpenVillageIndexView(CreateView):
     template_name = 'werewolf/index.html'
     success_url = reverse_lazy('werewolf:index')
     def form_valid(self, form):
-        from .charasetTable import getCharacterName,getRandomCharacterImgURL
-        form.instance.auther = self.request.user
-        form.instance.auther_name = self.request.user.username
-        form.instance.charaset_name = getCharacterName(form.cleaned_data['charaset'])
-        form.instance.icon_url = getRandomCharacterImgURL(form.cleaned_data['charaset'])
+        from .forms import createVillage
+        createVillage(request=self.request,form=form)
         return super(OpenVillageIndexView, self).form_valid(form)
     def get_context_data(self, *args, **kwargs):
         from .models import getOpenVillageObjects

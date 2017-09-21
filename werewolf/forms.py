@@ -144,3 +144,10 @@ def getVillageContext(request,village_object,next_update_time):
         context['notStarted'] = True
         context['icon_url'] = village_object.icon_url
     return context
+
+def createVillage(request,form):
+    from .charasetTable import getCharacterName,getRandomCharacterImgURL
+    form.instance.auther = request.user
+    form.instance.auther_name = request.user.username
+    form.instance.charaset_name = getCharacterName(form.cleaned_data['charaset'])
+    form.instance.icon_url = getRandomCharacterImgURL(form.cleaned_data['charaset'])
