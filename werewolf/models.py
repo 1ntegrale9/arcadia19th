@@ -3,11 +3,11 @@ from django.db import models
 from django.utils import timezone
 
 class Village(models.Model):
-    name = models.CharField('村名', max_length=200)
+    name = models.CharField(max_length=200)
     auther = models.ForeignKey(User,default=1,on_delete=models.CASCADE)
     # auther.usernameで取れるので廃止する
-    auther_name = models.CharField('村主',default='system',max_length=200)
-    charaset = models.CharField('キャラセット', default='rain', max_length=200)
+    auther_name = models.CharField(default='system',max_length=200)
+    charaset = models.CharField(default='rain', max_length=200)
     charaset_name = models.CharField(default='霧雨降る街', max_length=200)
     icon_url = models.CharField(default='rain/01.png',max_length=200)
     created_date = models.DateTimeField(default=timezone.now)
@@ -15,7 +15,7 @@ class Village(models.Model):
     updated_date = models.DateTimeField(default=timezone.now)
     daytime_seconds = models.IntegerField()
     nighttime_seconds = models.IntegerField()
-    day = models.IntegerField('何日目', default=0)
+    day = models.IntegerField(default=0)
     nightflag = models.IntegerField(default=0)
     palflag = models.IntegerField(default=0)
     startflag = models.IntegerField(default=0)
@@ -33,12 +33,12 @@ class Remark(models.Model):
     nightflag = models.IntegerField(default=0)
     types = models.IntegerField(default=1)
     # remarker.usernameで取れるので廃止する
-    remarker_name = models.CharField('ユーザ名', max_length=200)
+    remarker_name = models.CharField(max_length=200)
     character = models.IntegerField(default=1)
-    charaset = models.CharField('キャラセット', default='rain', max_length=30)
+    charaset = models.CharField(default='rain', max_length=30)
     icon_url = models.CharField(max_length=100, default="rain/01.png")
     date = models.DateTimeField(default=timezone.now)
-    text = models.TextField('発言')
+    text = models.TextField()
     delflag = models.IntegerField(default=0)
 
     def __str__(self):
@@ -48,9 +48,9 @@ class Resident(models.Model):
     village = models.ForeignKey(Village, on_delete=models.CASCADE)
     resident = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
     character = models.IntegerField(default=1)
-    charaset = models.CharField('キャラセット', default='rain', max_length=30)
+    charaset = models.CharField(default='rain', max_length=30)
     icon_url = models.CharField(max_length=100, default="rain/01.png")
-    job = models.CharField('役職', max_length=100, default='村人')
+    job = models.CharField(max_length=100, default='村人')
     types = models.IntegerField(default=1)
     deathflag = models.IntegerField(default=0)
     winflag = models.IntegerField(default=0)
