@@ -5,6 +5,7 @@ from django.utils import timezone
 class Village(models.Model):
     name = models.CharField('村名', max_length=200)
     auther = models.ForeignKey(User,default=1,on_delete=models.CASCADE)
+    # auther.usernameで取れるので廃止する
     auther_name = models.CharField('村主',default='system',max_length=200)
     charaset = models.CharField('キャラセット', default='rain', max_length=200)
     charaset_name = models.CharField(default='霧雨降る街', max_length=200)
@@ -31,6 +32,7 @@ class Remark(models.Model):
     day = models.IntegerField(default=0)
     nightflag = models.IntegerField(default=0)
     types = models.IntegerField(default=1)
+    # remarker.usernameで取れるので廃止する
     remarker_name = models.CharField('ユーザ名', max_length=200)
     character = models.IntegerField(default=1)
     charaset = models.CharField('キャラセット', default='rain', max_length=30)
