@@ -69,8 +69,8 @@ def getResidentObjects(village_id):
 def getRemarkObjects(village_object):
     return Remark.objects.filter(
         village   = village_object.id,
-        day      = village_object.day,
-        nightflag = village_object.nightflag,
+#        day      = village_object.day,
+#        nightflag = village_object.nightflag,
         delflag   = 0,
     ).order_by('-date')
 
