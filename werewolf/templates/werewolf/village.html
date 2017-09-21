@@ -17,9 +17,11 @@
             {% else %}
               <p>{{ update_time }}〆</p>
             {% endif %}
-            {% for resident in resident_list %}
-              <p><img src="{% static resident.icon_url %}" width='50'/></p>
-            {% endfor %}
+            <p>
+              {% for resident in resident_list %}
+                <img src="{% static resident.icon_url %}" width='50'/>
+              {% endfor %}
+            </p>
           </div>
         </div>
       </div>
