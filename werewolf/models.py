@@ -4,7 +4,8 @@ from django.utils import timezone
 
 class Village(models.Model):
     name = models.CharField('村名', max_length=200)
-    auther = models.CharField('村主', max_length=200)
+    auther = models.ForeignKey(User,default=1,on_delete=models.CASCADE)
+    auther_name = models.CharField('村主',default='system',max_length=200)
     character = models.CharField('キャラセット', default='rain', max_length=200)
     character_name = models.CharField(default='霧雨降る街', max_length=200)
     character_img_url = models.CharField(default='rain/01.png',max_length=200)

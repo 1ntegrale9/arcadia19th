@@ -10,7 +10,8 @@ class OpenVillageIndexView(CreateView):
     success_url = reverse_lazy('werewolf:index')
     def form_valid(self, form):
         from .charasetTable import getCharacterName,getRandomCharacterImgURL
-        form.instance.auther = self.request.user.username
+        form.instance.auther = self.request.user
+        form.instance.auther_name = self.request.user.username
         form.instance.character_name = getCharacterName(form.cleaned_data['character'])
         form.instance.character_img_url = getRandomCharacterImgURL(form.cleaned_data['character'])
         return super(OpenVillageIndexView, self).form_valid(form)
@@ -81,7 +82,7 @@ def VillageView(request,village_id):
             try:
                 context['residentinfo'] = context['resident_list'].get(resident=request.user)
                 context['isResident'] = True
-                context['isAuther'] = village_object.auther == request.user.username
+                context['isAuther'] = village_object.auther == request.user
                 context['notStarted'] = not bool(village_object.startflag)
                 context['icon_url'] = context['residentinfo'].character_img_url
             except:
