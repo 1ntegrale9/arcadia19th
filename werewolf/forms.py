@@ -113,3 +113,10 @@ def startPost(request,village_object):
         return True
     else:
         return False
+
+def villageUpdate(village_object):
+    from django.utils import timezone
+    village_object.updated_date = timezone.now()
+    village_object.day += village_object.nightflag
+    village_object.nightflag = 1 - village_object.nightflag
+    village_object.save()

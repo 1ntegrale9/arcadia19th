@@ -50,22 +50,14 @@ def VillageView(request,village_id):
         elif request.POST['form'] == 'start':
             from .forms import startPost
             do_redirect = startPost(request=request,village_object=village_object)
-        if do_redirect:
-            from django.urls import reverse
-            from django.http import HttpResponseRedirect
-            return HttpResponseRedirect(reverse('werewolf:village', args=(village_id,)))
     else:
         from django.utils import timezone
         from .models import calculateUpdateTime
         next_update_time = calculateUpdateTime(village_object=village_object)
         if bool(village_object.startflag) and timezone.now() > next_update_time:
-            village_object.day += village_object.nightflag
-            village_object.nightflag = 1 - village_object.nightflag
-            village_object.updated_date = timezone.now()
-            village_object.save()
-            from django.urls import reverse
-            from django.http import HttpResponseRedirect
-            return HttpResponseRedirect(reverse('werewolf:village', args=(village_id,)))
+            from .forms import villageUpdate
+            villageUpdate(village_object=village_object)
+            do_redirect = True
         else:
             from .forms import RemarkForm,ResidentForm,StartForm
             from .models import getRemarkObjects,getResidentObjects
@@ -89,5 +81,9 @@ def VillageView(request,village_id):
                 context['isResident'] = False
                 context['notStarted'] = True
                 context['icon_url'] = village_object.icon_url
-        from django.shortcuts import render
-        return render(request, 'werewolf/village.html', context)
+            from django.shortcuts import render
+            return render(request, 'werewolf/village.html', context)
+    if do_redirect:
+        from django.urls import reverse
+        from django.http import HttpResponseRedirect
+        return HttpResponseRedirect(reverse('werewolf:village', args=(village_id,)))
