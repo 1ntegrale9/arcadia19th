@@ -1,6 +1,6 @@
 from django import forms
-from .models import Village, Remark, Resident
-from .charasetTable import getCharasetChoices
+from .models import *
+from .charasetTable import *
 
 def generateSelectForm(choices):
     return forms.ChoiceField(widget=forms.Select, choices=choices)
@@ -59,10 +59,11 @@ class ResidentForm(forms.ModelForm):
         model = Resident
         fields = getResidentFormfields()
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, village_object, *args, **kwargs):
         super().__init__(*args, **kwargs)
         applyFormControl(self, getResidentFormfields())
         applyPlaceholder(self, getResidentPlaceholderTable())
+        self.fields['character'].choices = getCharacterTable(village_object.character)
 
     character = forms.ChoiceField(widget=forms.Select)
 

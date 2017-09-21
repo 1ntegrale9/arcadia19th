@@ -38,11 +38,9 @@ class EndVillageIndexView(ListView):
 
 def VillageView(request, village_id):
     village_object = getVillageObject(village_id=village_id)
-    update_time = calculateUpdateTime(village_object=village_object)
     if request.method == 'POST':
         if 'remark' in request.POST:
-            print(request.POST)
-            remark_form = RemarkForm(request.POST)
+            remark_form = RemarkForm(data=request.POST)
             if remark_form.is_valid():
                 post = remark_form.save(commit=False)
                 post.user_id = request.user
@@ -57,8 +55,7 @@ def VillageView(request, village_id):
                 post.save()
                 return HttpResponseRedirect(reverse('werewolf:village', args=(village_id,)))
         elif 'resident' in request.POST:
-            resident_form = ResidentForm(request.POST)
-            resident_form.fields['character'].choices = getCharacterTable(village_object.character)
+            resident_form = ResidentForm(data=request.POST, village_object=village_object)
             if resident_form.is_valid():
                 post = resident_form.save(commit=False)
                 post.resident = request.user
@@ -68,41 +65,40 @@ def VillageView(request, village_id):
                 post.save()
                 return HttpResponseRedirect(reverse('werewolf:village', args=(village_id,)))
         elif 'start' in request.POST:
-            start_form = StartForm(request.POST)
+            start_form = StartForm(data=request.POST)
             if start_form.is_valid():
                 village_object.nightflag = 1
                 village_object.startflag = 1
                 village_object.started_date = timezone.now()
                 village_object.save()
                 return HttpResponseRedirect(reverse('werewolf:village', args=(village_id,)))
-    elif village_object.startflag and timezone.now() > update_time:
-        village_object.days += village_object.nightflag
-        village_object.nightflag = 1 - village_object.nightflag
-        village_object.updated_date = timezone.now()
-        village_object.save()
-        return HttpResponseRedirect(reverse('werewolf:village', args=(village_id,)))
     else:
-        resident_form = ResidentForm()
-        resident_form.fields['character'].choices = getCharacterTable(village_object.character)
-        resident_list = getResidentObjects(village_id=village_id)
-        remark_list = getRemarkObjects(village_object=village_object)[:100]
-        context = {
-            'start_form'   : StartForm(),
-            'remark_form'  : RemarkForm(),
-            'resident_form': resident_form,
-            'remark_list'  : remark_list,
-            'resident_list': resident_list,
-            'village_info' : village_object,
-            'update_time'  : update_time,
-        }
-        try:
-            context['residentinfo'] = resident_list.get(resident=request.user)
-            context['isResident'] = True
-            context['isAuther'] = village_object.auther == request.user.username
-            context['notStarted'] = village_object.startflag == 0
-            context['icon_url'] = context['residentinfo'].character_img_url
-        except:
-            context['isResident'] = False
-            context['notStarted'] = True
-            context['icon_url'] = village_object.character_img_url
-    return render(request, 'werewolf/village.html', context)
+        next_update_time = calculateUpdateTime(village_object=village_object)
+        if bool(village_object.startflag) and timezone.now() > next_update_time:
+            village_object.days += village_object.nightflag
+            village_object.nightflag = 1 - village_object.nightflag
+            village_object.updated_date = timezone.now()
+            village_object.save()
+            return HttpResponseRedirect(reverse('werewolf:village', args=(village_id,)))
+        else:
+            context = {
+                'start_form'   : StartForm(),
+                'remark_form'  : RemarkForm(),
+                'resident_form': ResidentForm(village_object=village_object),
+                'remark_list'  : getRemarkObjects(village_object=village_object)[:100],
+                'resident_list': getResidentObjects(village_id=village_id),
+                'village_info' : village_object,
+                'update_time'  : next_update_time,
+            }
+            # クソ実装
+            try:
+                context['residentinfo'] = context['resident_list'].get(resident=request.user)
+                context['isResident'] = True
+                context['isAuther'] = village_object.auther == request.user.username
+                context['notStarted'] = not bool(village_object.startflag)
+                context['icon_url'] = context['residentinfo'].character_img_url
+            except:
+                context['isResident'] = False
+                context['notStarted'] = True
+                context['icon_url'] = village_object.character_img_url
+        return render(request, 'werewolf/village.html', context)
