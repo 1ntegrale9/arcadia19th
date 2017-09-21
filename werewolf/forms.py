@@ -75,7 +75,7 @@ def remarkPost(request,village_object):
         from .charasetTable import getCharacterImgURL
         resident_self = Resident.objects.get(village=village_object.id,resident=request.user)
         remark_object = remark_form.save(commit=False)
-        remark_object.user_id = request.user
+        remark_object.remarker = request.user
         remark_object.user = request.user.username
         remark_object.village_id = village_object.id
         remark_object.day = village_object.day
