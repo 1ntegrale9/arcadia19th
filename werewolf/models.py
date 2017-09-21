@@ -12,9 +12,8 @@ class Village(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     started_date = models.DateTimeField(default=timezone.now)
     updated_date = models.DateTimeField(default=timezone.now)
-    # daytime_seconds, nighttime_seconds
-    daytime_length = models.IntegerField()
-    nighttime_length = models.IntegerField()
+    daytime_seconds = models.IntegerField()
+    nighttime_seconds = models.IntegerField()
     days = models.IntegerField('何日目', default=0)
     nightflag = models.IntegerField(default=0)
     palflag = models.IntegerField(default=0)
@@ -77,6 +76,6 @@ def getVillageObject(village_id):
     return Village.objects.get(id=village_id)
 
 def getThisTurnLength(village_object):
-    return village_object.nighttime_length if bool(village_object.nightflag) else village_object.daytime_length
+    return village_object.nighttime_seconds if bool(village_object.nightflag) else village_object.daytime_seconds
 def calculateUpdateTime(village_object):
     return timezone.timedelta(seconds=getThisTurnLength(village_object)) + village_object.updated_date

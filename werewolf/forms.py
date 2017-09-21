@@ -13,7 +13,7 @@ class VillageForm(forms.ModelForm):
     class Meta:
         from .models import Village
         model = Village
-        fields = ('name','daytime_length','nighttime_length','charaset','palflag',)
+        fields = ('name','daytime_seconds','nighttime_seconds','charaset','palflag',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -23,8 +23,8 @@ class VillageForm(forms.ModelForm):
     def getVillageFormPlaceholderTable(self):
         return {
             'name':'村の名前を入力',
-            'daytime_length':'昼時間(秒)',
-            'nighttime_length':'夜時間(秒)',
+            'daytime_seconds':'昼時間(秒)',
+            'nighttime_seconds':'夜時間(秒)',
         }
 
     def getPalflagChoices():
