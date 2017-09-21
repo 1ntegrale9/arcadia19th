@@ -59,28 +59,8 @@ def VillageView(request,village_id):
             villageUpdate(village_object=village_object)
             do_redirect = True
         else:
-            from .forms import RemarkForm,ResidentForm,StartForm
-            from .models import getRemarkObjects,getResidentObjects
-            context = {
-                'start_form'   : StartForm(),
-                'remark_form'  : RemarkForm(),
-                'resident_form': ResidentForm(village_object=village_object),
-                'remark_list'  : getRemarkObjects(village_object=village_object)[:100],
-                'resident_list': getResidentObjects(village_id=village_id),
-                'village_info' : village_object,
-                'update_time'  : next_update_time,
-            }
-            # クソ実装
-            try:
-                context['residentinfo'] = context['resident_list'].get(resident=request.user)
-                context['isResident'] = True
-                context['isAuther'] = village_object.auther == request.user
-                context['notStarted'] = not bool(village_object.startflag)
-                context['icon_url'] = context['residentinfo'].icon_url
-            except:
-                context['isResident'] = False
-                context['notStarted'] = True
-                context['icon_url'] = village_object.icon_url
+            from .forms import getVillageContext
+            context = getVillageContext(request=request,village_object=village_object,next_update_time=next_update_time)
             from django.shortcuts import render
             return render(request, 'werewolf/village.html', context)
     if do_redirect:

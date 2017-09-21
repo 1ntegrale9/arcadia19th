@@ -120,3 +120,27 @@ def villageUpdate(village_object):
     village_object.day += village_object.nightflag
     village_object.nightflag = 1 - village_object.nightflag
     village_object.save()
+
+def getVillageContext(request,village_object,next_update_time):
+    from .models import getRemarkObjects,getResidentObjects
+    context = {
+        'start_form'   : StartForm(),
+        'remark_form'  : RemarkForm(),
+        'resident_form': ResidentForm(village_object=village_object),
+        'remark_list'  : getRemarkObjects(village_object=village_object)[:100],
+        'resident_list': getResidentObjects(village_id=village_object.id),
+        'village_info' : village_object,
+        'update_time'  : next_update_time,
+    }
+    # クソ実装
+    try:
+        context['residentinfo'] = context['resident_list'].get(resident=request.user)
+        context['isResident'] = True
+        context['isAuther'] = village_object.auther == request.user
+        context['notStarted'] = not bool(village_object.startflag)
+        context['icon_url'] = context['residentinfo'].icon_url
+    except:
+        context['isResident'] = False
+        context['notStarted'] = True
+        context['icon_url'] = village_object.icon_url
+    return context
