@@ -78,7 +78,7 @@ def remarkPost(request,village_object):
         remark_object.user_id = request.user
         remark_object.user = request.user.username
         remark_object.village_id = village_object.id
-        remark_object.days = village_object.days
+        remark_object.day = village_object.day
         remark_object.nightflag = village_object.nightflag
         remark_object.character = resident_self.character
         remark_object.charaset = resident_self.charaset

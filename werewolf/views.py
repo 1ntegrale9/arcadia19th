@@ -59,7 +59,7 @@ def VillageView(request,village_id):
         from .models import calculateUpdateTime
         next_update_time = calculateUpdateTime(village_object=village_object)
         if bool(village_object.startflag) and timezone.now() > next_update_time:
-            village_object.days += village_object.nightflag
+            village_object.day += village_object.nightflag
             village_object.nightflag = 1 - village_object.nightflag
             village_object.updated_date = timezone.now()
             village_object.save()

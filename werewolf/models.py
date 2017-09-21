@@ -14,7 +14,7 @@ class Village(models.Model):
     updated_date = models.DateTimeField(default=timezone.now)
     daytime_seconds = models.IntegerField()
     nighttime_seconds = models.IntegerField()
-    days = models.IntegerField('何日目', default=0)
+    day = models.IntegerField('何日目', default=0)
     nightflag = models.IntegerField(default=0)
     palflag = models.IntegerField(default=0)
     startflag = models.IntegerField(default=0)
@@ -28,7 +28,7 @@ class Remark(models.Model):
     village = models.ForeignKey(Village, on_delete=models.CASCADE)
     user_id = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
     serial_no = models.IntegerField(default=0)
-    days = models.IntegerField(default=0)
+    day = models.IntegerField(default=0)
     nightflag = models.IntegerField(default=0)
     types = models.IntegerField(default=1)
     user = models.CharField('ユーザ名', max_length=200)
@@ -67,7 +67,7 @@ def getResidentObjects(village_id):
 def getRemarkObjects(village_object):
     return Remark.objects.filter(
         village   = village_object.id,
-        days      = village_object.days,
+        day      = village_object.day,
         nightflag = village_object.nightflag,
         delflag   = 0,
     ).order_by('-date')

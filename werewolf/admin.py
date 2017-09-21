@@ -14,10 +14,10 @@ class ResidentInline(admin.TabularInline):
 
 class RemarkAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields':['village','serial_no','days','types','user','charaset','character','icon_url','date','text']})
+        (None, {'fields':['village','serial_no','day','types','user','charaset','character','icon_url','date','text']})
     ]
-    list_display = ['text', 'id', 'village', 'user_id', 'serial_no', 'days', 'types', 'user', 'character', 'charaset', 'icon_url', 'date',]
-    list_filter = ['village', 'user_id', 'days', 'types', 'user','charaset', 'character', 'date',]
+    list_display = ['text', 'id', 'village', 'user_id', 'serial_no', 'day', 'types', 'user', 'character', 'charaset', 'icon_url', 'date',]
+    list_filter = ['village', 'user_id', 'day', 'types', 'user','charaset', 'character', 'date',]
     search_fields = ['text',]
 
 class ResidentAdmin(admin.ModelAdmin):
@@ -28,10 +28,10 @@ class ResidentAdmin(admin.ModelAdmin):
 
 class VillageAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields':['name','auther','auther_name','charaset','charaset_name','icon_url','created_date','started_date','updated_date','daytime_seconds','nighttime_seconds','days','nightflag','palflag','startflag','endflag','delflag']})
+        (None, {'fields':['name','auther','auther_name','charaset','charaset_name','icon_url','created_date','started_date','updated_date','daytime_seconds','nighttime_seconds','day','nightflag','palflag','startflag','endflag','delflag']})
     ]
     inlines = [ResidentInline, RemarkInline]
-    list_display = ['name','id','auther','auther_name','charaset','charaset_name','daytime_seconds','nighttime_seconds','days','nightflag','palflag','startflag','endflag','delflag','started_date','created_date','updated_date',]
+    list_display = ['name','id','auther','auther_name','charaset','charaset_name','daytime_seconds','nighttime_seconds','day','nightflag','palflag','startflag','endflag','delflag','started_date','created_date','updated_date',]
     list_filter = ['created_date','started_date','updated_date','auther','auther_name','charaset','charaset_name','created_date','palflag','endflag','delflag',]
     search_fields = ['name','auther','auther_name',]
 
