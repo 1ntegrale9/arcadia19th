@@ -36,54 +36,23 @@ class EndVillageIndexView(ListView):
     queryset = getEndVillageObjects()
     template_name = 'werewolf/log.html'
 
-def VillageView(request, village_id):
-    from django.http import HttpResponseRedirect
-    from django.urls import reverse
+def VillageView(request,village_id):
     from .models import getVillageObject
     village_object = getVillageObject(village_id=village_id)
     if request.method == 'POST':
-        if 'remark' in request.POST:
-            from .forms import RemarkForm
-            remark_form = RemarkForm(data=request.POST)
-            if remark_form.is_valid():
-                from .models import Resident
-                from .charasetTable import getCharacterImgURL
-                post = remark_form.save(commit=False)
-                post.user_id = request.user
-                post.user = request.user.username
-                post.village_id = village_id
-                resident_self = Resident.objects.get(village=village_id, resident=request.user)
-                post.days = village_object.days
-                post.nightflag = village_object.nightflag
-                post.character = resident_self.character
-                post.charaset = resident_self.charaset
-                post.character_img_url = getCharacterImgURL(post.charaset, post.character)
-                post.save()
-                return HttpResponseRedirect(reverse('werewolf:village', args=(village_id,)))
-            else:
-                print(remark_form.errors.as_data())
-        elif 'resident' in request.POST:
-            from .forms import ResidentForm
-            resident_form = ResidentForm(data=request.POST, village_object=village_object)
-            if resident_form.is_valid():
-                from .charasetTable import getCharacterImgURL
-                post = resident_form.save(commit=False)
-                post.resident = request.user
-                post.village_id = village_id
-                post.charaset = village_object.character
-                post.character_img_url = getCharacterImgURL(post.charaset, post.character)
-                post.save()
-                return HttpResponseRedirect(reverse('werewolf:village', args=(village_id,)))
-        elif 'start' in request.POST:
-            from .forms import StartForm
-            start_form = StartForm(data=request.POST)
-            if start_form.is_valid():
-                from django.utils import timezone
-                village_object.nightflag = 1
-                village_object.startflag = 1
-                village_object.started_date = timezone.now()
-                village_object.save()
-                return HttpResponseRedirect(reverse('werewolf:village', args=(village_id,)))
+        if request.POST['form'] == 'remark':
+            from .forms import remarkPost
+            do_redirect = remarkPost(request=request,village_object=village_object)
+        elif request.POST['form'] == 'resident':
+            from .forms import residentPost
+            do_redirect = residentPost(request=request,village_object=village_object)
+        elif request.POST['form'] == 'start':
+            from .forms import startPost
+            do_redirect = startPost(request=request,village_object=village_object)
+        if do_redirect:
+            from django.urls import reverse
+            from django.http import HttpResponseRedirect
+            return HttpResponseRedirect(reverse('werewolf:village', args=(village_id,)))
     else:
         from django.utils import timezone
         from .models import calculateUpdateTime
@@ -93,6 +62,8 @@ def VillageView(request, village_id):
             village_object.nightflag = 1 - village_object.nightflag
             village_object.updated_date = timezone.now()
             village_object.save()
+            from django.urls import reverse
+            from django.http import HttpResponseRedirect
             return HttpResponseRedirect(reverse('werewolf:village', args=(village_id,)))
         else:
             from .forms import RemarkForm,ResidentForm,StartForm

@@ -12,7 +12,7 @@
               <div class="card border-dark rounded mb-3">
                 <div class="card-body border-dark">
                   <form method="POST">{% csrf_token %}
-                    <button type="submit" name='start' class="save btn btn-block btn-outline-info">開始</button>
+                    <button type="submit" name="form" value="start" class="save btn btn-block btn-outline-info">開始</button>
                     </form>
                   </div>
                 </div>
@@ -39,12 +39,12 @@
                     <p>{{ village_info.days }}日目 {% if village_info.nightflag == 0 %}昼{% else %}夜{% endif %} {% if residentinfo.deathflag == 0 %}生存{% else %}死亡{% endif %} {{ residentinfo.job }}</p>
                     <form method="POST">{% csrf_token %}
                       {{ remark_form.text }}
-                      <button type="submit" name="remark" class="save btn btn-block btn-outline-info">発言</button>
+                      <button type="submit" name="form" value="remark" class="save btn btn-block btn-outline-info">発言</button>
                     </form>
                   {% else %}
                     <form method="POST">{% csrf_token %}
                       {{ resident_form.character }}
-                      <button type="submit" name="resident" class="save btn btn-block btn-outline-info">居住</button>
+                      <button type="submit" name="form" value="resident" class="save btn btn-block btn-outline-info">居住</button>
                     </form>
                   {% endif %}
                 </div>
