@@ -12,8 +12,8 @@ class OpenVillageIndexView(CreateView):
         from .charasetTable import getCharacterName,getRandomCharacterImgURL
         form.instance.auther = self.request.user
         form.instance.auther_name = self.request.user.username
-        form.instance.character_name = getCharacterName(form.cleaned_data['character'])
-        form.instance.character_img_url = getRandomCharacterImgURL(form.cleaned_data['character'])
+        form.instance.charaset_name = getCharacterName(form.cleaned_data['charaset'])
+        form.instance.character_img_url = getRandomCharacterImgURL(form.cleaned_data['charaset'])
         return super(OpenVillageIndexView, self).form_valid(form)
     def get_context_data(self, *args, **kwargs):
         from .models import getOpenVillageObjects

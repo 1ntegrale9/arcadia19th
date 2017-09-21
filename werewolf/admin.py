@@ -28,11 +28,11 @@ class ResidentAdmin(admin.ModelAdmin):
 
 class VillageAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields':['name','auther','auther_name','character','character_name','character_img_url','created_date','started_date','updated_date','daytime_length','nighttime_length','days','nightflag','palflag','startflag','endflag','delflag']})
+        (None, {'fields':['name','auther','auther_name','charaset','charaset_name','character_img_url','created_date','started_date','updated_date','daytime_length','nighttime_length','days','nightflag','palflag','startflag','endflag','delflag']})
     ]
     inlines = [ResidentInline, RemarkInline]
-    list_display = ['name','id','auther','auther_name','character','character_name','daytime_length','nighttime_length','days','nightflag','palflag','startflag','endflag','delflag','started_date','created_date','updated_date',]
-    list_filter = ['created_date','started_date','updated_date','auther','auther_name','character','character_name','created_date','palflag','endflag','delflag',]
+    list_display = ['name','id','auther','auther_name','charaset','charaset_name','daytime_length','nighttime_length','days','nightflag','palflag','startflag','endflag','delflag','started_date','created_date','updated_date',]
+    list_filter = ['created_date','started_date','updated_date','auther','auther_name','charaset','charaset_name','created_date','palflag','endflag','delflag',]
     search_fields = ['name','auther','auther_name',]
 
 admin.site.register(Village, VillageAdmin)

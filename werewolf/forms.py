@@ -13,7 +13,7 @@ class VillageForm(forms.ModelForm):
     class Meta:
         from .models import Village
         model = Village
-        fields = ('name','daytime_length','nighttime_length','character','palflag',)
+        fields = ('name','daytime_length','nighttime_length','charaset','palflag',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -34,7 +34,7 @@ class VillageForm(forms.ModelForm):
         )
 
     from .charasetTable import getCharasetChoices
-    character = generateSelectForm(getCharasetChoices())
+    charaset = generateSelectForm(getCharasetChoices())
     palflag = generateSelectForm(getPalflagChoices())
 
 class RemarkForm(forms.ModelForm):
@@ -58,7 +58,7 @@ class ResidentForm(forms.ModelForm):
         from .charasetTable import getCharacterTable
         super().__init__(*args, **kwargs)
         applyFormControl(self, self.fields)
-        self.fields['character'].choices = getCharacterTable(village_object.character)
+        self.fields['character'].choices = getCharacterTable(village_object.charaset)
 
     character = forms.ChoiceField(widget=forms.Select)
 
@@ -95,7 +95,7 @@ def residentPost(request,village_object):
         resident_object = resident_form.save(commit=False)
         resident_object.resident = request.user
         resident_object.village_id = village_object.id
-        resident_object.charaset = village_object.character
+        resident_object.charaset = village_object.charaset
         resident_object.character_img_url = getCharacterImgURL(resident_object.charaset, resident_object.character)
         resident_object.save()
         return True

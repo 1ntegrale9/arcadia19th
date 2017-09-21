@@ -14,7 +14,7 @@
             <div class="card-body border-dark">
               <form method="POST">{% csrf_token %}
                 {{ form.name }}
-                {{ form.character }}
+                {{ form.charaset }}
                 {{ form.daytime_length }}
                 {{ form.nighttime_length }}
                 {{ form.palflag }}
@@ -43,7 +43,7 @@
                     <tbody>
                       <tr><td class="border-0 card-text">{{ village.auther_name }}</td></tr>
                       <tr><td class="card-text">牛村</td></tr>
-                      <tr><td class="card-text">{{ village.character_name }}</td></tr>
+                      <tr><td class="card-text">{{ village.charaset_name }}</td></tr>
                     </tbody>
                   </table>
                 </div>
