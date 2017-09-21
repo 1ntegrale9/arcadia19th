@@ -16,8 +16,8 @@ class RemarkAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields':['village','serial_no','day','types','user','charaset','character','icon_url','date','text']})
     ]
-    list_display = ['text', 'id', 'village', 'user_id', 'serial_no', 'day', 'types', 'user', 'character', 'charaset', 'icon_url', 'date',]
-    list_filter = ['village', 'user_id', 'day', 'types', 'user','charaset', 'character', 'date',]
+    list_display = ['text', 'id', 'village', 'remarker', 'serial_no', 'day', 'types', 'user', 'character', 'charaset', 'icon_url', 'date',]
+    list_filter = ['village', 'remarker', 'day', 'types', 'user','charaset', 'character', 'date',]
     search_fields = ['text',]
 
 class ResidentAdmin(admin.ModelAdmin):

@@ -26,7 +26,7 @@ class Village(models.Model):
 
 class Remark(models.Model):
     village = models.ForeignKey(Village, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
+    remarker = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
     serial_no = models.IntegerField(default=0)
     day = models.IntegerField(default=0)
     nightflag = models.IntegerField(default=0)
