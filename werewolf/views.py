@@ -13,7 +13,7 @@ class OpenVillageIndexView(CreateView):
         form.instance.auther = self.request.user
         form.instance.auther_name = self.request.user.username
         form.instance.charaset_name = getCharacterName(form.cleaned_data['charaset'])
-        form.instance.character_img_url = getRandomCharacterImgURL(form.cleaned_data['charaset'])
+        form.instance.icon_url = getRandomCharacterImgURL(form.cleaned_data['charaset'])
         return super(OpenVillageIndexView, self).form_valid(form)
     def get_context_data(self, *args, **kwargs):
         from .models import getOpenVillageObjects
@@ -84,10 +84,10 @@ def VillageView(request,village_id):
                 context['isResident'] = True
                 context['isAuther'] = village_object.auther == request.user
                 context['notStarted'] = not bool(village_object.startflag)
-                context['icon_url'] = context['residentinfo'].character_img_url
+                context['icon_url'] = context['residentinfo'].icon_url
             except:
                 context['isResident'] = False
                 context['notStarted'] = True
-                context['icon_url'] = village_object.character_img_url
+                context['icon_url'] = village_object.icon_url
         from django.shortcuts import render
         return render(request, 'werewolf/village.html', context)

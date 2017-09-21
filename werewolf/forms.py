@@ -82,7 +82,7 @@ def remarkPost(request,village_object):
         remark_object.nightflag = village_object.nightflag
         remark_object.character = resident_self.character
         remark_object.charaset = resident_self.charaset
-        remark_object.character_img_url = getCharacterImgURL(remark_object.charaset, remark_object.character)
+        remark_object.icon_url = getCharacterImgURL(remark_object.charaset, remark_object.character)
         remark_object.save()
         return True
     else:
@@ -96,7 +96,7 @@ def residentPost(request,village_object):
         resident_object.resident = request.user
         resident_object.village_id = village_object.id
         resident_object.charaset = village_object.charaset
-        resident_object.character_img_url = getCharacterImgURL(resident_object.charaset, resident_object.character)
+        resident_object.icon_url = getCharacterImgURL(resident_object.charaset, resident_object.character)
         resident_object.save()
         return True
     else:
