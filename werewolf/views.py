@@ -2,26 +2,28 @@ from django.views.generic import ListView, CreateView
 
 class OpenVillageIndexView(CreateView):
     from django.core.urlresolvers import reverse_lazy
-    from .models import Village,Resident,getOpenVillageObjects
-    from .forms import VillageForm,createVillage
+    from .models import Village,Resident
+    from .forms import VillageForm
     model = Village, Resident
     form_class = VillageForm
     template_name = 'werewolf/index.html'
     success_url = reverse_lazy('werewolf:index')
     def form_valid(self, form):
+        from .forms import createVillage
         createVillage(request=self.request,form=form)
         return super(OpenVillageIndexView, self).form_valid(form)
     def get_context_data(self, *args, **kwargs):
+        from .models import getOpenVillageObjects
         context = super().get_context_data(*args, **kwargs)
         context['object_list'] = getOpenVillageObjects()
         return context
 
 class PalVillageIndexView(OpenVillageIndexView):
     from django.core.urlresolvers import reverse_lazy
-    from .models import getPalVillageObjects
     template_name = 'werewolf/pal.html'
     success_url = reverse_lazy('werewolf:pal')
     def get_context_data(self, *args, **kwargs):
+        from .models import getPalVillageObjects
         context = super().get_context_data(*args, **kwargs)
         context['object_list'] = getPalVillageObjects()
         return context
