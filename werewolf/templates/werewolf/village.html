@@ -5,29 +5,25 @@
   <div class='container'>
     <div class="card-block">
 
-      {% if user.is_authenticated %}
-        {% if notStarted %}
-          {% if isAuther %}
-            <div class="col-sm-12">
-              <div class="card border-dark rounded mb-3">
-                <div class="card-body border-dark">
-                  <form method="POST">{% csrf_token %}
-                    <button type="submit" name="form" value="start" class="save btn btn-block btn-outline-info">開始</button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          {% endif %}
-        {% else %}
-          <div class="col-sm-12">
-            <div class="card border-dark rounded mb-3">
-              <div class="card-body border-dark">
-                {{ update_time }}〆
-              </div>
-            </div>
+      <div class="col-sm-12">
+        <div class="card border-dark rounded mb-3">
+          <div class="card-body border-dark">
+            {% if notStarted %}
+              {% if isAuther %}
+                <form method="POST">{% csrf_token %}
+                  <button type="submit" name="form" value="start" class="save btn btn-block btn-outline-info">開始</button>
+                </form>
+              {% endif %}
+            {% else %}
+              <p>{{ update_time }}〆</p>
+            {% endif %}
+            {% for resident in resident_list %}
+              <p><img src="{% static resident.icon_url %}" width='50'/></p>
+            {% endfor %}
           </div>
-        {% endif %}
+        </div>
+      </div>
+      {% if user.is_authenticated %}
         <div class="col-sm-12">
           <div class="card border-dark rounded mb-3">
             <div class="card-body border-dark">
