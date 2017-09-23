@@ -53,6 +53,7 @@ def VillageView(request,village_id):
         next_update_time = calculateUpdateTime(village_object=village_object)
         if bool(village_object.startflag) and timezone.now() > next_update_time:
             from .forms import villageUpdate
+            #residentUpdate(village_object=village_object)
             villageUpdate(village_object=village_object)
             do_redirect = True
         else:

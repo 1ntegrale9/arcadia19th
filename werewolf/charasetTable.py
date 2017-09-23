@@ -351,7 +351,7 @@ def getRandomCharacterImgURL(ID):
             'free':'free/{}.jpg'.format(str(randint(1,27)).zfill(2)),
         }[ID]
     except:
-        return 'rain/01.png'
+        return 'A.png'
 
 def getCharacterImgURL(ID,no):
     try:
@@ -363,4 +363,4 @@ def getCharacterImgURL(ID,no):
             'free':'free/{}.jpg'.format(str(no).zfill(2)),
         }[ID]
     except:
-        'rain/01.png'
+        'A.png'

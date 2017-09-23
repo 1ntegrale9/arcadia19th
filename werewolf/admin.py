@@ -14,10 +14,10 @@ class ResidentInline(admin.TabularInline):
 
 class RemarkAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None,{'fields':['village','serial_no','day','types','charaset','character','icon_url','date','text']})
+        (None,{'fields':['village','serial_no','day','remark_type','charaset','character','icon_url','date','text']})
     ]
-    list_display = ['text','id','village','remarker','serial_no','day','types', 'character','charaset','icon_url','date',]
-    list_filter = ['village','remarker','day','types','charaset','character','date',]
+    list_display = ['text','id','village','remarker','serial_no','day','remark_type', 'character','charaset','icon_url','date',]
+    list_filter = ['village','remarker','day','remark_type','charaset','character','date',]
     search_fields = ['text',]
 
 class ResidentAdmin(admin.ModelAdmin):

@@ -121,6 +121,20 @@ def villageUpdate(village_object):
     village_object.nightflag = 1 - village_object.nightflag
     village_object.save()
 
+def executeVote(village_object):
+    from .models import getAliveResidentObjects,getExecuteObjects
+    getAliveResidentObjects(village_id=village_object.id)
+    getExecuteObjects(village_object=village_object)    
+
+def residentUpdate(village_object):
+    if village_object.nightflag == 0:
+        executeVote(village_object=village_object) #投票
+    else:
+        executeRevelation(village_object=village_object) #占い
+        executeNecropsy(village_object=village_object) #霊能
+        executeEscort(village_object=village_object) #護衛
+        executeMurder(village_object=village_object) #襲撃
+
 def getVillageContext(request,village_object,next_update_time):
     from .models import getRemarkObjects,getResidentObjects
     context = {
