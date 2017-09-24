@@ -110,6 +110,8 @@ def startPost(request,village_object):
         village_object.startflag = 1
         village_object.started_date = timezone.now()
         village_object.save()
+        # 参加者に役職を振り分ける
+        # 開始通知を出す
         return True
     else:
         return False
@@ -122,18 +124,49 @@ def villageUpdate(village_object):
     village_object.save()
 
 def executeVote(village_object):
-    from .models import getAliveResidentObjects,getExecuteObjects
-    getAliveResidentObjects(village_id=village_object.id)
-    getExecuteObjects(village_object=village_object)    
+    from .models import Remark,getAliveResidentObjects,getExecuteObjects
+    from random import choice
+    from collections import defaultdict
+    alive_resident_objects = getAliveResidentObjects(village_id=village_object.id)
+    execute_objects = getExecuteObjects(village_object=village_object)
+    votes = defaultdict(int)
+    targets = {}
+    for resident in alive_resident_objects:
+        execute_object,is_created = execute_objects.get_or_create(
+            executer=resident,
+            defaults={
+                'village':village_object,
+                'target':choice(alive_resident_objects),
+                'execute_type':'vote',
+                'day':village_object.day,
+            }
+        )
+        votes[execute_object.target] += 1
+        targets[execute_object.executer] = execute_object.target
+    from .charasetTable import getCharacterImgURL
+    for resident in alive_resident_objects:
+        Remark(
+            village = village_object,
+            remarker = resident.resident,
+            day = village_object.day,
+            nightflag = 0,
+            remark_type = 'vote',
+            remarker_name = resident.resident.username,
+            character = resident.character,
+            charaset = resident.charaset,
+            icon_url = getCharacterImgURL(resident.charaset,resident.character),
+            text = "投票先：{0}\n得票数：{1}".format(targets[resident],votes[resident]),
+        ).save()
 
 def residentUpdate(village_object):
     if village_object.nightflag == 0:
         executeVote(village_object=village_object) #投票
     else:
-        executeRevelation(village_object=village_object) #占い
-        executeNecropsy(village_object=village_object) #霊能
-        executeEscort(village_object=village_object) #護衛
-        executeMurder(village_object=village_object) #襲撃
+        pass
+        # executeRevelation(village_object=village_object) #占い
+        # executeNecropsy(village_object=village_object) #霊能
+        # executeEscort(village_object=village_object) #護衛
+        # executeMurder(village_object=village_object) #襲撃
 
 def getVillageContext(request,village_object,next_update_time):
     from .models import getRemarkObjects,getResidentObjects
@@ -151,11 +184,11 @@ def getVillageContext(request,village_object,next_update_time):
         context['residentinfo'] = context['resident_list'].get(resident=request.user)
         context['isResident'] = True
         context['isAuther'] = village_object.auther == request.user
-        context['notStarted'] = not bool(village_object.startflag)
+        context['isStarted'] = bool(village_object.startflag)
         context['icon_url'] = context['residentinfo'].icon_url
     except:
         context['isResident'] = False
-        context['notStarted'] = True
+        context['isStarted'] = True
         context['icon_url'] = village_object.icon_url
     return context
 

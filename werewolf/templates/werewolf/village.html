@@ -9,20 +9,17 @@
         <div class="card border-dark rounded mb-3">
           <div class="card-body border-dark">
             <p class='c-title'>{{ village_info.name }}</p>
-            {% if notStarted %}
-              {% if isAuther %}
-                <form method="POST">{% csrf_token %}
-                  <button type="submit" name="form" value="start" class="save btn btn-block btn-outline-info">開始</button>
-                </form>
-              {% endif %}
-            {% else %}
-              <p>{{ update_time }}〆</p>
-            {% endif %}
+            {% if isStarted %}<p>{{ update_time }}〆</p>{% endif %}
             <p>
               {% for resident in resident_list %}
                 <img src="{% static resident.icon_url %}" width='50'/>
               {% endfor %}
             </p>
+            {% if not isStarted and isAuther %}
+              <form method="POST">{% csrf_token %}
+                <button type="submit" name="form" value="start" class="save btn btn-block btn-outline-info">開始</button>
+              </form>
+            {% endif %}
           </div>
         </div>
       </div>

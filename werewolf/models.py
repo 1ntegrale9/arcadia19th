@@ -50,7 +50,8 @@ class Resident(models.Model):
     character = models.IntegerField(default=1)
     charaset = models.CharField(default='rain', max_length=30)
     icon_url = models.CharField(max_length=100, default="A.png")
-    job = models.CharField(max_length=100, default='村人')
+    job = models.CharField(max_length=100,default='村人')
+    votes = models.IntegerField(default=0)
     deathflag = models.IntegerField(default=0)
     winflag = models.IntegerField(default=0)
 
@@ -78,7 +79,7 @@ def getResidentObjects(village_id):
 def getAliveResidentObjects(village_id):
     return Resident.objects.filter(village=village_id,deathflag=0)
 def getExecuteObjects(village_object):
-    return Execute.objects.filter(day=village_object.day)
+    return Execute.objects.filter(village=village_object.id,day=village_object.day)
 def getRemarkObjects(village_object):
     return Remark.objects.filter(
         village   = village_object.id,
