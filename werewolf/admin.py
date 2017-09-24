@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Village,Remark,Resident
+from .models import Village,Remark,Resident,Execute
 
 class RemarkInline(admin.TabularInline):
     model = Remark
@@ -35,6 +35,13 @@ class VillageAdmin(admin.ModelAdmin):
     list_filter = ['created_date','started_date','updated_date','auther','charaset','charaset_name','created_date','palflag','endflag','delflag',]
     search_fields = ['name','auther',]
 
+class ExecuteAdmin(admin.ModelAdmin):
+    fieldsets= [
+        (None,{'fields':['village','executer','target','execute_type','day']})
+    ]
+    list_display = ['village','executer','target','execute_type','day']
+
 admin.site.register(Village,VillageAdmin)
 admin.site.register(Remark,RemarkAdmin)
 admin.site.register(Resident,ResidentAdmin)
+admin.site.register(Execute,ExecuteAdmin)

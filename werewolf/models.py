@@ -64,6 +64,9 @@ class Execute(models.Model):
     execute_type = models.CharField(default='none',max_length=30)
     day = models.IntegerField(default=0)
 
+    def __str__(self):
+        return self.execute_type
+
 def getOpenVillageObjects():
     return Village.objects.filter(palflag=0,endflag=0,delflag=0).order_by('-created_date')
 def getPalVillageObjects():
