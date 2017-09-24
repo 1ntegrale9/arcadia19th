@@ -68,6 +68,18 @@ class StartForm(forms.ModelForm):
         model = Village
         fields = ()
 
+class ExecuteForm(forms.ModelForm):
+    class Meta:
+        from .models import Execute
+        model = Execute
+        fields = ('target',)
+
+    def __init__(self, village_object, *args, **kwargs):
+        from .models import Resident,getAliveResidentObjects
+        super().__init__(*args, **kwargs)
+        applyFormControl(self, self.fields)
+        self.fields['target'] = forms.ModelChoiceField(queryset=getAliveResidentObjects(village_id=village_object.id), empty_label=None)
+
 def remarkPost(request,village_object):
     remark_form = RemarkForm(data=request.POST)
     if remark_form.is_valid():
@@ -116,6 +128,19 @@ def startPost(request,village_object):
     else:
         return False
 
+def votePost(request,village_object):
+    vote_form = ExecuteForm(data=request.POST,village_object=village_object)
+    if vote_form.is_valid():
+        vote_object = vote_form.save(commit=False)
+        vote_object.village_id = village_object.id
+        vote_object.executer_id = request.user.id
+        vote_object.execute_type = 'vote'
+        vote_object.day = village_object.day
+        vote_object.save()
+        return True
+    else:
+        return False
+
 def villageUpdate(village_object):
     from django.utils import timezone
     village_object.updated_date = timezone.now()
@@ -144,6 +169,18 @@ def executeVote(village_object):
         votes[execute_object.target] += 1
         targets[execute_object.executer] = execute_object.target
     from .charasetTable import getCharacterImgURL
+    Remark(
+        village = village_object,
+        remarker_id = 1,
+        day = village_object.day,
+        nightflag = 0,
+        remark_type = 'vote',
+        remarker_name = resident.resident.username,
+        character = resident.character,
+        charaset = resident.charaset,
+        icon_url = 'A.png',
+        text = '投票を締め切りました。',
+    ).save()
     for resident in alive_resident_objects:
         Remark(
             village = village_object,
@@ -157,6 +194,18 @@ def executeVote(village_object):
             icon_url = getCharacterImgURL(resident.charaset,resident.character),
             text = "投票先：{0}\n得票数：{1}".format(targets[resident],votes[resident]),
         ).save()
+    Remark(
+        village = village_object,
+        remarker_id = 1,
+        day = village_object.day,
+        nightflag = 0,
+        remark_type = 'vote',
+        remarker_name = resident.resident.username,
+        character = resident.character,
+        charaset = resident.charaset,
+        icon_url = 'A.png',
+        text = '{}が処刑されましたが、\n不思議な力で生き返りました。'.format('a19th'),
+    ).save()
 
 def residentUpdate(village_object):
     if village_object.nightflag == 0:
@@ -174,6 +223,7 @@ def getVillageContext(request,village_object,next_update_time):
         'start_form'   : StartForm(),
         'remark_form'  : RemarkForm(),
         'resident_form': ResidentForm(village_object=village_object),
+        'execute_form' : ExecuteForm(village_object=village_object),
         'remark_list'  : getRemarkObjects(village_object=village_object)[:100],
         'resident_list': getResidentObjects(village_id=village_object.id),
         'village_info' : village_object,
@@ -190,6 +240,12 @@ def getVillageContext(request,village_object,next_update_time):
         context['isResident'] = False
         context['isStarted'] = True
         context['icon_url'] = village_object.icon_url
+    # クソ実装2,動かない
+    try:
+        context['vote_object'] = Execute.objects.get(village=village_object,executer_id=request.user.id,execute_type='vote',day=village_object.day)
+        print(context['vote_object'])
+    except:
+        context['vote_object'] = False
     return context
 
 def createVillage(request,form):

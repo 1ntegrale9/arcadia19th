@@ -47,6 +47,9 @@ def VillageView(request,village_id):
         elif request.POST['form'] == 'start':
             from .forms import startPost
             do_redirect = startPost(request=request,village_object=village_object)
+        elif request.POST['form'] == 'vote':
+            from .forms import votePost
+            do_redirect = votePost(request=request,village_object=village_object)
     else:
         from django.utils import timezone
         from .models import calculateUpdateTime
