@@ -1,4 +1,9 @@
 from django import forms
+from django.utils import timezone
+from random import choice
+from .models import Village,Remark,Resident,Execute,getAliveResidentObjects,getRemarkObjects,getResidentObjects,getExecuteObjects
+from .charasetTable import getCharasetChoices,getCharacterTable,getCharacterImgURL,getCharacterName,getRandomCharacterImgURL
+from collections import defaultdict
 
 def generateSelectForm(choices):
     return forms.ChoiceField(widget=forms.Select, choices=choices)
@@ -11,7 +16,6 @@ def applyPlaceholder(target, messages):
 
 class VillageForm(forms.ModelForm):
     class Meta:
-        from .models import Village
         model = Village
         fields = ('name','daytime_seconds','nighttime_seconds','charaset','palflag',)
 
@@ -33,13 +37,11 @@ class VillageForm(forms.ModelForm):
             (1,'身内限定'),
         )
 
-    from .charasetTable import getCharasetChoices
     charaset = generateSelectForm(getCharasetChoices())
     palflag = generateSelectForm(getPalflagChoices())
 
 class RemarkForm(forms.ModelForm):
     class Meta:
-        from .models import Remark
         model = Remark
         fields = ('text',)
         widgets = {'text': forms.Textarea(attrs={'rows': 3}),}
@@ -50,12 +52,10 @@ class RemarkForm(forms.ModelForm):
 
 class ResidentForm(forms.ModelForm):
     class Meta:
-        from .models import Resident
         model = Resident
         fields = ('character',)
 
     def __init__(self, village_object, *args, **kwargs):
-        from .charasetTable import getCharacterTable
         super().__init__(*args, **kwargs)
         applyFormControl(self, self.fields)
         self.fields['character'].choices = getCharacterTable(village_object.charaset)
@@ -64,18 +64,15 @@ class ResidentForm(forms.ModelForm):
 
 class StartForm(forms.ModelForm):
     class Meta:
-        from .models import Village
         model = Village
         fields = ()
 
 class ExecuteForm(forms.ModelForm):
     class Meta:
-        from .models import Execute
         model = Execute
         fields = ('target',)
 
     def __init__(self, village_object, *args, **kwargs):
-        from .models import Resident,getAliveResidentObjects
         super().__init__(*args, **kwargs)
         applyFormControl(self, self.fields)
         self.fields['target'] = forms.ModelChoiceField(queryset=getAliveResidentObjects(village_id=village_object.id), empty_label=None)
@@ -83,8 +80,6 @@ class ExecuteForm(forms.ModelForm):
 def remarkPost(request,village_object):
     remark_form = RemarkForm(data=request.POST)
     if remark_form.is_valid():
-        from .models import Resident
-        from .charasetTable import getCharacterImgURL
         resident_self = Resident.objects.get(village=village_object.id,resident=request.user)
         remark_object = remark_form.save(commit=False)
         remark_object.remarker = request.user
@@ -103,7 +98,6 @@ def remarkPost(request,village_object):
 def residentPost(request,village_object):
     resident_form = ResidentForm(data=request.POST,village_object=village_object)
     if resident_form.is_valid():
-        from .charasetTable import getCharacterImgURL
         resident_object = resident_form.save(commit=False)
         resident_object.resident = request.user
         resident_object.village_id = village_object.id
@@ -117,7 +111,6 @@ def residentPost(request,village_object):
 def startPost(request,village_object):
     start_form = StartForm(data=request.POST)
     if start_form.is_valid():
-        from django.utils import timezone
         village_object.nightflag = 1
         village_object.startflag = 1
         village_object.started_date = timezone.now()
@@ -142,16 +135,12 @@ def votePost(request,village_object):
         return False
 
 def villageUpdate(village_object):
-    from django.utils import timezone
     village_object.updated_date = timezone.now()
     village_object.day += village_object.nightflag
     village_object.nightflag = 1 - village_object.nightflag
     village_object.save()
 
 def executeVote(village_object):
-    from .models import Remark,getAliveResidentObjects,getExecuteObjects
-    from random import choice
-    from collections import defaultdict
     alive_resident_objects = getAliveResidentObjects(village_id=village_object.id)
     execute_objects = getExecuteObjects(village_object=village_object)
     votes = defaultdict(int)
@@ -168,7 +157,6 @@ def executeVote(village_object):
         )
         votes[execute_object.target] += 1
         targets[execute_object.executer] = execute_object.target
-    from .charasetTable import getCharacterImgURL
     Remark(
         village = village_object,
         remarker_id = 1,
@@ -218,7 +206,6 @@ def residentUpdate(village_object):
         # executeMurder(village_object=village_object) #襲撃
 
 def getVillageContext(request,village_object,next_update_time):
-    from .models import getRemarkObjects,getResidentObjects
     context = {
         'start_form'   : StartForm(),
         'remark_form'  : RemarkForm(),
@@ -249,7 +236,6 @@ def getVillageContext(request,village_object,next_update_time):
     return context
 
 def createVillage(request,form):
-    from .charasetTable import getCharacterName,getRandomCharacterImgURL
     form.instance.auther = request.user
     form.instance.auther_name = request.user.username
     form.instance.charaset_name = getCharacterName(form.cleaned_data['charaset'])
