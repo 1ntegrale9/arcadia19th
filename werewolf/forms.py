@@ -229,7 +229,12 @@ def getVillageContext(request,village_object,next_update_time):
         context['icon_url'] = village_object.icon_url
     # クソ実装2,動かない
     try:
-        context['vote_object'] = Execute.objects.get(village=village_object,executer_id=request.user.id,execute_type='vote',day=village_object.day)
+        context['vote_object'] = Execute.objects.get(
+            village = village_object,
+            executer_id = request.user.id,
+            execute_type = 'vote',
+            day = village_object.day
+        )
         print(context['vote_object'])
     except:
         context['vote_object'] = False
