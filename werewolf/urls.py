@@ -1,10 +1,10 @@
-from django.conf.urls import url
+from django.urls import path
 from . import views
 
 app_name = 'werewolf'
 urlpatterns = [
-    url(r'^open/$', views.OpenVillageIndexView.as_view(), name='index'),
-    url(r'^pal/$', views.PalVillageIndexView.as_view(), name='pal'),
-    url(r'^log/$', views.EndVillageIndexView.as_view(), name='log'),
-    url(r'^(?P<village_id>[0-9]+)/$', views.VillageView, name='village'),
+    path('open/', views.OpenVillageIndexView.as_view(), name='index'),
+    path('pal/', views.PalVillageIndexView.as_view(), name='pal'),
+    path('log/', views.EndVillageIndexView.as_view(), name='log'),
+    path('<int:village_id>/', views.VillageView, name='village'),
 ]

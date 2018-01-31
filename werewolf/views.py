@@ -1,7 +1,6 @@
 from django.views.generic import ListView, CreateView
-from django.core.urlresolvers import reverse_lazy
 from django.utils import timezone
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
 from .models import Village,Resident,getEndVillageObjects,getOpenVillageObjects,getPalVillageObjects,getVillageObject,calculateUpdateTime
 from .forms import remarkPost,residentPost,startPost,votePost,VillageForm,createVillage,villageUpdate,residentUpdate,getVillageContext
