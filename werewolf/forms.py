@@ -15,29 +15,26 @@ def applyPlaceholder(target, messages):
     for f,s in messages.items():
         target.fields[f].widget.attrs['placeholder'] = s
 
+# 村作成
 class VillageForm(forms.ModelForm):
     class Meta:
         model = Village
         fields = ('name','daytime_seconds','nighttime_seconds','charaset','palflag',)
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         applyFormControl(self, self.fields)
         applyPlaceholder(self, self.getVillageFormPlaceholderTable())
-
     def getVillageFormPlaceholderTable(self):
         return {
             'name':'村の名前を入力',
             'daytime_seconds':'昼時間(秒)',
             'nighttime_seconds':'夜時間(秒)',
         }
-
     def getPalflagChoices():
         return (
             (0,'誰でも歓迎'),
             (1,'身内限定'),
         )
-
     charaset = generateSelectForm(getCharasetChoices())
     palflag = generateSelectForm(getPalflagChoices())
 

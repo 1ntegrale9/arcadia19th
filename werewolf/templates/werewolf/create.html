@@ -1,0 +1,26 @@
+{% extends 'index/base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class='container'>
+    <div class="card-group">
+      <div class="col-sm-12">
+        <div class="card border-dark rounded mb-4">
+          <div class="card-header border-dark">
+            <p class="c-title card-text">新規村</p>
+          </div>
+          <div class="card-body border-dark">
+            <form method="POST">{% csrf_token %}
+              {{ form.name }}
+              {{ form.charaset }}
+              {{ form.daytime_seconds }}
+              {{ form.nighttime_seconds }}
+              {{ form.palflag }}
+              <button type="submit" class="save btn btn-block btn-outline-info">村を建てる</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
