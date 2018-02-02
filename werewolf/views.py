@@ -3,7 +3,7 @@ from django.views.generic.list import ListView
 from django.utils import timezone
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
-from .models import Village,Resident,getEndVillageObjects,getOpenVillageObjects,getPalVillageObjects,getVillageObject,calculateUpdateTime
+from .models import Village,Resident,getEndVillageObjects,getOpenVillageObjects,getStartVillageObjects,getPalVillageObjects,getVillageObject,calculateUpdateTime
 from .forms import remarkPost,residentPost,startPost,votePost,VillageForm,createVillage,villageUpdate,residentUpdate,getVillageContext
 from django.shortcuts import render
 
@@ -11,27 +11,33 @@ from django.shortcuts import render
 class CreateVillageView(CreateView):
     form_class = VillageForm
     template_name = 'werewolf/create.html'
-    success_url = reverse_lazy('werewolf:index')
+    success_url = reverse_lazy('werewolf:open')
     def form_valid(self, form):
         createVillage(request=self.request,form=form)
         return super().form_valid(form)
 
-# 募集村
+# 募集中
 class OpenVillageIndexView(ListView):
     model = Village
     queryset = getOpenVillageObjects()
+    template_name = 'werewolf/index.html'
+
+# 進行中
+class StartVillageIndexView(ListView):
+    model = Village
+    queryset = getStartVillageObjects()
+    template_name = 'werewolf/index.html'
+
+# 過去村
+class EndVillageIndexView(ListView):
+    model = Village
+    queryset = getEndVillageObjects()
     template_name = 'werewolf/index.html'
 
 # 身内村
 class PalVillageIndexView(ListView):
     model = Village
     queryset = getPalVillageObjects()
-    template_name = 'werewolf/index.html'
-
-# 終了村
-class EndVillageIndexView(ListView):
-    model = Village
-    queryset = getEndVillageObjects()
     template_name = 'werewolf/index.html'
 
 # 入村後

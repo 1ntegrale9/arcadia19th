@@ -68,18 +68,29 @@ class Execute(models.Model):
     def __str__(self):
         return self.execute_type
 
+# 村一覧
 def getOpenVillageObjects():
-    return Village.objects.filter(palflag=0,endflag=0,delflag=0).order_by('-created_date')
+    return Village.objects.filter(palflag=0,startflag=0,endflag=0,delflag=0).order_by('-created_date')
+def getStartVillageObjects():
+    return Village.objects.filter(startflag=1,endflag=0,delflag=0).order_by('-created_date')
+def getEndVillageObjects():
+    return Village.objects.filter(palflag=0,endflag=1, delflag=0).order_by('-created_date')
 def getPalVillageObjects():
     return Village.objects.filter(palflag=1,endflag=0,delflag=0).order_by('-created_date')
-def getEndVillageObjects():
-    return Village.objects.filter(endflag=1, delflag=0).order_by('-created_date')
+
+# 村の参加者リスト
 def getResidentObjects(village_id):
     return Resident.objects.filter(village=village_id)
+
+# 村の生存者リスト
 def getAliveResidentObjects(village_id):
     return Resident.objects.filter(village=village_id,deathflag=0)
+
+# 実行リスト
 def getExecuteObjects(village_object):
     return Execute.objects.filter(village=village_object.id,day=village_object.day)
+
+# 発言リスト
 def getRemarkObjects(village_object):
     return Remark.objects.filter(
         village   = village_object.id,
@@ -88,10 +99,14 @@ def getRemarkObjects(village_object):
         delflag   = 0,
     ).order_by('-date')
 
+# 村情報
 def getVillageObject(village_id):
     return Village.objects.get(id=village_id)
 
+# 昼または夜時間
 def getThisTurnLength(village_object):
     return village_object.nighttime_seconds if bool(village_object.nightflag) else village_object.daytime_seconds
+
+# 更新時間の計算
 def calculateUpdateTime(village_object):
     return timezone.timedelta(seconds=getThisTurnLength(village_object)) + village_object.updated_date

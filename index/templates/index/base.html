@@ -17,9 +17,10 @@
       <a href="{% url 'index:top' %}" class='arcadia text-center'><h1>Werewolf Arcadia</h1></a>
       <nav class="nav navbar">
         <a class="nav-item nav-link" href="{% url 'werewolf:create' %}">村を建てる</a>
-        <a class="nav-item nav-link" href="{% url 'werewolf:index' %}">募集村</a>
-        <a class="nav-item nav-link" href="{% url 'werewolf:pal' %}">身内村</a>
+        <a class="nav-item nav-link" href="{% url 'werewolf:open' %}">募集中</a>
+        <a class="nav-item nav-link" href="{% url 'werewolf:game' %}">進行中</a>
         <a class="nav-item nav-link" href="{% url 'werewolf:log' %}">過去村</a>
+        <a class="nav-item nav-link" href="{% url 'werewolf:pal' %}">身内村</a>
         <a class="nav-item nav-link" href="{% url 'bbs:post_list' %}">掲示板</a>
         {% if user.is_authenticated %}
           <a class="nav-item nav-link" href="/admin" style="color: black;">管理画面</a>

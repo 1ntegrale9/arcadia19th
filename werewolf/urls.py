@@ -4,8 +4,9 @@ from . import views
 app_name = 'werewolf'
 urlpatterns = [
     path('create/', views.CreateVillageView.as_view(), name='create'),
-    path('open/', views.OpenVillageIndexView.as_view(), name='index'),
-    path('pal/', views.PalVillageIndexView.as_view(), name='pal'),
+    path('open/', views.OpenVillageIndexView.as_view(), name='open'),
+    path('game/', views.StartVillageIndexView.as_view(), name='game'),
     path('log/', views.EndVillageIndexView.as_view(), name='log'),
+    path('pal/', views.PalVillageIndexView.as_view(), name='pal'),
     path('<int:village_id>/', views.VillageView, name='village'),
 ]
