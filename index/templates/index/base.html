@@ -24,6 +24,7 @@
         <a class="nav-item nav-link" href="{% url 'werewolf:log' %}">過去村</a>
         <a class="nav-item nav-link" href="{% url 'werewolf:pal' %}">身内村</a>
         <a class="nav-item nav-link" href="{% url 'bbs:post_list' %}">掲示板</a>
+        <a class="nav-item nav-link" href="https://www65.atwiki.jp/arcadia19th/">Wiki</a>
         {% if user.is_authenticated %}
           <a class="nav-item nav-link" href="/admin" style="color: black;">管理画面</a>
           <a class="nav-item nav-link" href="{% url 'account:logout' %}">ログアウト</a>
