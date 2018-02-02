@@ -1,26 +1,23 @@
 {% extends "index/base.html" %}
 
 {% block content %}
-<div class="container">
-  <div class="card-group">
-    <div class="card-block">
-    <form action="{% url 'account:create' %}" method="POST">
-      <div class="form-group">
-        {{ form.username }}
-        {{ form.username.errors }}
+  <div class='container'>
+    <div class="card-group">
+      <div class="col-sm-12">
+        <div class="card border-dark rounded mb-4">
+          <div class="card-body border-dark">
+            <form action="{% url 'account:create' %}" method="POST">{% csrf_token %}
+              {{ form.username }}
+              {{ form.username.errors }}
+              {{ form.password1 }}
+              {{ form.password1.errors }}
+              {{ form.password2 }}
+              {{ form.password2.errors }}
+              <button type="submit" class="sabe btn btn-block btn-outline-info">ユーザ登録</button>
+            </form>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        {{ form.password1 }}
-        {{ form.password1.errors }}
-      </div>
-      <div class="form-group">
-        {{ form.password2 }}
-        {{ form.password2.errors }}
-      </div>
-      {% csrf_token %}
-      <button type="submit" class="btn btn-lg btn-block btn-outline-info">ユーザ登録</button>
     </div>
-    </div>
-  </form>
-</div>
+  </div>
 {% endblock %}
