@@ -6,9 +6,6 @@
     <div class="card-group">
       <div class="col-sm-12">
         <div class="card border-dark rounded mb-4">
-          <div class="card-header border-dark">
-            <p class="c-title card-text">新規村</p>
-          </div>
           <div class="card-body border-dark">
             <form method="POST">{% csrf_token %}
               {{ form.name }}
