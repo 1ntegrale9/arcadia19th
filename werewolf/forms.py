@@ -219,7 +219,7 @@ def getVillageContext(request,village_object,next_update_time):
         'remark_list'  : getRemarkObjects(village_object=village_object)[:100],
         'resident_list': getResidentObjects(village_id=village_object.id),
         'village_info' : village_object,
-        'status_turn'  : '夜' if village_object.nightflag else '昼'
+        'status_turn'  : '夜' if village_object.nightflag else '昼',
         'is_started'   : bool(village_object.startflag),
         'update_time'  : next_update_time
     }
