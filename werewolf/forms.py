@@ -15,7 +15,7 @@ def applyPlaceholder(target, messages):
     for f,s in messages.items():
         target.fields[f].widget.attrs['placeholder'] = s
 
-# 村作成
+# 村作成フォーム
 class VillageForm(forms.ModelForm):
     class Meta:
         model = Village
@@ -38,6 +38,7 @@ class VillageForm(forms.ModelForm):
     charaset = generateSelectForm(getCharasetChoices())
     palflag = generateSelectForm(getPalflagChoices())
 
+# 発言フォーム
 class RemarkForm(forms.ModelForm):
     class Meta:
         model = Remark
@@ -48,6 +49,7 @@ class RemarkForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         applyFormControl(self, self.fields)
 
+# 入村フォーム
 class ResidentForm(forms.ModelForm):
     class Meta:
         model = Resident
@@ -60,11 +62,13 @@ class ResidentForm(forms.ModelForm):
 
     character = forms.ChoiceField(widget=forms.Select)
 
+# 開始フォーム
 class StartForm(forms.ModelForm):
     class Meta:
         model = Village
         fields = ()
 
+# 実行フォーム
 class ExecuteForm(forms.ModelForm):
     class Meta:
         model = Execute
@@ -73,8 +77,9 @@ class ExecuteForm(forms.ModelForm):
     def __init__(self, village_object, *args, **kwargs):
         super().__init__(*args, **kwargs)
         applyFormControl(self, self.fields)
-        self.fields['target'] = forms.ModelChoiceField(queryset=getAliveResidentObjects(village_id=village_object.id), empty_label=None)
+        self.fields['target'] = forms.ModelChoiceField(queryset=getAliveResidentObjects(village_id=village_object.id), empty_label='対象を選択してください')
 
+# 発言
 def remarkPost(request,village_object):
     remark_form = RemarkForm(data=request.POST)
     if remark_form.is_valid():
@@ -193,6 +198,7 @@ def executeVote(village_object):
         text = '{}が処刑されましたが、\n不思議な力で生き返りました。'.format('a19th'),
     ).save()
 
+# 参加者の更新
 def residentUpdate(village_object):
     if village_object.nightflag == 0:
         executeVote(village_object=village_object) #投票
@@ -203,6 +209,7 @@ def residentUpdate(village_object):
         # executeEscort(village_object=village_object) #護衛
         # executeMurder(village_object=village_object) #襲撃
 
+# フォームとレコードを渡す
 def getVillageContext(request,village_object,next_update_time):
     context = {
         'start_form'   : StartForm(),
@@ -212,20 +219,21 @@ def getVillageContext(request,village_object,next_update_time):
         'remark_list'  : getRemarkObjects(village_object=village_object)[:100],
         'resident_list': getResidentObjects(village_id=village_object.id),
         'village_info' : village_object,
-        'update_time'  : next_update_time,
+        'status_turn'  : '夜' if village_object.nightflag else '昼'
+        'is_started'   : bool(village_object.startflag),
+        'update_time'  : next_update_time
     }
-    # クソ実装
+    # 参加者か否かで渡すcontextを変える
     try:
         context['residentinfo'] = context['resident_list'].get(resident=request.user)
-        context['isResident'] = True
+        context['status_death'] = '死亡' if context['residentinfo'].deathflag else '生存'
+        context['job'] = context['residentinfo'].job
         context['isAuther'] = village_object.auther == request.user
-        context['isStarted'] = bool(village_object.startflag)
         context['icon_url'] = context['residentinfo'].icon_url
+        context['isResident'] = True
     except:
-        context['isResident'] = False
-        context['isStarted'] = True
         context['icon_url'] = village_object.icon_url
-    # クソ実装2,動かない
+        context['isResident'] = False
     try:
         context['vote_object'] = Execute.objects.get(
             village = village_object,
@@ -233,11 +241,11 @@ def getVillageContext(request,village_object,next_update_time):
             execute_type = 'vote',
             day = village_object.day
         )
-        print(context['vote_object'])
     except:
         context['vote_object'] = False
     return context
 
+# 村を作成
 def createVillage(request,form):
     form.instance.auther = request.user
     form.instance.auther_name = request.user.username

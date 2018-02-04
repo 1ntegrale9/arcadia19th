@@ -9,13 +9,13 @@
         <div class="card border-dark rounded mb-3">
           <div class="card-body border-dark">
             <p class='c-title'>{{ village_info.name }}</p>
-            {% if isStarted %}<p>{{ update_time }}〆</p>{% endif %}
+            {% if is_started %}<p>{{ update_time }}〆</p>{% endif %}
             <p>
               {% for resident in resident_list %}
                 <img src="{% static resident.icon_url %}" width='50'/>
               {% endfor %}
             </p>
-            {% if not isStarted and isAuther %}
+            {% if not is_started and isAuther %}
               <form method="POST">{% csrf_token %}
                 <button type="submit" name="form" value="start" class="save btn btn-block btn-outline-info">開始</button>
               </form>
@@ -33,12 +33,12 @@
                 <div class="media-body">
                   <p class="card-title c-title text-left">{{ user.username }}</p>
                   {% if isResident %}
-                    <p>{{ village_info.day }}日目 {% if village_info.nightflag == 0 %}昼{% else %}夜{% endif %} {% if residentinfo.deathflag == 0 %}生存{% else %}死亡{% endif %} {{ residentinfo.job }}</p>
+                    <p>{{ village_info.day }}日目 {{ status_turn }} {{ status_death }} {{ job }}</p>
                     <form method="POST">{% csrf_token %}
                       {{ remark_form.text }}
                       <button type="submit" name="form" value="remark" class="save btn btn-block btn-outline-info">発言</button>
                     </form>
-                    {% if isStarted and village_info.nightflag == 0 and not vote_object %}
+                    {% if is_started and village_info.nightflag == 0 and not vote_object %}
                       <form method="POST">{% csrf_token %}
                         {{ execute_form.target }}
                         <button type="submit" name="form" value="vote" class="save btn btn-block btn-outline-info">投票</button>
