@@ -1,0 +1,78 @@
+/* UTILITY */
+
+h1,
+h1 a,
+h1 a:hover,
+h1 a:visited,
+h1 a:active,
+a:hover {
+  text-decoration: none;
+}
+.text-word-break-all {
+  word-break: break-all;
+}
+
+/* LAYOUT */
+
+/* FONT */
+
+html
+body,
+footer {
+  font-family: 'Rounded Mplus 1c';
+}
+h1,
+h1 a,
+h1 a:hover,
+h1 a:visited,
+h1 a:active {
+  font-family: 'Metamorphous', cursive;
+}
+
+/* COLOR */
+
+html
+body,
+footer,
+.border-top,
+.card-text {
+  /* white */
+  color: #D2D2D3;
+}
+.table th,
+.table td {
+  border-top: 1px solid #D2D2D3;
+}
+
+a,
+a:hover,
+a:visited,
+a:active,
+.c-name,
+.c-title {
+  /* red */
+  color: #A81E1E;
+}
+html
+body,
+footer,
+.post-form textarea,
+.post-form input {
+  /* black */
+  background-color: white;
+}
+.card {
+  /* gray */
+  background-color: #111112;
+}
+a
+a:hover,
+a:visited,
+a:active,
+.btn,
+.btn-block,
+.btn-outline-info,
+.nav-link {
+  /* blue */
+  color: #006C92;
+}
