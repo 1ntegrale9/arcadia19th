@@ -177,8 +177,17 @@ def executeVote(village_object):
             icon_url = getCharacterImgURL(resident.charaset,resident.character),
             text = "投票先：{0}\n得票数：{1}".format(targets[resident],votes[resident]),
         ).save()
+    # 処刑者を決定する
+    prisoner, maxnum = [], 0
+    for name, number in votes.items():
+        if number > maxnum:
+            prisoner = [name]
+            maxnum = number
+        elif number == maxnum:
+            prisoner.append(name)
+    prisoner = choice(prisoner) if len(prisoner) > 1 else prisoner[0]
     # 処刑のシステムメッセージ
-    systemMessage(village_object, resident, '{}が処刑されました。'.format('a19th'))
+    systemMessage(village_object, resident, '{}が処刑されました。'.format(prisoner))
 
 # 参加者の更新
 def residentUpdate(village_object):
