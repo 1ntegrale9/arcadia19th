@@ -364,3 +364,15 @@ def getCharacterImgURL(ID,no):
         }[ID]
     except:
         'A.png'
+
+def getDeadCharacterImgURL(ID,no):
+    try:
+        return {
+            'rain':'rain/{}_b.png'.format(str(no).zfill(2)),
+            'rainBig':'rainBig/{}.png'.format(str(no).zfill(2)),
+            'jewel':'jewel/{}_n.png'.format(str(no).zfill(2)),
+            'ensou':'ensou/{}.png'.format(str(no).zfill(3)),
+            'free':'free/{}.jpg'.format(str(no).zfill(2)),
+        }[ID]
+    except:
+        'A.png'

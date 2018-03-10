@@ -2,7 +2,7 @@ from django import forms
 from django.utils import timezone
 from random import choice
 from .models import Village,Remark,Resident,Execute,getAliveResidentObjects,getRemarkObjects,getResidentObjects,getExecuteObjects
-from .charasetTable import getCharasetChoices,getCharacterTable,getCharacterImgURL,getCharacterName,getRandomCharacterImgURL
+from .charasetTable import getCharasetChoices,getCharacterTable,getCharacterImgURL,getDeadCharacterImgURL,getCharacterName,getRandomCharacterImgURL
 from collections import defaultdict
 
 # Utility Functions
@@ -141,6 +141,10 @@ def villageUpdate(village_object):
     village_object.updated_date = timezone.now()
     village_object.day += village_object.nightflag
     village_object.nightflag = 1 - village_object.nightflag
+    if len(getAliveResidentObjects(village_id=village_object.id)) < 2:
+        village_object.startflag = 0
+        village_object.endflag = 1
+        systemMessage(village_object, '生存者が1人になりゲームが終了しました。')
     village_object.save()
 
 def executeVote(village_object):
@@ -162,7 +166,7 @@ def executeVote(village_object):
         votes[execute_object.target] += 1
         targets[execute_object.executer] = execute_object.target
     # 投票締め切りのシステムメッセージ
-    systemMessage(village_object, resident, '投票を締め切りました。')
+    systemMessage(village_object, '投票を締め切りました。')
     # 各参加者の投票先と得票数を表示
     for resident in alive_resident_objects:
         Remark(
@@ -179,8 +183,12 @@ def executeVote(village_object):
         ).save()
     # 処刑者を決定する
     prisoner = judgment(votes)
+    # 処刑
+    prisoner.deathflag = 1
+    prisoner.icon_url = getDeadCharacterImgURL(prisoner.charaset, prisoner.character)
+    prisoner.save()
     # 処刑のシステムメッセージ
-    systemMessage(village_object, resident, '{}が処刑されました。'.format(prisoner))
+    systemMessage(village_object, '{}が処刑されました。'.format(prisoner))
 
 # 参加者の更新
 def residentUpdate(village_object):
@@ -237,16 +245,14 @@ def createVillage(request,form):
     form.instance.icon_url = getRandomCharacterImgURL(form.cleaned_data['charaset'])
 
 # システムメッセージ
-def systemMessage(village_object, resident, msg):
+def systemMessage(village_object, msg):
     Remark(
         village = village_object,
         remarker_id = 1,
         day = village_object.day,
         nightflag = 0,
         remark_type = 'vote',
-        remarker_name = resident.resident.username,
-        character = resident.character,
-        charaset = resident.charaset,
+        remarker_name = 'System Message',
         icon_url = 'A.png',
         text = msg,
     ).save()
