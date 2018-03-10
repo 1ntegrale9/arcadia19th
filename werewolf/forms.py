@@ -5,7 +5,7 @@ from .models import Village,Remark,Resident,Execute,getAliveResidentObjects,getR
 from .charasetTable import getCharasetChoices,getCharacterTable,getCharacterImgURL,getCharacterName,getRandomCharacterImgURL
 from collections import defaultdict
 
-# Utility Functions  
+# Utility Functions
 def generateSelectForm(choices):
     return forms.ChoiceField(widget=forms.Select, choices=choices)
 def applyFormControl(target, fields):
