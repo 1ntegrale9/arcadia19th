@@ -146,6 +146,7 @@ def villageUpdate(village_object):
 def executeVote(village_object):
     alive_resident_objects = getAliveResidentObjects(village_id=village_object.id)
     execute_objects = getExecuteObjects(village_object=village_object)
+    # 全ての参加者の投票先リストを取得、投票なしならランダムで決定
     votes = defaultdict(int)
     targets = {}
     for resident in alive_resident_objects:
@@ -160,6 +161,7 @@ def executeVote(village_object):
         )
         votes[execute_object.target] += 1
         targets[execute_object.executer] = execute_object.target
+    # 投票締め切りのシステムメッセージ
     Remark(
         village = village_object,
         remarker_id = 1,
@@ -172,6 +174,7 @@ def executeVote(village_object):
         icon_url = 'A.png',
         text = '投票を締め切りました。',
     ).save()
+    # 各参加者の投票先と得票数を表示
     for resident in alive_resident_objects:
         Remark(
             village = village_object,
@@ -185,6 +188,7 @@ def executeVote(village_object):
             icon_url = getCharacterImgURL(resident.charaset,resident.character),
             text = "投票先：{0}\n得票数：{1}".format(targets[resident],votes[resident]),
         ).save()
+    # 処刑のシステムメッセージ
     Remark(
         village = village_object,
         remarker_id = 1,
@@ -195,7 +199,7 @@ def executeVote(village_object):
         character = resident.character,
         charaset = resident.charaset,
         icon_url = 'A.png',
-        text = '{}が処刑されましたが、\n不思議な力で生き返りました。'.format('a19th'),
+        text = '{}が処刑されました。'.format('a19th'),
     ).save()
 
 # 参加者の更新
