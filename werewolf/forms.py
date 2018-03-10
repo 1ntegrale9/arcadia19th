@@ -178,14 +178,7 @@ def executeVote(village_object):
             text = "投票先：{0}\n得票数：{1}".format(targets[resident],votes[resident]),
         ).save()
     # 処刑者を決定する
-    prisoner, maxnum = [], 0
-    for name, number in votes.items():
-        if number > maxnum:
-            prisoner = [name]
-            maxnum = number
-        elif number == maxnum:
-            prisoner.append(name)
-    prisoner = choice(prisoner) if len(prisoner) > 1 else prisoner[0]
+    prisoner = judgment(votes)
     # 処刑のシステムメッセージ
     systemMessage(village_object, resident, '{}が処刑されました。'.format(prisoner))
 
@@ -257,3 +250,15 @@ def systemMessage(village_object, resident, msg):
         icon_url = 'A.png',
         text = msg,
     ).save()
+
+# 処刑者の決定
+def judgment(votes):
+    prisoner, maxnum = [], 0
+    for name, number in votes.items():
+        if number > maxnum:
+            prisoner = [name]
+            maxnum = number
+        elif number == maxnum:
+            prisoner.append(name)
+    prisoner = choice(prisoner) if len(prisoner) > 1 else prisoner[0]
+    return prisoner
