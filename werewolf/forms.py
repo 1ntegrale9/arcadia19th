@@ -162,18 +162,7 @@ def executeVote(village_object):
         votes[execute_object.target] += 1
         targets[execute_object.executer] = execute_object.target
     # 投票締め切りのシステムメッセージ
-    Remark(
-        village = village_object,
-        remarker_id = 1,
-        day = village_object.day,
-        nightflag = 0,
-        remark_type = 'vote',
-        remarker_name = resident.resident.username,
-        character = resident.character,
-        charaset = resident.charaset,
-        icon_url = 'A.png',
-        text = '投票を締め切りました。',
-    ).save()
+    systemMessage(village_object, resident, '投票を締め切りました。')
     # 各参加者の投票先と得票数を表示
     for resident in alive_resident_objects:
         Remark(
@@ -189,18 +178,7 @@ def executeVote(village_object):
             text = "投票先：{0}\n得票数：{1}".format(targets[resident],votes[resident]),
         ).save()
     # 処刑のシステムメッセージ
-    Remark(
-        village = village_object,
-        remarker_id = 1,
-        day = village_object.day,
-        nightflag = 0,
-        remark_type = 'vote',
-        remarker_name = resident.resident.username,
-        character = resident.character,
-        charaset = resident.charaset,
-        icon_url = 'A.png',
-        text = '{}が処刑されました。'.format('a19th'),
-    ).save()
+    systemMessage(village_object, resident, '{}が処刑されました。'.format('a19th'))
 
 # 参加者の更新
 def residentUpdate(village_object):
@@ -255,3 +233,18 @@ def createVillage(request,form):
     form.instance.auther_name = request.user.username
     form.instance.charaset_name = getCharacterName(form.cleaned_data['charaset'])
     form.instance.icon_url = getRandomCharacterImgURL(form.cleaned_data['charaset'])
+
+# システムメッセージ
+def systemMessage(village_object, resident, msg):
+    Remark(
+        village = village_object,
+        remarker_id = 1,
+        day = village_object.day,
+        nightflag = 0,
+        remark_type = 'vote',
+        remarker_name = resident.resident.username,
+        character = resident.character,
+        charaset = resident.charaset,
+        icon_url = 'A.png',
+        text = msg,
+    ).save()
