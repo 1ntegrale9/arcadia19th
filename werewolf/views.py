@@ -1,3 +1,4 @@
+from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.utils import timezone
@@ -6,6 +7,14 @@ from django.http import HttpResponseRedirect
 from .models import Village,Resident,getEndVillageObjects,getOpenVillageObjects,getStartVillageObjects,getPalVillageObjects,getVillageObject,calculateUpdateTime
 from .forms import remarkPost,residentPost,startPost,votePost,VillageForm,createVillage,villageUpdate,residentUpdate,getVillageContext
 from django.shortcuts import render
+
+# トップページ
+class AboutPageView(TemplateView):
+    template_name = 'werewolf/about.html'
+
+## キャラセット情報
+class CharasetView(TemplateView):
+    template_name = 'index/charaset.html'
 
 # 村を建てる
 class CreateVillageView(CreateView):
