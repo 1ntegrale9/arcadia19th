@@ -2,6 +2,8 @@ import os
 import dj_database_url
 import django_heroku
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 INSTALLED_APPS = [
     'rest_framework',
     'django.contrib.admin',
@@ -24,6 +26,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -73,7 +76,6 @@ REST_FRAMEWORK = {
 }
 
 ALLOWED_HOSTS = ['*']
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATABASES['default'] = dj_database_url.config()
 FORMAT_MODULE_PATH = 'mysite.formats'
 LOGIN_URL = "/account/login/"
