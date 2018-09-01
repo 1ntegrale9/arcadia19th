@@ -73,7 +73,7 @@ REST_FRAMEWORK = {
 }
 
 ALLOWED_HOSTS = ['*']
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATABASES['default'] = dj_database_url.config()
 FORMAT_MODULE_PATH = 'mysite.formats'
 LOGIN_URL = "/account/login/"
