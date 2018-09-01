@@ -2,17 +2,6 @@ import os
 import dj_database_url
 import django_heroku
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
-
-ALLOWED_HOSTS = []
-
-
-# Application definition
-
 INSTALLED_APPS = [
     'rest_framework',
     'django.contrib.admin',
@@ -55,22 +44,12 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'mysite.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -88,51 +67,32 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/1.10/topics/i18n/
-
+ALLOWED_HOSTS = ['*']
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATABASES['default'] = dj_database_url.config()
+FORMAT_MODULE_PATH = 'mysite.formats'
+LOGIN_URL = "/account/login/"
+LOGIN_REDIRECT_URL = '/'
 LANGUAGE_CODE = 'ja-JP'
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 TIME_ZONE = 'Asia/Tokyo'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = False
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.10/howto/static-files/
-
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-)
-
-FORMAT_MODULE_PATH = 'mysite.formats'
-
-DATABASES['default'] = dj_database_url.config()
-
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-ALLOWED_HOSTS = ['*']
-
-STATIC_ROOT = 'staticfiles'
-
-LOGIN_URL = "/account/login/"
-LOGIN_REDIRECT_URL = '/'
+WSGI_APPLICATION = 'mysite.wsgi.application'
 
 try:
     from .local_settings import *
 except ImportError:
-    # SECURITY WARNING: keep the secret key used in production secret!
     from os import environ
     SECRET_KEY = environ['SECRET_KEY']
-    # SECURITY WARNING: don't run with debug turned on in production!
     django_heroku.settings(locals())
     DEBUG = False
