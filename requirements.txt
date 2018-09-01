@@ -1,6 +1,7 @@
 dj-database-url
 Django
 djangorestframework
+django_heroku
 gunicorn
 psycopg2
 whitenoise
