@@ -94,7 +94,6 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 try:
     from .local_settings import *
 except ImportError:
-    from os import environ
-    SECRET_KEY = environ['SECRET_KEY']
+    SECRET_KEY = os.environ['SECRET_KEY']
     django_heroku.settings(locals())
     DEBUG = False
